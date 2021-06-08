@@ -3,7 +3,7 @@ const socketMiddleware = require('../../../utils/socketMiddleware')
 const socketValidate = require('../../../middlewares/socketValidate');
 const {messageValidation, transactionValidation} = require('../../../validations/socket');
 module.exports = (io, socket) => {
-    //whisper
+    //whisper messenger
     socket.on('sendMessage', socketMiddleware(
         socketValidate(transactionValidation.transactionPayload),
         messageController.sendMessage
