@@ -1,5 +1,5 @@
 const socketCatchAsync = require('../../utils/socketCatchAsync')
-const {messageService} = require('../../services/index')
+const {messageService, pushService} = require('../../services/index')
 const redisClient = require('../../config/database/redis')
 const config = require('../../config/config')
 
@@ -11,17 +11,16 @@ const sendMessage = socketCatchAsync(async (io, socket, data) => {
     redisClient.saddAsync(toAddress,toAddress)
     redisClient.sinterAsync('connectedUser', toAddress)
         .then(async (res)=>{
-            console.log(toAddress)
             if(res.length!==0)
                 io.to(toAddress).emit('sendMessage', sendMessageStatus)
             else
-                await fcmService.sendFcm(toAddress)
+                let pushData = await pushService.makePushDataFromTransaction(toAddress, data);
+                await pushService.sendPush(toAddress)
         }).catch((err)=>{
             throw err;
     })
     redisClient.delAsync(toAddress);
-    //todo :: check redis whether the user is present or not
-    //todo :: send message로 받은 경우에는 client 쪽에서 다시 메시지 리스트를 요청
+    //todo :: send message로 받은 경우에는 client 쪽에서 다시 메시지 리스트를 요청?
     //emit to user who sent message
     // socket.emit('sendMessage', sendMessageStatus)
 });

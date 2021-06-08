@@ -12,6 +12,10 @@ const defaultRoutes = [
     {
         path: '/spam-users',
         route: spamUserRoute,
+    },
+    {
+        path: '/push',
+        route: spamUserRoute,
     }
 ];
 
