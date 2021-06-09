@@ -2,6 +2,9 @@ const config = require('../../../config/config');
 const redisClient = require('../../../config/database/redis');
 const spamUserRoute = require('./spamUser.route');
 const messageRoute = require('./message.route');
+const pushNotificationRoute = require('./pushNotification.route');
+const socketMiddleware = require('../../../utils/socketMiddleware')
+const socketCatchAsync = require('../../../utils/socketCatchAsync')
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
@@ -22,16 +25,27 @@ const initialize = (io, socket) => {
     })
 };
 
-const disconnectHandler = (socket) => async () => {
-    return new Promise(async (resolve, reject)=>{
-        await redisClient.selectAsync(config.redis.database.connectedUser).catch((err)=> reject (err))
-        await redisClient.sremAsync('connectedUser', socket.address).then((data)=>{
-            // res === 0 : 지우는 값이 없는 경우 (srem 실패)
-            // res === 1 : 지우는 값이 있는 경우 (srem 성공)
-        }).catch((err) => reject(err))
-        resolve();
-    })
-};
+// const disconnectHandler = (socket) => async () => {
+//     return new Promise(async (resolve, reject)=>{
+//         await redisClient.selectAsync(config.redis.database.connectedUser).catch((err)=> reject (err))
+//         await redisClient.sremAsync('connectedUser', socket.address).then((data)=>{
+//             // res === 0 : 지우는 값이 없는 경우 (srem 실패)
+//             // res === 1 : 지우는 값이 있는 경우 (srem 성공)
+//         }).catch((err) => reject(err))
+//         resolve();
+//     })
+// };
+
+const disconnectHandler = socketCatchAsync(async (io, socket, data) =>{
+    await redisClient.selectAsync(config.redis.database.connectedUser)
+        .catch((err)=>{
+            throw new Error('disconnect redis error')
+        })
+    await redisClient.sremAsync('connectedUser', socket.address)
+        .catch((err)=>{
+            throw new Error('disconnect redis error')
+        })
+})
 
 module.exports = function (io) {
     io.on('connection', (socket) => {
@@ -39,11 +53,14 @@ module.exports = function (io) {
             .then(() => {
                 spamUserRoute(io, socket);
                 messageRoute(io, socket);
+                pushNotificationRoute(io,socket);
             })
             .catch((err) => {
                 console.log(err);
                 // TODO:: socket.emit('error')
             });
-        socket.on('disconnect', disconnectHandler(socket));
+        socket.on('disconnect', socketMiddleware(
+            disconnectHandler
+        )(io,socket))
     })
 };

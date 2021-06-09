@@ -1,6 +1,7 @@
 const express = require('express');
 const messageRoute = require('./message.route');
 const spamUserRoute = require('./spamUser.route');
+const pushNotificationRoute = require('./pushNotification.route');
 
 const router = express.Router();
 
@@ -14,8 +15,8 @@ const defaultRoutes = [
         route: spamUserRoute,
     },
     {
-        path: '/push',
-        route: spamUserRoute,
+        path: '/push-notification',
+        route: pushNotificationRoute,
     }
 ];
 

@@ -1,5 +1,4 @@
 const joi = require('joi');
-const customValidation = require('./custom.validation');
 
 const syncPushCount = {
     params : joi.object().keys({
