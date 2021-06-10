@@ -9,6 +9,16 @@ const transactionPayload = {
     })
 }
 
+const sendTransactionResult = {
+    body : joi.object().keys({
+        tx_hash : joi.string().required(),
+        type : joi.string().required(),
+        transactionResult : joi.object().required(),
+        from : joi.string().required()
+    })
+}
+
 module.exports = {
-    transactionPayload
+    transactionPayload,
+    sendTransactionResult
 }

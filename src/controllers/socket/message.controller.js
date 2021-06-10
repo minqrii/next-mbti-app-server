@@ -11,11 +11,12 @@ const sendMessage = socketCatchAsync(async (io, socket, data) => {
     redisClient.saddAsync(toAddress,toAddress)
     redisClient.sinterAsync('connectedUser', toAddress)
         .then(async (res)=>{
-            if(res.length!==0)
+            if(res.length!==0){
                 io.to(toAddress).emit('sendMessage', sendMessageStatus)
-            else
-                let pushData = await pushService.makePushDataFromTransaction(toAddress, data);
-                await pushService.sendPush(toAddress)
+            }
+            else{
+                await pushService.sendPushNotification(toAddress)
+            }
         }).catch((err)=>{
             throw err;
     })
