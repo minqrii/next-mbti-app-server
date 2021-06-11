@@ -15,6 +15,7 @@ const sendMessage = socketCatchAsync(async (io, socket, data) => {
                 io.to(toAddress).emit('sendMessage', sendMessageStatus)
             }
             else{
+                //todo:: 여기있는 푸쉬 알림 로직은 accept 이후로 이동해야함.
                 await pushService.sendPushNotification(toAddress)
             }
         }).catch((err)=>{

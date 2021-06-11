@@ -13,5 +13,8 @@ redisClient.saddAsync = promisify(redisClient.sadd).bind(redisClient);
 redisClient.sremAsync = promisify(redisClient.srem).bind(redisClient);
 redisClient.sinterAsync = promisify(redisClient.sinter).bind(redisClient);
 redisClient.delAsync = promisify(redisClient.del).bind(redisClient);
+redisClient.hmsetAsync = promisify(redisClient.hmset).bind(redisClient);
+redisClient.hmgetAsync = promisify(redisClient.hmget).bind(redisClient);
+redisClient.hgetallAsync = promisify(redisClient.hgetall).bind(redisClient);
 
 module.exports = redisClient;

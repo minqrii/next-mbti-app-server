@@ -9,4 +9,8 @@ router
     .route('/result')
     .post(validate(transactionValidation.sendTransactionResult), transactionController.sendTransactionResult);
 
+router
+    .route('/fail')
+    .get(validate(transactionValidation.getSendFailTransactions), transactionController.getSendFailTransactionsByAddress);
+
 module.exports = router;

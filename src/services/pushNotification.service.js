@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const alarmAppServer = require('../utils/appServer');
+const alarmAppServer = require('../utils/walletAppServer');
 
 
 const sendPushNotification = async function (data, targetAddress, type) {

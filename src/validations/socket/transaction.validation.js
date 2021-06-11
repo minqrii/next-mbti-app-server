@@ -7,6 +7,11 @@ const transactionPayload = joi.object().keys({
     signature : joi.string().required()
 });
 
+const getSendFailTransactions = joi.object().keys({
+    address : joi.string().required()
+})
+
 module.exports = {
-    transactionPayload
+    transactionPayload,
+    getSendFailTransactions
 }

@@ -5,6 +5,8 @@ const messageRoute = require('./message.route');
 const pushNotificationRoute = require('./pushNotification.route');
 const socketMiddleware = require('../../../utils/socketMiddleware')
 const socketCatchAsync = require('../../../utils/socketCatchAsync')
+const transactionRoute = require('./transaction.route')
+const tokenRoute = require('./token.route')
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
@@ -54,6 +56,8 @@ module.exports = function (io) {
                 spamUserRoute(io, socket);
                 messageRoute(io, socket);
                 pushNotificationRoute(io,socket);
+                transactionRoute(io,socket);
+                tokenRoute(io,socket);
             })
             .catch((err) => {
                 console.log(err);

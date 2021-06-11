@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const whisperAppServer = require('../utils/appServer');
+const whisperAppServer = require('../utils/whisperAppServer');
 
 const registerSpamUser = async function (data) {
     try {

@@ -3,34 +3,32 @@ const catchAsync = require('../../utils/catchAsync');
 const {messageService} = require('../../services');
 
 const sendMessage = catchAsync(async (req, res) => {
-    const registerSpamStatus = await messageService.sendMessage(req.data);
+    const data = {...req.query, ...req.body, ...req.params}
+    const registerSpamStatus = await messageService.sendMessage(data);
     res.json(registerSpamStatus)
 });
 
 const readMessage = catchAsync(async (req, res) => {
-    const readMessageStatus = await messageService.readMessage(req.data);
+    const data = {...req.query, ...req.body, ...req.params}
+    const readMessageStatus = await messageService.readMessage(data);
     res.json(readMessageStatus)
 });
 
 const getMessageCount = catchAsync(async (req, res) => {
-    const messageCount = await messageService.getMessageCount(req.query);
+    const data = {...req.query, ...req.body, ...req.params}
+    const messageCount = await messageService.getMessageCount(data);
     res.json(messageCount)
 });
 
 const getMessagesByAddress = catchAsync(async (req, res) => {
-    const messageData = await messageService.getMessagesByAddress(req.query);
+    const data = {...req.query, ...req.body, ...req.params}
+    const messageData = await messageService.getMessagesByAddress(data);
     res.json(messageData)
 });
-
-const test = catchAsync(async (req,res) => {
-    let testData = await messageService.test2()
-    await res.send(testData)
-})
 
 module.exports = {
     sendMessage,
     readMessage,
     getMessageCount,
     getMessagesByAddress,
-    test
 };

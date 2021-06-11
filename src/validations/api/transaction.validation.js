@@ -1,4 +1,5 @@
 const joi = require('joi');
+const customValidation = require('./custom.validation')
 
 const transactionPayload = {
     body :joi.object().keys({
@@ -14,7 +15,14 @@ const sendTransactionResult = {
         tx_hash : joi.string().required(),
         type : joi.string().required(),
         transactionResult : joi.object().required(),
-        from : joi.string().required()
+        from : joi.string().required(),
+        transactionObject : joi.object()
+    })
+}
+
+const getSendFailTransactions = {
+    query : joi.object().keys({
+        address : joi.string().required().custom(customValidation.address)
     })
 }
 

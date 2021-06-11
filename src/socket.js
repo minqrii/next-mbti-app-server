@@ -5,7 +5,7 @@ const IORedis = require('socket.io-redis');
 const config = require('./config/config');
 const redisClient = require('./config/database/redis');
 
-const appServer = require('./utils/appServer');
+const appServer = require('./utils/walletAppServer');
 
 io.adapter(IORedis({host: config.redis.host, port: config.redis.port}));
 

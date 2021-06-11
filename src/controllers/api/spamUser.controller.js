@@ -3,17 +3,20 @@ const catchAsync = require('../../utils/catchAsync');
 const {spamUserService} = require('../../services');
 
 const registerSpamUser = catchAsync(async (req, res) => {
-    const registerSpamStatus = await spamUserService.registerSpamUser(req.data);
+    const data = {...req.query, ...req.body, ...req.params}
+    const registerSpamStatus = await spamUserService.registerSpamUser(data);
     res.json(registerSpamStatus)
 });
 
 const deregisterSpamUser = catchAsync(async (req, res) => {
-    const deregisterSpamStatus = await spamUserService.deregisterSpamUser(req.data);
+    const data = {...req.query, ...req.body, ...req.params}
+    const deregisterSpamStatus = await spamUserService.deregisterSpamUser(data);
     res.json(deregisterSpamStatus)
 });
 
 const getSpamUsers = catchAsync(async (req, res) => {
-    const spamUsers = await spamUserService.getSpamUsers(req.query);
+    const data = {...req.query, ...req.body, ...req.params}
+    const spamUsers = await spamUserService.getSpamUsers(data);
     res.json(spamUsers)
 });
 

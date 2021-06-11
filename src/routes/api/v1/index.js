@@ -3,6 +3,7 @@ const messageRoute = require('./message.route');
 const spamUserRoute = require('./spamUser.route');
 const pushNotificationRoute = require('./pushNotification.route');
 const transactionRoute = require('./transaction.route');
+const tokenRoute = require('./token.route')
 
 const router = express.Router();
 
@@ -22,6 +23,10 @@ const defaultRoutes = [
     {
         path: '/transaction',
         route: transactionRoute,
+    },
+    {
+        path: '/tokens',
+        route: tokenRoute,
     }
     //::todo transaction route가 각 서버에서 쏜것이 맞는지 verify 하는 process 있으면 좋겠다.
 ];
