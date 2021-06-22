@@ -8,7 +8,6 @@ const redisClient = redis.createClient({
     // password: config.redis.password
 });
 
-redisClient.selectAsync = promisify(redisClient.select).bind(redisClient);
 redisClient.saddAsync = promisify(redisClient.sadd).bind(redisClient);
 redisClient.sremAsync = promisify(redisClient.srem).bind(redisClient);
 redisClient.sinterAsync = promisify(redisClient.sinter).bind(redisClient);
