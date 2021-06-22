@@ -26,9 +26,16 @@ const getMessagesByAddress = catchAsync(async (req, res) => {
     res.json(messageData)
 });
 
+const getMessagesByTimestamp = catchAsync(async (req, res) => {
+    const data = {...req.query, ...req.body, ...req.params}
+    const messageData = await messageService.getMessagesByTimestamp(data);
+    res.json(messageData)
+});
+
 module.exports = {
     sendMessage,
     readMessage,
     getMessageCount,
     getMessagesByAddress,
+    getMessagesByTimestamp
 };

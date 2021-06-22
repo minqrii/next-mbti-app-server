@@ -5,21 +5,26 @@ const {messageValidation, transactionValidation} = require('../../../validations
 module.exports = (io, socket) => {
     //whisper messenger
     socket.on('sendMessage', socketMiddleware(
-        socketValidate(transactionValidation.transactionPayload),
+        socketValidate(messageValidation.sendMessage),
         messageController.sendMessage
-    )(io,socket))
+    )(io,socket));
+
     socket.on('readMessage', socketMiddleware(
-        socketValidate(transactionValidation.transactionPayload),
+        socketValidate(messageValidation.readMessage),
         messageController.readMessage
-    )(io,socket))
+    )(io,socket));
+
     socket.on('getMessageCount', socketMiddleware(
         socketValidate(messageValidation.getMessageCount),
         messageController.getMessageCount
-    )(io,socket))
-    socket.on('getMessageByAddress', socketMiddleware(
-        socketValidate(messageValidation.getMessageByAddress),
-        messageController.getMessageByAddress
-    )(io,socket))
+    )(io,socket));
+
+    socket.on('getMessagesByAddress', socketMiddleware(
+        socketValidate(messageValidation.getMessagesByAddress),
+        messageController.getMessagesByAddress
+    )(io,socket));
+
+
     //wallet
 
 

@@ -4,7 +4,6 @@ const io = require('./socket');
 const config = require('./config/config');
 const logger = require('./config/logger');
 const redisClient = require('./config/database/redis');
-
 let server;
 
 redisClient

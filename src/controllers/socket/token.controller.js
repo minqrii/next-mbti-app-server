@@ -8,7 +8,7 @@ const sendToken = socketCatchAsync(async(io, socket, data)=>{
 
 const getAllTokenBalance = socketCatchAsync(async(io, socket, data)=>{
     const balance = await tokenService.getAllTokenBalance(data);
-    socket.emit('balance', balance)
+    socket.emit('getAllTokenBalance', balance)
 })
 
 const getTokenBalanceByTokenName = socketCatchAsync(async(io, socket, data)=>{

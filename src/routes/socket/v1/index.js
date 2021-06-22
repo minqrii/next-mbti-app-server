@@ -11,7 +11,6 @@ const tokenRoute = require('./token.route')
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
         await io.of('/').adapter.remoteJoin(socket.id, socket.address).catch((err)=> reject(err));
-        await redisClient.selectAsync(config.redis.database.connectedUser).catch((err)=> reject (err))
         await redisClient.saddAsync('connectedUser', socket.address).then((data)=>{
             if(data === 0){
                 //todo::
@@ -39,10 +38,6 @@ const initialize = (io, socket) => {
 // };
 
 const disconnectHandler = socketCatchAsync(async (io, socket, data) =>{
-    await redisClient.selectAsync(config.redis.database.connectedUser)
-        .catch((err)=>{
-            throw new Error('disconnect redis error')
-        })
     await redisClient.sremAsync('connectedUser', socket.address)
         .catch((err)=>{
             throw new Error('disconnect redis error')

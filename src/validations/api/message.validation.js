@@ -1,5 +1,10 @@
 const joi = require('joi');
 const customValidation = require('./custom.validation');
+const transactionValidation = require('./transaction.validation');
+
+const sendMessage = transactionValidation.transactionPayload;
+
+const readMessage = transactionValidation.transactionPayload;
 
 const getMessageCount = {
     query : joi.object().keys({
@@ -14,8 +19,18 @@ const getMessagesByAddress = {
     })
 }
 
+const getMessagesByTimestamp = {
+    query : joi.object().keys({
+        address : joi.string().required().custom(customValidation.address),
+        timestamp : joi.string().required()
+    })
+}
+
 module.exports = {
     getMessageCount,
-    getMessagesByAddress
+    getMessagesByAddress,
+    sendMessage,
+    readMessage,
+    getMessagesByTimestamp
 };
 

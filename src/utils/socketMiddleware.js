@@ -7,7 +7,7 @@ const socketMiddleware = (...args) => (io, socket) => (data) => {
     Promise.resolve(execFuc(io, socket, data))
         .then(socketMiddleware(...arg)(io, socket))
         .catch((err) => {
-            console.log('hi error')
+            console.log(err)
             socket.emit('error', err.message)
         })
 }

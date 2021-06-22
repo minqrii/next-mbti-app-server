@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const alarmAppServer = require('../utils/walletAppServer');
+const alarmAppServer = require('../utils/alarmAppServer');
 
 
 const sendPushNotification = async function (data, targetAddress, type) {
@@ -16,7 +16,7 @@ const sendPushNotification = async function (data, targetAddress, type) {
 
 const syncPushNotificationCount = async function (data){
     try {
-        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/key/${data.key}/count`, data);
+        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/key/${data.key}/count`, {count : data.count});
         return sendPushStatus.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');

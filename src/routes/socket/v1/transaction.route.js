@@ -5,6 +5,6 @@ const {transactionValidation} = require('../../../validations/socket');
 module.exports = (io, socket) => {
     socket.on('getSendFailTransactions', socketMiddleware(
         socketValidate(transactionValidation.getSendFailTransactions),
-        transactionController.getSendFailTransactionsByAddress
+        transactionController.getSendFailTransactions
     )(io,socket))
 };

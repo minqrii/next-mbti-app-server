@@ -4,18 +4,19 @@ const {pushNotificationValidation} = require('../../../validations/socket');
 const {pushNotificationController} = require('../../../controllers/socket');
 
 module.exports = (io, socket) => {
+
     socket.on('syncPushNotificationCount', socketMiddleware(
         socketValidate(pushNotificationValidation.syncPushNotificationCount),
         pushNotificationController.syncPushNotificationCount
-    ))
+    )(io,socket))
 
     socket.on('registerPushNotificationToken', socketMiddleware(
         socketValidate(pushNotificationValidation.registerPushNotificationToken),
         pushNotificationController.registerPushNotificationToken
-    ))
+    )(io,socket))
 
     socket.on('deregisterPushNotificationToken', socketMiddleware(
         socketValidate(pushNotificationValidation.deregisterPushNotificationToken),
         pushNotificationController.deregisterPushNotificationToken
-    ))
+    )(io,socket))
 };

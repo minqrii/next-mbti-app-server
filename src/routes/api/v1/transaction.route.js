@@ -11,6 +11,6 @@ router
 
 router
     .route('/fail')
-    .get(validate(transactionValidation.getSendFailTransactions), transactionController.getSendFailTransactionsByAddress);
+    .get(validate(transactionValidation.getSendFailTransactions), transactionController.getSendFailTransactions);
 
 module.exports = router;

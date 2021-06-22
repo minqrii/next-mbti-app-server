@@ -6,23 +6,23 @@ const {messageController} = require('../../../controllers/api');
 const router = express.Router();
 
 router
-    .route('/test')
-    .post(messageController.test);
-
-router
     .route('/send')
-    .post(validate(transactionValidation.transactionPayload), messageController.sendMessage);
+    .post(validate(messageValidation.sendMessage), messageController.sendMessage);
 
 router
     .route('/read')
-    .post(validate(transactionValidation.transactionPayload),messageController.readMessage)
+    .post(validate(messageValidation.readMessage),messageController.readMessage)
 
 router
     .route('/:address/count')
     .post(validate(messageValidation.getMessageCount),messageController.getMessageCount)
 
 router
-    .route('/:address/count/:toAddress')
+    .route('/:address/address/:toAddress')
     .post(validate(messageValidation.getMessagesByAddress),messageController.getMessagesByAddress)
+
+router
+    .route('/:address/timestamp/:timestamp')
+    .post(validate(messageValidation.getMessagesByTimestamp),messageController.getMessagesByTimestamp)
 
 module.exports = router;

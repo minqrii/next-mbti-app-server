@@ -4,12 +4,13 @@ const redisClient = require('../../config/database/redis')
 const config = require('../../config/config')
 
 const sendMessage = socketCatchAsync(async (io, socket, data) => {
-    let toAddress = JSON.parse(data.transaction).data.to;
+    let fromAddress = JSON.parse(data.transaction).data.from;
     let sendMessageStatus = await messageService.sendMessage(data)
+    io.to(fromAddress).emit('sendMessage', sendMessageStatus)
     //emit to user who should receive message
-    redisClient.selectAsync(config.redis.database.connectedUser);
-    redisClient.saddAsync(toAddress,toAddress)
-    redisClient.sinterAsync('connectedUser', toAddress)
+    /*
+    redisClient.saddAsync("connectedUser"+toAddress,toAddress)
+    redisClient.sinterAsync('connectedUser', "connectedUser"+toAddress)
         .then(async (res)=>{
             if(res.length!==0){
                 io.to(toAddress).emit('sendMessage', sendMessageStatus)
@@ -21,7 +22,9 @@ const sendMessage = socketCatchAsync(async (io, socket, data) => {
         }).catch((err)=>{
             throw err;
     })
-    redisClient.delAsync(toAddress);
+    redisClient.delAsync("connectedUser"+toAddress);
+    */
+
     //todo :: send message로 받은 경우에는 client 쪽에서 다시 메시지 리스트를 요청?
     //emit to user who sent message
     // socket.emit('sendMessage', sendMessageStatus)
@@ -37,14 +40,14 @@ const getMessageCount = socketCatchAsync(async (io, socket, data) => {
     socket.emit('getMessageCount', messageCounts)
 });
 
-const getMessageByAddress = socketCatchAsync(async (io, socket, data) => {
-    let messages = await messageService.getMessageByAddress(data)
-    socket.emit('getMessageByAddress', messages)
+const getMessagesByAddress = socketCatchAsync(async (io, socket, data) => {
+    let messages = await messageService.getMessagesByAddress(data)
+    socket.emit('getMessagesByAddress', messages)
 });
 
 module.exports = {
     sendMessage,
     readMessage,
     getMessageCount,
-    getMessageByAddress
+    getMessagesByAddress
 }

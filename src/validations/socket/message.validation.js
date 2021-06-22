@@ -1,16 +1,23 @@
 const joi = require('joi');
 const customValidation = require('./custom.validation');
+const transactionValidation = require('./transaction.validation')
 
 const getMessageCount = joi.object().keys({
     address : joi.string().required().custom(customValidation.address)
 });
 
-const getMessageByAddress = joi.object().keys({
+const getMessagesByAddress = joi.object().keys({
     address : joi.string().required().custom(customValidation.address),
     toAddress : joi.string().required().custom(customValidation.address)
 });
 
+const sendMessage = transactionValidation.transactionPayload
+
+const readMessage = transactionValidation.transactionPayload
+
 module.exports = {
     getMessageCount,
-    getMessageByAddress
+    getMessagesByAddress,
+    sendMessage,
+    readMessage
 };

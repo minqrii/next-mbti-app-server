@@ -5,7 +5,7 @@ const whisperAppServer = require('../utils/whisperAppServer');
 const sendMessage = async function (data) {
     try {
         const sendMessageStatus = await whisperAppServer.post(`/v1/messages/send`,data);
-        return sendMessageStatus.data.success;
+        return sendMessageStatus.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }
@@ -14,7 +14,7 @@ const sendMessage = async function (data) {
 const readMessage = async function (data) {
     try {
         const readMessageStatus = await whisperAppServer.post(`/v1/messages/read`,data);
-        return readMessageStatus.data;
+        return readMessageStatus.data.success;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }
@@ -38,9 +38,19 @@ const getMessagesByAddress = async function (data) {
     }
 };
 
+const getMessagesByTimestamp = async function (data) {
+    try {
+        const messageData = await whisperAppServer.get(`/v1/messages/${data.address}/timestamp/${data.timestamp}`);
+        return messageData.data;
+    } catch (err) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
+    }
+};
+
 module.exports = {
     sendMessage,
     readMessage,
     getMessageCount,
     getMessagesByAddress,
+    getMessagesByTimestamp
 };
