@@ -15,8 +15,22 @@ const deregisterPushNotificationToken  = joi.object().keys({
     key : joi.string().required()
 });
 
+const registerPushType  = joi.object().keys({
+    type : joi.string().required(),
+    token : joi.string().required(),
+    key : joi.string().required()
+});
+
+const deregisterPushType  = joi.object().keys({
+    type : joi.string().required(),
+    token : joi.string().required(),
+    key : joi.string().required()
+});
+
 module.exports = {
     syncPushNotificationCount,
     registerPushNotificationToken,
-    deregisterPushNotificationToken
+    deregisterPushNotificationToken,
+    registerPushType,
+    deregisterPushType
 };

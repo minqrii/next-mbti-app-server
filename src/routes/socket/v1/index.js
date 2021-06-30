@@ -7,10 +7,12 @@ const socketMiddleware = require('../../../utils/socketMiddleware')
 const socketCatchAsync = require('../../../utils/socketCatchAsync')
 const transactionRoute = require('./transaction.route')
 const tokenRoute = require('./token.route')
+const testRoute = require('./test.route')
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
         await io.of('/').adapter.remoteJoin(socket.id, socket.address).catch((err)=> reject(err));
+        await io.of('/').adapter.allRooms().then((result)=> console.log(result))
         await redisClient.saddAsync('connectedUser', socket.address).then((data)=>{
             if(data === 0){
                 //todo::
@@ -53,6 +55,7 @@ module.exports = function (io) {
                 pushNotificationRoute(io,socket);
                 transactionRoute(io,socket);
                 tokenRoute(io,socket);
+                testRoute(io,socket);
             })
             .catch((err) => {
                 console.log(err);

@@ -19,4 +19,14 @@ module.exports = (io, socket) => {
         socketValidate(pushNotificationValidation.deregisterPushNotificationToken),
         pushNotificationController.deregisterPushNotificationToken
     )(io,socket))
+
+    socket.on('registerPushType', socketMiddleware(
+        socketValidate(pushNotificationValidation.registerPushType),
+        pushNotificationController.registerPushType
+    )(io, socket))
+
+    socket.on('deregisterPushType', socketMiddleware(
+        socketValidate(pushNotificationValidation.deregisterPushType),
+        pushNotificationController.deregisterPushType
+    )(io, socket))
 };

@@ -14,7 +14,7 @@ const getMessageCount = {
 
 const getMessagesByAddress = {
     query : joi.object().keys({
-        address : joi.string().required().custom(customValidation.address),
+        fromAddress : joi.string().required().custom(customValidation.address),
         toAddress : joi.string().required().custom(customValidation.address)
     })
 }

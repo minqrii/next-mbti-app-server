@@ -14,5 +14,9 @@ router
     .post(validate(pushNotificationValidation.registerPushNotificationToken), pushNotificationController.registerPushNotificationToken)
     .delete(validate(pushNotificationValidation.deregisterPushNotificationToken), pushNotificationController.deregisterPushNotificationToken)
 
+router
+    .route('/:token/key/:key/type')
+    .post(validate(pushNotificationValidation.registerPushType), pushNotificationController.registerPushType)
+    .delete(validate(pushNotificationValidation.deregisterPushType), pushNotificationController.deregisterPushType)
 
 module.exports = router;

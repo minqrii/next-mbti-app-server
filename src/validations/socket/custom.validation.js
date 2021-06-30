@@ -9,10 +9,14 @@ const password = (value, helpers) =>{
 };
 
 const address = (value, helpers) =>{
-    if(value.length !== 48)
+    if(value.length !== 48){
+        console.log("wrong length")
         return helpers.message('Wrong address');
-    if(value.slice(0,4)!== "0x1k")
+    }
+    if(value.slice(0,4)!== "0x1k"){
+        console.log("wrong form")
         return helpers.message('Wrong address form')
+    }
     return value
 };
 

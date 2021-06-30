@@ -23,8 +23,30 @@ const deregisterPushToken  = {
     })
 }
 
+const registerPushType  = {
+    params : joi.object().keys({
+        token : joi.string().required(),
+        key : joi.string().required()
+    }),
+    query : joi.object().keys({
+        type : joi.string().required(),
+    })
+}
+
+const deregisterPushType  = {
+    params : joi.object().keys({
+        token : joi.string().required(),
+        key : joi.string().required()
+    }),
+    query : joi.object().keys({
+        type : joi.string().required(),
+    })
+}
+
 module.exports = {
     syncPushCount,
     registerPushToken,
-    deregisterPushToken
+    deregisterPushToken,
+    registerPushType,
+    deregisterPushType
 };

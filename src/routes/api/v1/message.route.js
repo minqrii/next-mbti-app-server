@@ -18,7 +18,7 @@ router
     .post(validate(messageValidation.getMessageCount),messageController.getMessageCount)
 
 router
-    .route('/:address/address/:toAddress')
+    .route('/:toAddress/address/:fromAddress')
     .post(validate(messageValidation.getMessagesByAddress),messageController.getMessagesByAddress)
 
 router

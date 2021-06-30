@@ -16,8 +16,20 @@ const deregisterPushNotificationToken = socketCatchAsync(async (io, socket, data
     socket.emit('deregisterPushNotificationToken', deregisterPushNotificationTokenStatus);
 })
 
+const registerPushType = socketCatchAsync(async (io, socket, data) =>{
+    const registerPushTypeStatus = await pushNotificationService.registerPushType(data)
+    socket.emit('registerPushType', registerPushTypeStatus);
+})
+
+const deregisterPushType = socketCatchAsync(async (io, socket, data) =>{
+    const deregisterPushTypeStatus = await pushNotificationService.deregisterPushType(data)
+    socket.emit('deregisterPushType', deregisterPushTypeStatus);
+})
+
 module.exports = {
     syncPushNotificationCount,
     registerPushNotificationToken,
     deregisterPushNotificationToken,
+    registerPushType,
+    deregisterPushType
 };

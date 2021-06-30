@@ -29,5 +29,6 @@ const getSendFailTransactions = {
 
 module.exports = {
     transactionPayload,
+    getSendFailTransactions,
     sendTransactionResult
 }

@@ -4,19 +4,19 @@ const redisClient = require('../config/database/redis')
 
 const setSendFailTransaction = async function (from, type, transactionObject) {
     try {
-        redisClient.hmgetAsync(from, type)
+        redisClient.hmgetAsync("send_fail_" + from, type)
             .then((result) => {
                 let stringifyTransaction = [];
-                if (result !== null) {
+                if (result[0] !== null) {
                     //이미 send fail이 존재하는 경우
                     stringifyTransaction.push(JSON.parse(result[0]));
                     stringifyTransaction.push(transactionObject);
                     stringifyTransaction = JSON.stringify(stringifyTransaction)
-                    redisClient.hmsetAsync(from, type, stringifyTransaction)
+                    redisClient.hmsetAsync("send_fail_" + from, type, stringifyTransaction)
                 } else {
                     //send fail이 한개도 없는 경우
                     stringifyTransaction = JSON.stringify([transactionObject])
-                    redisClient.hmsetAsync(from, type, stringifyTransaction)
+                    redisClient.hmsetAsync("send_fail_" + from, type, stringifyTransaction)
                 }
             })
     } catch (err) {

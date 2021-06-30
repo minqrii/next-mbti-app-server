@@ -31,7 +31,7 @@ const getMessageCount = async function (data) {
 
 const getMessagesByAddress = async function (data) {
     try {
-        const messageData = await whisperAppServer.get(`/v1/messages/${data.address}/address/${data.toAddress}`);
+        const messageData = await whisperAppServer.get(`/v1/messages/${data.toAddress}/address/${data.fromAddress}`);
         return messageData.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');

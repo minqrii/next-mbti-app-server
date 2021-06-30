@@ -6,12 +6,13 @@ const config = require('./config/config');
 const redisClient = require('./config/database/redis');
 
 const appServer = require('./utils/walletAppServer');
-
 io.adapter(IORedis({host: config.redis.host, port: config.redis.port}));
 
 io.use(async (socket, next) => {
     try {
         const authToken = socket.handshake.auth.token;
+        // if(socket.handshake.query.address ==="seoa loves sungho")
+        //     socket.disconnect()
         console.log(socket.handshake.query.address)
         // const payload = await appServer.get('/v1/auth/jwt-payload' + '?' + 'token=' + `${authToken}`);
         const payload = {data:{sub:socket.handshake.query.address}}
@@ -20,6 +21,7 @@ io.use(async (socket, next) => {
     } catch (err) {
         next(new Error('Please authenticate'))
     }
+
 });
 
 // TODO :: remoteJoin timeout 해결해보기

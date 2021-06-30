@@ -6,9 +6,15 @@ const socketCatchAsync = require('../../utils/socketCatchAsync')
 
 
 const getSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
-    redisClient.hgetallAsync(data.address)
+    redisClient.hgetallAsync("send_fail_" + data.address)
         .then((data)=>{
-            io.emit("getSendFailTransactions",data)
+            let result = {};
+            if(data !== null){
+                Object.entries(data).forEach(([key,value]) => {
+                    result[key] = JSON.parse(value)
+                })
+            }
+            io.emit("getSendFailTransactions",result)
         })
 });
 
