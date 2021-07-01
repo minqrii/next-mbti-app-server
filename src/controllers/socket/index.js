@@ -4,3 +4,4 @@ module.exports.pushNotificationController = require('./pushNotification.controll
 module.exports.tokenController = require('./token.controller');
 module.exports.transactionController = require('./transaction.controller');
 module.exports.testController = require('./test.controller');
+module.exports.notificationController = require('./notification.controller');

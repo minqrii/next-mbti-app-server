@@ -10,7 +10,7 @@ const getTransactionType = (data) => {
     return {
         SEND_MESSAGE : {
             channel : "sendMessage",
-            sendPush : true
+            sendPush : true,
         },
         READ_MESSAGE : {
             channel : "readMessage",
@@ -23,6 +23,10 @@ const getTransactionType = (data) => {
         DEREGISTER_SPAM: {
             channel : "deregisterSpam",
             sendPush : false
+        },
+        ADD_FRIEND: {
+            channel : "addFriend",
+            sendPush : true
         }
     }[data]
 }
@@ -39,7 +43,7 @@ const sendTransactionResult = catchAsync(async (req, res) => {
             redisClient.sinterAsync('connectedUser', "connectedUser" + data.to)
                 .then(async (res)=>{
                     if(res.length!==0){
-                        req.app.io.to(data.to).emit(transactionType.channel+"Result")
+                        req.app.io.to(data.to).emit(transactionType.channel+"Receive", transactionResult)
                     }
                     else{
                         await pushNotificationService.sendPushNotification({}, [data.to], data.type)
