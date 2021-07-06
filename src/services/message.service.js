@@ -14,7 +14,7 @@ const sendMessage = async function (data) {
 const readMessage = async function (data) {
     try {
         const readMessageStatus = await whisperAppServer.post(`/v1/messages/read`,data);
-        return readMessageStatus.data.success;
+        return readMessageStatus.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }

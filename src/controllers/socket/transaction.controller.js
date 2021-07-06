@@ -15,6 +15,8 @@ const getSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
                 })
             }
             io.emit("getSendFailTransactions",result)
+            //todo :: 개발 후 delete
+            socket.emit("log",'getSendFailTransactions')
         })
 });
 

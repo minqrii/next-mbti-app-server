@@ -17,7 +17,7 @@ const sendTransactionResult = {
         transactionResult : joi.object().required(),
         from : joi.string().required().custom(customValidation.address),
         transactionObject : joi.object(),
-        to : joi.string().required().custom(customValidation.address)
+        to : joi.string().custom(customValidation.address)
     })
 }
 

@@ -5,11 +5,7 @@ const alarmAppServer = require('../utils/alarmAppServer');
 
 const sendPushNotification = async function (data, targetAddress, type) {
     try {
-        console.log(type)
-        console.log(targetAddress)
-        data["type"] = type
-        data["key"] = targetAddress
-        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/send`, data);
+        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/send`, {type : type, key : targetAddress, ...data});
         return sendPushStatus.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
