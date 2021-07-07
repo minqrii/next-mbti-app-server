@@ -23,6 +23,7 @@ const getMessageCount = socketCatchAsync(async (io, socket, data) => {
     socket.emit('getMessageCount', messageCounts)
     //todo :: 개발 후 delete
     socket.emit("log",'getMessageCount')
+    io.to('').emit('getMessageCount', messageCounts)
 });
 
 const getMessagesByAddress = socketCatchAsync(async (io, socket, data) => {

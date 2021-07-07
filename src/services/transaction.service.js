@@ -6,19 +6,13 @@ const setSendFailTransaction = async function (from, type, transactionObject) {
     try {
         redisClient.hmgetAsync("send_fail_" + from, type)
             .then((result) => {
-                console.log(JSON.parse(result[0]))
-                let stringifyTransaction = [];
                 let sendFailObject = {};
                 sendFailObject[transactionObject.tx_hash] = transactionObject
                 if (result[0] !== null) {
                     //이미 send fail이 존재하는 경우
-                    stringifyTransaction = JSON.parse(result[0]);
-                    stringifyTransaction.push(sendFailObject);
-                } else {
-                    //send fail이 한개도 없는 경우
-                    stringifyTransaction.push(sendFailObject);
+                    sendFailObject = {...sendFailObject, ...JSON.parse(result[0])};
                 }
-                redisClient.hmsetAsync("send_fail_" + from, type, JSON.stringify(stringifyTransaction))
+                redisClient.hmsetAsync("send_fail_" + from, type, JSON.stringify(sendFailObject))
                 //todo :: add expire time to key
             })
     } catch (err) {

@@ -11,7 +11,14 @@ const getSendFailTransactions = joi.object().keys({
     address : joi.string().required()
 })
 
+const deleteSendFailTransactions = joi.object().keys({
+    address : joi.string().required(),
+    tx_hash : joi.string().required(),
+    type : joi.string().required()
+})
+
 module.exports = {
     transactionPayload,
-    getSendFailTransactions
+    getSendFailTransactions,
+    deleteSendFailTransactions
 }

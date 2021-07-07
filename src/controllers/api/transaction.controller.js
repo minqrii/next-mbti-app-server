@@ -51,10 +51,7 @@ const sendTransactionResult = catchAsync(async (req, res) => {
             }
         }
     }
-
-    console.log("result sent to : " + req.body.from);
-    console.log(transactionType.channel+"Result")
-
+    console.log(transactionType.channel + " : result sent to : " + req.body.from);
     req.app.io.to(req.body.from).emit(transactionType.channel + "Result", transactionResult)
     //todo :: 개발 후 delete
     req.app.io.to(req.body.from).emit("log", transactionType.channel + "Result")

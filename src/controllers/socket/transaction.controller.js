@@ -20,6 +20,20 @@ const getSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
         })
 });
 
+const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
+    redisClient.hgetAsync("send_fail_" + data.address, data.type)
+        .then(async (data)=>{
+            let sendFailObject = JSON.parse(data[0])
+            if(data !== null){
+                sendFailObject.delete(data.tx_hash);
+                await redisClient.hsetAsync("send_fail_" + data.address, data.type, sendFailObject)
+            }
+            io.emit("deleteSendFailTransactions", sendFailObject)
+            //todo :: 개발 후 delete
+            socket.emit("log",'deleteSendFailTransactions')
+        })
+});
+
 module.exports = {
-    getSendFailTransactions
+    deleteSendFailTransactions
 };

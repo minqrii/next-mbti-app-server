@@ -22,7 +22,7 @@ const envVarSchema = joi.object()
         ALARM_APP_SERVER_PORT: joi.number().required(),
         REDIS_HOST: joi.string().required(),
         REDIS_PORT: joi.number().required(),
-        REDIS_PASSWORD: joi.string().required(),
+        // REDIS_PASSWORD: joi.string().required(),
     })
     .unknown();
 
@@ -41,6 +41,6 @@ module.exports = {
     redis: {
         host: envVars.REDIS_HOST,
         port: envVars.REDIS_PORT,
-        password: envVars.REDIS_PASSWORD,
+        // password: envVars.REDIS_PASSWORD,
     }
 };

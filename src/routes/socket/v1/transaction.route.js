@@ -7,5 +7,9 @@ module.exports = (io, socket) => {
         socketValidate(transactionValidation.getSendFailTransactions),
         transactionController.getSendFailTransactions
     )(io,socket))
+    socket.on('deleteSendFailTransactions', socketMiddleware(
+        socketValidate(transactionValidation.deleteSendFailTransactions),
+        transactionController.deleteSendFailTransactions
+    )(io,socket))
 };
 
