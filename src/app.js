@@ -24,6 +24,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(xss());
 
+//todo:: 개발 완료 후 삭제
+app.use('/status', function (req,res,next){
+    console.log('status')
+    res.send('status');
+})
+
 app.use('/api/v1', apiRoutes);
 
 app.use((req, res, next) => {

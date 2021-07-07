@@ -7,7 +7,7 @@ dotenv.config({path: path.join(__dirname, '../../.env')});
 const envVarSchema = joi.object()
     .keys({
         NODE_ENV: joi.string().valid('production', 'development', 'test').required(),
-        PORT: joi.number().default(4000),
+        PORT: joi.number().default(9117),
         // APP_SERVER_HOST: joi.string().required().ip({
         //     version: [
         //         'ipv4',
