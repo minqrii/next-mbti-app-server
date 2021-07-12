@@ -61,18 +61,22 @@ const sendTransactionResult = catchAsync(async (req, res) => {
 //todo :: util로 빼는 편이 좋아 보여요. -> message 등 모든 로직에 포함
 const checkUserConnectionStatus = (targetUsers) => {
     return new Promise(async (resolve, reject) => {
-        await redisClient.saddAsync("connectedUser"+ targetUsers[0], ...targetUsers)
-        await redisClient.sinterAsync('connectedUser', "connectedUser" + targetUsers[0])
-            .then(async(res)=> {
-                if(res.length!==0){
-                    resolve(true);
-                }else{
-                    reject(false);
-                }
-            }).catch((err)=>{
-                throw err
-        })
-        await redisClient.delAsync("connectedUser"+ targetUsers[0])
+        try{
+            await redisClient.saddAsync("connectedUser"+ targetUsers[0], ...targetUsers)
+            await redisClient.sinterAsync('connectedUser', "connectedUser" + targetUsers[0])
+                .then(async(res)=> {
+                    if(res.length!==0){
+                        resolve(res);
+                    }else{
+                        resolve(targetUsers);
+                    }
+                }).catch((err)=>{
+                    reject(err)
+                })
+            await redisClient.delAsync("connectedUser"+ targetUsers[0])
+        }catch(err){
+            reject(err)
+        }
     })
 }
 
