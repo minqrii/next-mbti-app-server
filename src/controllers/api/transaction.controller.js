@@ -43,11 +43,14 @@ const sendTransactionResult = catchAsync(async (req, res) => {
         await transactionService.setSendFailTransaction(data.from, req.body.type, req.body.transactionObject)
     }else{
         if(transactionType.sendPush) {
-            if (await checkUserConnectionStatus([data.to])) {
-                req.app.io.to(data.to).emit("log", transactionType.channel + "Receive")
-                req.app.io.to(data.to).emit(transactionType.channel + "Receive", transactionResult)
+            const targetUser = [data.to]
+            let connectedUsers = await checkUserConnectionStatus(targetUser)
+            let pushUsers = [data.to].filter(x => !connectedUsers.includes(x))
+            if (!pushUsers) {
+                req.app.io.to(...targetUser).emit("log", transactionType.channel + "Receive")
+                req.app.io.to(...targetUser).emit(transactionType.channel + "Receive", transactionResult)
             } else {
-                await pushNotificationService.sendPushNotification({}, [data.to], data.type)
+                await pushNotificationService.sendPushNotification({}, pushUsers, data.type)
             }
         }
     }
