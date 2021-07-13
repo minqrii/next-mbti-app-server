@@ -22,7 +22,7 @@ const defaultRoutes = [
         route: pushNotificationRoute
     },
     {
-        path: '/transaction',
+        path: '/transactions',
         route: transactionRoute
     },
     {

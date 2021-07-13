@@ -39,19 +39,15 @@ const sendTransactionResult = catchAsync(async (req, res) => {
         "status" : req.body.transactionResult.data[0],
         "tx_hash" : req.body.tx_hash
     }
-    if(req.body.transactionResult.data[0] === "blockchain timeout" || req.body.transactionResult.data[0] === 'reject') {
-        await transactionService.setSendFailTransaction(data.from, req.body.type, req.body.transactionObject)
-    }else{
-        if(transactionType.sendPush) {
-            const targetUser = [data.to]
-            let connectedUsers = await checkUserConnectionStatus(targetUser)
-            let pushUsers = [data.to].filter(x => !connectedUsers.includes(x))
-            if (!pushUsers) {
-                req.app.io.to(...targetUser).emit("log", transactionType.channel + "Receive")
-                req.app.io.to(...targetUser).emit(transactionType.channel + "Receive", transactionResult)
-            } else {
-                await pushNotificationService.sendPushNotification({}, pushUsers, data.type)
-            }
+    if(transactionType.sendPush) {
+        const targetUser = [data.to]
+        let connectedUsers = await checkUserConnectionStatus(targetUser)
+        let pushUsers = [data.to].filter(x => !connectedUsers.includes(x))
+        if (!pushUsers) {
+            req.app.io.to(...targetUser).emit("log", transactionType.channel + "Receive")
+            req.app.io.to(...targetUser).emit(transactionType.channel + "Receive", transactionResult)
+        } else {
+            await pushNotificationService.sendPushNotification({}, pushUsers, data.type)
         }
     }
     console.log(transactionType.channel + " : result sent to : " + req.body.from);
@@ -84,14 +80,20 @@ const checkUserConnectionStatus = (targetUsers) => {
 }
 
 const getSendFailTransactions = catchAsync(async (req, res) => {
-    redisClient.hgetallAsync(req.address)
-        .then((data)=>{
-            res.send(data)
-        })
+    const data = {...req.query, ...req.body, ...req.params}
+    const getSendFailTransactionsStatus = await transactionService.getSendFailTransactions(data);
+    res.json(getSendFailTransactionsStatus)
+});
+
+const deleteSendFailTransactions = catchAsync(async (req, res) => {
+    const data = {...req.query, ...req.body, ...req.params}
+    const deleteSendFailTransactionsStatus = await transactionService.deleteSendFailTransactions(data);
+    res.json(deleteSendFailTransactionsStatus)
 });
 
 
 module.exports = {
     sendTransactionResult,
-    getSendFailTransactions
+    getSendFailTransactions,
+    deleteSendFailTransactions
 };

@@ -47,5 +47,8 @@ process.on('SIGINT', () => {
     if (server) {
         server.close();
     }
+    if(process){
+        process.exit(1);
+    }
 });
 

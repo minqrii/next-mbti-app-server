@@ -1,23 +1,15 @@
 const redisClient = require('../../config/database/redis')
 const config = require('../../config/config')
-
+const {transactionService} = require('../../services')
 const socketCatchAsync = require('../../utils/socketCatchAsync')
 
 
 
 const getSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
-    redisClient.hgetallAsync("send_fail_" + data.address)
-        .then((data)=>{
-            let result = {};
-            if(data !== null){
-                Object.entries(data).forEach(([key,value]) => {
-                    result[key] = JSON.parse(value)
-                })
-            }
-            io.emit("getSendFailTransactions",result)
-            //todo :: 개발 후 delete
-            socket.emit("log",'getSendFailTransactions')
-        })
+    let sendFailTransactions = await transactionService.getSendFailTransactions(data);
+    socket.emit('getSendFailTransactions', sendFailTransactions);
+    //:todo 개발 후 delete
+    socket.emit('log', 'getSendFailTransactions')
 });
 
 const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
@@ -35,5 +27,6 @@ const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
 });
 
 module.exports = {
-    deleteSendFailTransactions
+    deleteSendFailTransactions,
+    getSendFailTransactions
 };

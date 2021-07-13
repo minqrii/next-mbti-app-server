@@ -23,12 +23,22 @@ const sendTransactionResult = {
 
 const getSendFailTransactions = {
     query : joi.object().keys({
-        address : joi.string().required().custom(customValidation.address)
+        address : joi.string().required().custom(customValidation.address),
+        type : joi.string().required()
+    })
+}
+
+const deleteSendFailTransactions = {
+    query : joi.object().keys({
+        address : joi.string().required().custom(customValidation.address),
+        tx_hash : joi.string().required(),
+        type : joi.string().required()
     })
 }
 
 module.exports = {
     transactionPayload,
     getSendFailTransactions,
-    sendTransactionResult
+    sendTransactionResult,
+    deleteSendFailTransactions
 }

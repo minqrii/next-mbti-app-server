@@ -8,7 +8,8 @@ const transactionPayload = joi.object().keys({
 });
 
 const getSendFailTransactions = joi.object().keys({
-    address : joi.string().required()
+    address : joi.string().required(),
+    type : joi.string().required()
 })
 
 const deleteSendFailTransactions = joi.object().keys({
