@@ -7,6 +7,7 @@ const setSendFailTransaction = async function (from, type, transactionObject) {
         redisClient.hmgetAsync("send_fail_" + from, type)
             .then((result) => {
                 let sendFailObject = {};
+                console.log('here')
                 sendFailObject[transactionObject.tx_hash] = transactionObject
                 if (result[0] !== null) {
                     //이미 send fail이 존재하는 경우
