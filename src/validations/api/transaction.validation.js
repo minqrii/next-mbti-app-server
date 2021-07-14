@@ -36,6 +36,13 @@ const deleteSendFailTransactions = {
     })
 }
 
+const getNonceByAddress = {
+    query : joi.object().keys({
+        address : joi.string().required().custom(customValidation.address),
+        server : joi.string().required().valid('whisper', 'wallet')
+    })
+}
+
 module.exports = {
     transactionPayload,
     getSendFailTransactions,

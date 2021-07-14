@@ -91,9 +91,16 @@ const deleteSendFailTransactions = catchAsync(async (req, res) => {
     res.json(deleteSendFailTransactionsStatus)
 });
 
+const getNonceByAddress = catchAsync(async (req, res) => {
+    const data = {...req.query, ...req.body, ...req.params}
+    const getNonceByAddressStatus = await transactionService.getNonceByAddress(data);
+    res.json(getNonceByAddressStatus)
+});
+
 
 module.exports = {
     sendTransactionResult,
     getSendFailTransactions,
-    deleteSendFailTransactions
+    deleteSendFailTransactions,
+    getNonceByAddress
 };

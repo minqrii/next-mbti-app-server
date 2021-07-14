@@ -14,4 +14,8 @@ router
     .get(validate(transactionValidation.getSendFailTransactions), transactionController.getSendFailTransactions)
     .delete(validate(transactionValidation.deleteSendFailTransactions), transactionController.deleteSendFailTransactions)
 
+router
+    .route('/nonce')
+    .get(validate(transactionValidation.getNonceByAddress), transactionController.getNonceByAddress)
+
 module.exports = router;

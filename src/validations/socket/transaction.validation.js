@@ -1,4 +1,5 @@
 const joi = require('joi');
+const customValidation = require('./custom.validation')
 
 const transactionPayload = joi.object().keys({
     transaction : joi.string().required(),
@@ -18,8 +19,14 @@ const deleteSendFailTransactions = joi.object().keys({
     type : joi.string().required()
 })
 
+const getNonceByAddress = joi.object().keys({
+    address : joi.string().required().custom(customValidation.address),
+    server : joi.string().required().valid('whisper', 'wallet')
+})
+
 module.exports = {
     transactionPayload,
     getSendFailTransactions,
-    deleteSendFailTransactions
+    deleteSendFailTransactions,
+    getNonceByAddress
 }

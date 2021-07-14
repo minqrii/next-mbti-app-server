@@ -26,7 +26,13 @@ const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
         })
 });
 
+const getNonceByAddress = socketCatchAsync(async(io, socket, data) => {
+
+});
+
+
 module.exports = {
     deleteSendFailTransactions,
-    getSendFailTransactions
+    getSendFailTransactions,
+    getNonceByAddress,
 };

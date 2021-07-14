@@ -12,5 +12,10 @@ module.exports = (io, socket) => {
         socketValidate(transactionValidation.deleteSendFailTransactions),
         transactionController.deleteSendFailTransactions
     )(io,socket))
+
+    socket.on('getNonceByAddress', socketMiddleware(
+        socketValidate(transactionValidation.getNonceByAddress),
+        transactionController.getNonceByAddress
+    )(io,socket))
 };
 
