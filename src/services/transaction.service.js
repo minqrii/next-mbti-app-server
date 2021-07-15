@@ -66,17 +66,17 @@ const deleteSendFailTransactions = async function (data){
 
 const getNonceByAddress = async function (data){
     try {
-        let deleteSendFailTransactionResult;
-        let path = `/v1/transactions/fail?address=${data.address}&type=${data.type}&tx_hash=${data.tx_hash}`
-        switch (data.type){
-            case 'SEND_TOKEN':
-                deleteSendFailTransactionResult = await walletAppServer.delete(path)
+        let getNonceResult;
+        let path = `/v1/transactions/nonce?address=${data.address}`
+        switch (data.server){
+            case 'wallet':
+                getNonceResult = await walletAppServer.get(path)
                 break;
             default :
-                deleteSendFailTransactionResult = await whisperAppServer.delete(path)
+                getNonceResult = await whisperAppServer.get(path)
                 break;
         }
-        return deleteSendFailTransactionResult.data;
+        return getNonceResult.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }

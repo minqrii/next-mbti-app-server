@@ -42,11 +42,10 @@ const sendTransactionResult = catchAsync(async (req, res) => {
     if(transactionType.sendPush) {
         const targetUser = [data.to]
         let connectedUsers = await checkUserConnectionStatus(targetUser)
-        let pushUsers = [data.to].filter(x => !connectedUsers.includes(x))
-        if (!pushUsers) {
-            req.app.io.to(...targetUser).emit("log", transactionType.channel + "Receive")
-            req.app.io.to(...targetUser).emit(transactionType.channel + "Receive", transactionResult)
-        } else {
+        let pushUsers = targetUser.filter(x => !connectedUsers.includes(x))
+        req.app.io.to(...connectedUsers).emit("log", transactionType.channel + "Receive")
+        req.app.io.to(...connectedUsers).emit(transactionType.channel + "Receive", transactionResult)
+        if(pushUsers){
             await pushNotificationService.sendPushNotification({}, pushUsers, data.type)
         }
     }
@@ -66,11 +65,9 @@ const checkUserConnectionStatus = (targetUsers) => {
                 .then(async(res)=> {
                     if(res.length!==0){
                         resolve(res);
-                    }else{
-                        resolve(targetUsers);
+                        return;
                     }
-                }).catch((err)=>{
-                    reject(err)
+                    resolve([]);
                 })
             await redisClient.delAsync("connectedUser"+ targetUsers[0])
         }catch(err){

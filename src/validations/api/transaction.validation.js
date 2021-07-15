@@ -47,5 +47,6 @@ module.exports = {
     transactionPayload,
     getSendFailTransactions,
     sendTransactionResult,
-    deleteSendFailTransactions
+    deleteSendFailTransactions,
+    getNonceByAddress
 }
