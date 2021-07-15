@@ -31,7 +31,12 @@ const getSendFailTransactions = async function (data){
                 getSendFailTransactionResult = await walletAppServer.get(path)
                 break;
             case 'ALL' :
-                await Promise.all([walletAppServer.get(path), whisperAppServer.get(path)])
+                //todo :: change after wallet server
+                // await Promise.all([walletAppServer.get(path), whisperAppServer.get(path)])
+                //     .then((result)=>{
+                //         getSendFailTransactionResult = result;
+                //     })
+                await Promise.all([whisperAppServer.get(path)])
                     .then((result)=>{
                         getSendFailTransactionResult = result;
                     })
