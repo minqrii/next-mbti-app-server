@@ -37,7 +37,9 @@ const getSendFailTransactions = async function (data){
                 //         getSendFailTransactionResult = result;
                 //     })
                 await Promise.all([whisperAppServer.get(path)])
-                    .then((result)=>{
+                    .then((res)=>{
+                        let result = {};
+                        res.map(key => Object.assign(result, key.data))
                         getSendFailTransactionResult = result;
                     })
                 break;
