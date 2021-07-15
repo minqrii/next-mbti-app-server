@@ -24,7 +24,7 @@ const walletAppServer = require('../utils/walletAppServer')
 
 const getSendFailTransactions = async function (data){
     try {
-        let getSendFailTransactionResult;
+        let getSendFailTransactionResult = {};
         let path = `/v1/transactions/fail?address=${data.address}&type=${data.type}`
         switch (data.type){
             case 'SEND_TOKEN':
@@ -40,7 +40,7 @@ const getSendFailTransactions = async function (data){
                     .then((res)=>{
                         let result = {};
                         res.map(key => Object.assign(result, key.data))
-                        getSendFailTransactionResult = result;
+                        getSendFailTransactionResult.data = result;
                     })
                 break;
             default :
