@@ -4,3 +4,4 @@ module.exports.pushNotificationService =require('./pushNotification.service');
 module.exports.tokenService =require('./token.service');
 module.exports.notificationService =require('./notification.service');
 module.exports.transactionService =require('./transaction.service');
+module.exports.connectionService =require('./connection.service');

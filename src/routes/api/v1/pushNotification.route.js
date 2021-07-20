@@ -7,7 +7,8 @@ const router = express.Router();
 
 router
     .route('/key/:key/count')
-    .post(validate(pushNotificationValidation.syncPushNotificationCount), pushNotificationController.syncPushNotificationCount);
+    //sync fcm count
+    .post(validate(pushNotificationValidation.syncPushNotificationCount), pushNotificationController.syncPushNotificationCount)
 
 router
     .route('/:token/key/:key')
@@ -18,5 +19,11 @@ router
     .route('/:token/key/:key/type')
     .post(validate(pushNotificationValidation.registerPushType), pushNotificationController.registerPushType)
     .delete(validate(pushNotificationValidation.deregisterPushType), pushNotificationController.deregisterPushType)
+
+router
+    .route('/:token/key/:key/sound')
+    .get(validate(pushNotificationValidation.getPushSound), pushNotificationController.getPushSound)
+    .put(validate(pushNotificationValidation.updatePushSound), pushNotificationController.updatePushSound)
+
 
 module.exports = router;

@@ -3,15 +3,6 @@ const ApiError = require('../utils/ApiError');
 const alarmAppServer = require('../utils/alarmAppServer');
 
 
-const sendPushNotification = async function (data, targetAddress, type) {
-    try {
-        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/send`, {type : type, key : targetAddress, ...data});
-        return sendPushStatus.data;
-    } catch (err) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
-    }
-};
-
 const syncPushNotificationCount = async function (data){
     try {
         const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/key/${data.key}/count`, {count : data.count});
@@ -57,12 +48,29 @@ const deregisterPushType = async function(data){
     }
 }
 
+const getPushSound = async function(data){
+    try{
+
+    }catch (err){
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
+    }
+}
+
+const updatePushSound = async function(data){
+    try{
+
+    }catch (err){
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
+    }
+}
+
 
 module.exports = {
-    sendPushNotification,
     syncPushNotificationCount,
     registerPushNotificationToken,
     deregisterPushNotificationToken,
     registerPushType,
-    deregisterPushType
+    deregisterPushType,
+    getPushSound,
+    updatePushSound
 };

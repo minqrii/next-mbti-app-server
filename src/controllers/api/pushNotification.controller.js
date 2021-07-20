@@ -32,10 +32,24 @@ const deregisterPushType = catchAsync(async (req,res)=>{
     res.send(deregisterPushTypeStatus);
 })
 
+const getPushSound = catchAsync(async (req,res)=>{
+    const data = {...req.query, ...req.body, ...req.params}
+    const getPushSoundStatus = await pushNotificationService.getPushSound(data)
+    res.send(getPushSoundStatus);
+})
+
+const updatePushSound = catchAsync(async (req,res)=>{
+    const data = {...req.query, ...req.body, ...req.params}
+    const updatePushSoundStatus = await pushNotificationService.updatePushSound(data)
+    res.send(updatePushSoundStatus);
+})
+
 module.exports = {
     syncPushNotificationCount,
     registerPushNotificationToken,
     deregisterPushNotificationToken,
     registerPushType,
-    deregisterPushType
+    deregisterPushType,
+    getPushSound,
+    updatePushSound
 };
