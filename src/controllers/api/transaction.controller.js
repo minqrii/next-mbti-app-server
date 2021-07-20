@@ -6,20 +6,28 @@ const transactionService = require('../../services/transaction.service')
 
 const sendTransactionResult = catchAsync(async (req, res) => {
     let data = req.body
+    let type = snakeToCamel(data.type);
     let transactionResult = {
         "status" : req.body.transactionResult.data[0],
         "tx_hash" : req.body.tx_hash
     }
     if(data.to){
-        req.app.io.to(data.to).emit("log", data.type + "Receive")
-        req.app.io.to(data.to).emit(data.type + "Receive", transactionResult)
+        req.app.io.to(data.to).emit("log", type + "Receive")
+        req.app.io.to(data.to).emit(type + "Receive", transactionResult)
     }
-    console.log(data.type + " : result sent to : " + req.body.from);
-    req.app.io.to(req.body.from).emit(data.type + "Result", transactionResult)
-    req.app.io.to(req.body.from).emit("log", data.type + "Result")
+    console.log(type + " : result sent to : " + req.body.from);
+    req.app.io.to(req.body.from).emit(type + "Result", transactionResult)
+    req.app.io.to(req.body.from).emit("log", type + "Result")
     res.send("ok")
 });
 
+const snakeToCamel = str =>
+    str.toLowerCase().replace(/([-_][a-z])/g, group =>
+        group
+            .toUpperCase()
+            .replace('-', '')
+            .replace('_', '')
+    );
 
 const getSendFailTransactions = catchAsync(async (req, res) => {
     const data = {...req.query, ...req.body, ...req.params}
