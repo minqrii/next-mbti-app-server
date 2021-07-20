@@ -5,7 +5,8 @@ const alarmAppServer = require('../utils/alarmAppServer');
 
 const syncPushNotificationCount = async function (data){
     try {
-        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/key/${data.key}/count`, {count : data.count});
+        const body = (({key, ...obj})=> obj) (data)
+        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/key/${data.key}/count`, body);
         return sendPushStatus.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
@@ -14,7 +15,8 @@ const syncPushNotificationCount = async function (data){
 
 const registerPushNotificationToken = async function (data){
     try {
-        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/${data.token}/key/${data.key}`, data);
+        const body = (({token, key, ...obj})=> obj) (data)
+        const sendPushStatus = await alarmAppServer.post(`/v1/push-notification/${data.token}/key/${data.key}`, body);
         return sendPushStatus.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
@@ -23,7 +25,7 @@ const registerPushNotificationToken = async function (data){
 
 const deregisterPushNotificationToken = async function (data){
     try {
-        const sendPushStatus = await alarmAppServer.delete(`/v1/push-notification/${data.token}/key/${data.key}`, data);
+        const sendPushStatus = await alarmAppServer.delete(`/v1/push-notification/${data.token}/key/${data.key}?serviceName=${data.serviceName}`);
         return sendPushStatus.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
@@ -32,7 +34,8 @@ const deregisterPushNotificationToken = async function (data){
 
 const registerPushType = async function(data){
     try{
-        const registerPushTypeStatus = await alarmAppServer.post(`/v1/push-notification/${data.token}/key/${data.key}/type?type=${data.type}`)
+        const body = (({token, key, ...obj})=> obj) (data)
+        const registerPushTypeStatus = await alarmAppServer.post(`/v1/push-notification/${data.token}/key/${data.key}/type`, body)
         return registerPushTypeStatus.data
     }catch (err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
@@ -41,7 +44,7 @@ const registerPushType = async function(data){
 
 const deregisterPushType = async function(data){
     try{
-        const deregisterPushTypeStatus = await alarmAppServer.delete(`/v1/push-notification/${data.token}/key/${data.key}/type?type=${data.type}`)
+        const deregisterPushTypeStatus = await alarmAppServer.delete(`/v1/push-notification/${data.token}/key/${data.key}/type?type=${data.type}&serviceName=${data.serviceName}`)
         return deregisterPushTypeStatus.data
     }catch (err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
