@@ -1,12 +1,11 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
-const redisClient = require('../../config/database/redis')
-const config = require('../../config/config')
 const transactionService = require('../../services/transaction.service')
 
 const sendTransactionResult = catchAsync(async (req, res) => {
     let data = req.body
     let type = snakeToCamel(data.type);
+    console.log(type);
     let transactionResult = {
         "status" : req.body.transactionResult.data[0],
         "tx_hash" : req.body.tx_hash

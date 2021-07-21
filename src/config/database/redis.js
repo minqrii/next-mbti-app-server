@@ -1,8 +1,8 @@
-const redis = require('redis');
+const redis = require('ioredis');
 const {promisify} = require('util');
 const config = require('../config');
 
-const redisClient = redis.createClient({
+const redisClient = new redis.Cluster({
     host: config.redis.host,
     port: config.redis.port,
     // password: config.redis.password
