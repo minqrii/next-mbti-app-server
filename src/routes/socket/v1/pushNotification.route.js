@@ -12,7 +12,7 @@ module.exports = (io, socket) => {
     socket.on('registerPushNotificationToken', socketMiddleware(
         socketValidate(pushNotificationValidation.registerPushNotificationToken),
         pushNotificationController.registerPushNotificationToken
-    )(io,socket))a
+    )(io,socket))
 
     socket.on('deregisterPushNotificationToken', socketMiddleware(
         socketValidate(pushNotificationValidation.deregisterPushNotificationToken),
