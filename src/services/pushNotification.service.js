@@ -53,7 +53,8 @@ const deregisterPushType = async function(data){
 
 const getPushSound = async function(data){
     try{
-
+        const deregisterPushTypeStatus = await alarmAppServer.get(`/v1/push-notification/${data.token}/key/${data.key}/sound?serviceName=${data.serviceName}`)
+        return deregisterPushTypeStatus.data
     }catch (err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
     }
@@ -61,7 +62,9 @@ const getPushSound = async function(data){
 
 const updatePushSound = async function(data){
     try{
-
+        const body = (({token, key, ...obj})=> obj) (data)
+        const deregisterPushTypeStatus = await alarmAppServer.put(`/v1/push-notification/${data.token}/key/${data.key}/sound`, body)
+        return deregisterPushTypeStatus.data
     }catch (err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
     }
