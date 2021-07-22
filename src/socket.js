@@ -2,13 +2,15 @@ const io = require('socket.io')();
 const IORedis = require('socket.io-redis');
 const Redis = require('ioredis')
 
+const redisClient = require('./config/database/redis')
+
 const config = require('./config/config');
 
 const startupNodes = [
     {host: config.redis.host, port: config.redis.port}
 ]
 
-io.adapter(IORedis({pubClient: new Redis.Cluster(startupNodes), subClient: new Redis.Cluster(startupNodes)}));
+io.adapter(IORedis({pubClient: redisClient, subClient: redisClient}));
 
 io.use(async (socket, next) => {
     try {
