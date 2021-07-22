@@ -6,11 +6,7 @@ const redisClient = require('./config/database/redis')
 
 const config = require('./config/config');
 
-const startupNodes = [
-    {host: config.redis.host, port: config.redis.port}
-]
-
-io.adapter(IORedis({pubClient: redisClient, subClient: redisClient}));
+io.adapter(IORedis({host: config.redis.host, port: config.redis.port}));
 
 io.use(async (socket, next) => {
     try {
