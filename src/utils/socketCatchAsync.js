@@ -1,7 +1,7 @@
-const socketCatchAsync = (fn) => (io,socket,data) => {
+const socketCatchAsync = (fn) => (io,socket,data,callback) => {
     return new Promise((resolve, reject) => {
         try {
-            resolve(fn(io,socket,data))
+            resolve(fn(io,socket,data,callback))
         } catch (err) {
             reject(err);
         }

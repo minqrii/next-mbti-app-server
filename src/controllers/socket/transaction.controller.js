@@ -19,11 +19,12 @@ const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
     socket.emit('log', 'deleteSendFailTransactions')
 });
 
-const getNonceByAddress = socketCatchAsync(async(io, socket, data) => {
+const getNonceByAddress = socketCatchAsync(async(io, socket, data, callback) => {
     let nonce = await transactionService.getNonceByAddress(data);
     socket.emit('getNonceByAddress', nonce);
     //:todo 개발 후 delete
     socket.emit('log', 'getNonceByAddress')
+    callback(nonce)
 });
 
 

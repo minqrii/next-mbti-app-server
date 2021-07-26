@@ -1,11 +1,11 @@
-const socketMiddleware = (...args) => (io, socket) => (data) => {
+const socketMiddleware = (...args) => (io, socket) => (data, callback) => {
     if (args.length === 0) {
         return;
     }
     const execFuc = args[0];
     const arg = args.slice(1);
-    Promise.resolve(execFuc(io, socket, data))
-        .then(socketMiddleware(...arg)(io, socket))
+    Promise.resolve(execFuc(io, socket, data, callback))
+        .then((data) => socketMiddleware(...arg)(io, socket)(data, callback))
         .catch((err) => {
             console.log(err)
             socket.emit('error', err.message)
