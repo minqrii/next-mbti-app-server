@@ -1,7 +1,7 @@
 const express = require('express');
 const messageRoute = require('./message.route');
 const connectionRoute = require('./connection.route')
-const spamUserRoute = require('./spamUser.route');
+const userRoute = require('./user.route');
 const pushNotificationRoute = require('./pushNotification.route');
 const notificationRoute = require('./notification.route')
 const transactionRoute = require('./transaction.route');
@@ -15,8 +15,8 @@ const defaultRoutes = [
         route: messageRoute
     },
     {
-        path: '/spam-users',
-        route: spamUserRoute
+        path: '/users',
+        route: userRoute
     },
     {
         path: '/push-notification',

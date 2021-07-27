@@ -1,4 +1,4 @@
-module.exports.spamUserValidation = require('./spamUser.validation');
+module.exports.userValidation = require('./user.validation');
 module.exports.transactionValidation = require('./transaction.validation');
 module.exports.connectionValidation = require('./connection.validation');
 module.exports.messageValidation = require('./message.validation');

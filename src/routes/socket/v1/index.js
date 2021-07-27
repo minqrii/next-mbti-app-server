@@ -1,6 +1,6 @@
 const config = require('../../../config/config');
 const redisClient = require('../../../config/database/redis');
-const spamUserRoute = require('./spamUser.route');
+const userRoute = require('./user.route');
 const messageRoute = require('./message.route');
 const notificationRoute = require('./notification.route')
 const pushNotificationRoute = require('./pushNotification.route');
@@ -51,7 +51,7 @@ module.exports = function (io) {
     io.on('connection', (socket) => {
         initialize(io, socket)
             .then(() => {
-                spamUserRoute(io, socket);
+                userRoute(io, socket);
                 messageRoute(io, socket);
                 notificationRoute(io, socket);
                 pushNotificationRoute(io,socket);

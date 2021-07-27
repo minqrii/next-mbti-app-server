@@ -14,6 +14,10 @@ const {errorConverter, errorHandler} = require('./utils/error');
 
 const app = express();
 
+app.get('/health', function (req,res){
+    res.send('success');
+})
+
 if (config.env !== 'test') {
     app.use(morgan.successHandler);
     app.use(morgan.errorHandler);
@@ -25,10 +29,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(xss());
 
 //todo:: 개발 완료 후 삭제
-app.use('/status', function (req,res,next){
-    console.log('status')
-    res.send('status');
-})
 
 app.use('/api/v1', apiRoutes);
 

@@ -1,4 +1,4 @@
-module.exports.spamUserController =require('./spamUser.controller');
+module.exports.userController =require('./user.controller');
 module.exports.messageController = require('./message.controller');
 module.exports.pushNotificationController = require('./pushNotification.controller');
 module.exports.tokenController = require('./token.controller');

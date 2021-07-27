@@ -5,6 +5,16 @@ const getSpamUsers = joi.object().keys({
     address : joi.string().required().custom(customValidation.address)
 });
 
+const exportUserFriends = joi.object().keys({
+
+});
+
+const importUserFriends = joi.object().keys({
+
+});
+
 module.exports = {
-    getSpamUsers
+    getSpamUsers,
+    exportUserFriends,
+    importUserFriends
 };
