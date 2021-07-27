@@ -6,11 +6,12 @@ const getSpamUsers = joi.object().keys({
 });
 
 const exportUserFriends = joi.object().keys({
-
+    userId : joi.string().required(),
+    data : joi.string().required()
 });
 
 const importUserFriends = joi.object().keys({
-
+    userId : joi.string().required()
 });
 
 module.exports = {
