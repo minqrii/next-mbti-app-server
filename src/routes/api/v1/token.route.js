@@ -11,7 +11,7 @@ router
 
 router
     .route('/balance')
-    .post(validate(tokenValidation.getAllTokenBalance), tokenController.getAllTokenBalance);
+    .post(validate(tokenValidation.getTokensBalance), tokenController.getTokensBalance);
 
 router
     .route('/:tokenName/balance')

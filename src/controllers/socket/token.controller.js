@@ -8,11 +8,9 @@ const sendToken = socketCatchAsync(async(io, socket, data)=>{
     socket.emit("log",'sendTokenStatus')
 })
 
-const getAllTokenBalance = socketCatchAsync(async(io, socket, data)=>{
-    const balance = await tokenService.getAllTokenBalance(data);
-    socket.emit('getAllTokenBalance', balance)
-    //todo :: 개발 후 delete
-    socket.emit("log",'getAllTokenBalance')
+const getTokensBalance = socketCatchAsync(async(io, socket, data, callback)=>{
+    const balance = await tokenService.getTokensBalance(data);
+    callback(balance)
 })
 
 const getTokenBalanceByTokenName = socketCatchAsync(async(io, socket, data)=>{
@@ -31,7 +29,7 @@ const getTokenTransactionsByTokenName = socketCatchAsync(async(io, socket, data)
 
 module.exports = {
     sendToken,
-    getAllTokenBalance,
+    getTokensBalance,
     getTokenBalanceByTokenName,
     getTokenTransactionsByTokenName
 };

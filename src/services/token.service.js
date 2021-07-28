@@ -11,11 +11,10 @@ const sendToken = async function (data) {
     }
 };
 
-const getAllTokenBalance = async function (data) {
+const getTokensBalance = async function (data) {
     try {
-        const balanceResult = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}`);
-        return balanceResult.data;
-
+        const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}`);
+        return getTokensBalanceResponse.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }
@@ -41,7 +40,7 @@ const getTokenTransactionsByTokenName = async function (data) {
 
 module.exports = {
     sendToken,
-    getAllTokenBalance,
+    getTokensBalance,
     getTokenBalanceByTokenName,
     getTokenTransactionsByTokenName,
 };

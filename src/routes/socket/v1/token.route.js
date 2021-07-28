@@ -13,9 +13,9 @@ module.exports = (io, socket) => {
         tokenController.getTokenBalanceByTokenName
     )(io,socket))
 
-    socket.on('getAllTokenBalance', socketMiddleware(
-        socketValidate(tokenValidation.getAllTokenBalance),
-        tokenController.getAllTokenBalance
+    socket.on('getTokensBalance', socketMiddleware(
+        socketValidate(tokenValidation.getTokensBalance),
+        tokenController.getTokensBalance
     )(io,socket))
 
     socket.on('getTokenTransactionsByTokenName', socketMiddleware(
