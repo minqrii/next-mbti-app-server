@@ -1,11 +1,10 @@
 const socketCatchAsync = require('../../utils/socketCatchAsync')
 const {tokenService} = require('../../services/index')
 
-const sendToken = socketCatchAsync(async(io, socket, data)=>{
+const sendToken = socketCatchAsync(async(io, socket, data, callback)=>{
     const sendTokenStatus = await tokenService.sendToken(data);
-    socket.emit('sendTokenStatus', sendTokenStatus)
+    callback(sendTokenStatus)
     //todo :: 개발 후 delete
-    socket.emit("log",'sendTokenStatus')
 })
 
 const getTokensBalance = socketCatchAsync(async(io, socket, data, callback)=>{
@@ -13,18 +12,16 @@ const getTokensBalance = socketCatchAsync(async(io, socket, data, callback)=>{
     callback(balance)
 })
 
-const getTokenBalanceByTokenName = socketCatchAsync(async(io, socket, data)=>{
+const getTokenBalanceByTokenName = socketCatchAsync(async(io, socket, data, callback)=>{
     const tokenBalance = await tokenService.getTokenBalanceByTokenName(data);
-    socket.emit('tokenBalance', tokenBalance)
+    callback(tokenBalance)
     //todo :: 개발 후 delete
-    socket.emit("log",'tokenBalance')
 })
 
-const getTokenTransactionsByTokenName = socketCatchAsync(async(io, socket, data)=>{
+const getTokenTransactionsByTokenName = socketCatchAsync(async(io, socket, data, callback)=>{
     const transactions = await tokenService.getTokenTransactionsByTokenName(data);
-    socket.emit('transactions', transactions)
+    callback(transactions)
     //todo :: 개발 후 delete
-    socket.emit("log",'transactions')
 })
 
 module.exports = {
