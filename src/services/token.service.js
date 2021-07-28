@@ -13,22 +13,7 @@ const sendToken = async function (data) {
 
 const getAllTokenBalance = async function (data) {
     try {
-        // const balanceResult = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}`);
-        let balanceResult = {
-            data : [{
-                "token_name": "token",
-                "balance": "9"
-            },
-            {
-                "token_name": "token1",
-                "balance": "6"
-            },
-            {
-                "token_name": "token2",
-                "balance": "7"
-            }]
-        }
-
+        const balanceResult = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}`);
         return balanceResult.data;
 
     } catch (err) {
