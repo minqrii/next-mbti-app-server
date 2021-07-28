@@ -14,7 +14,6 @@ const getTokenBalanceByTokenName = joi.object().keys({
 });
 
 const getTokenTransactionsByTokenName = joi.object().keys({
-    page : joi.number().required(),
     count : joi.number().required(),
     timestamp : joi.number(),
     address : joi.string().required().custom(customValidation.address),

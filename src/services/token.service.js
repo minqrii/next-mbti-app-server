@@ -31,7 +31,7 @@ const getTokenBalanceByTokenName = async function (data) {
 
 const getTokenTransactionsByTokenName = async function (data) {
     try {
-        const transactionsResult = await walletAppServer.get(`/v1/tokens/${data.tokenName}/transactions?address=${data.address}&page=${data.page}&count=${data.count}&timestamp=${data.timestamp}`);
+        const transactionsResult = await walletAppServer.get(`/v1/tokens/${data.tokenName}/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}`);
         return transactionsResult.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
