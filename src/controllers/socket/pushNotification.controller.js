@@ -1,11 +1,9 @@
 const socketCatchAsync = require('../../utils/socketCatchAsync')
 const {pushNotificationService} = require('../../services/index')
 
-const syncPushNotificationCount = socketCatchAsync(async (io, socket, data) => {
+const syncPushNotificationCount = socketCatchAsync(async (io, socket, data, callback) => {
     let syncPushNotificationCountStatus = await pushNotificationService.syncPushNotificationCount(data)
-    //todo :: 개발 후 delete
-    socket.emit("log",'syncPushNotificationCount')
-    socket.emit('syncPushNotificationCount', syncPushNotificationCountStatus)
+    callback(syncPushNotificationCountStatus)
 });
 
 const registerPushNotificationToken = socketCatchAsync(async (io, socket, data) => {

@@ -20,13 +20,6 @@ const sendTransactionResult = catchAsync(async (req, res) => {
     res.send("ok")
 });
 
-const snakeToCamel = str =>
-    str.toLowerCase().replace(/([-_][a-z])/g, group =>
-        group
-            .toUpperCase()
-            .replace('-', '')
-            .replace('_', '')
-    );
 
 const getSendFailTransactions = catchAsync(async (req, res) => {
     const data = {...req.query, ...req.body, ...req.params}
