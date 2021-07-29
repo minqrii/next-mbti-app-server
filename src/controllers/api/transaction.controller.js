@@ -4,8 +4,8 @@ const transactionService = require('../../services/transaction.service')
 
 const sendTransactionResult = catchAsync(async (req, res) => {
     let data = req.body
-    let type = snakeToCamel(data.type);
-    console.log(type);
+    let type = data.type;
+    // console.log(type);
     let transactionResult = {
         "status" : req.body.transactionResult.data[0],
         "tx_hash" : req.body.tx_hash
