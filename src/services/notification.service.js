@@ -13,8 +13,8 @@ const getNotificationsByTimestamp = async function (data) {
 };
 
 const getNotifications = async function(address, whisperTimestamp, walletTimestamp){
-    whisperTimestamp ??= moment().subtract(7, 'day').toDate()
-    walletTimestamp ??= moment().subtract(7, 'day').toDate()
+    whisperTimestamp ??= moment().subtract(7, 'day').unix()
+    walletTimestamp ??= moment().subtract(7, 'day').unix()
     let promiseArray = [whisperTimestamp, walletTimestamp].map(async (timestamp, index) =>
         index === 0 ? Promise.resolve(await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`)) :
             Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`))

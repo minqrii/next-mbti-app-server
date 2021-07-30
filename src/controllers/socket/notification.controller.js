@@ -1,11 +1,10 @@
 const socketCatchAsync = require('../../utils/socketCatchAsync')
 const {notificationService} = require('../../services/index')
 
-const getNotificationsByTimestamp = socketCatchAsync(async (io, socket, data) => {
+const getNotificationsByTimestamp = socketCatchAsync(async (io, socket, data, callback) => {
     let notifications = await notificationService.getNotificationsByTimestamp(data)
-    socket.emit('getNotificationsByTimestamp', notifications)
+    callback(notifications)
     //todo :: 개발 후 delete
-    socket.emit("log",'getNotificationsByTimestamp')
 });
 
 module.exports = {
