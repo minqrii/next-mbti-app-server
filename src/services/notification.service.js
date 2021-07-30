@@ -15,26 +15,12 @@ const getNotificationsByTimestamp = async function (data) {
 const getNotifications = async function(address, whisperTimestamp, walletTimestamp){
     whisperTimestamp ??= moment().subtract(7, 'day').unix() * 1000
     walletTimestamp ??= moment().subtract(7, 'day').unix() * 1000
+    console.log("timestamps",whisperTimestamp ,walletTimestamp)
     let promiseArray = [whisperTimestamp, walletTimestamp].map(async (timestamp, index) =>
         index === 0 ? Promise.resolve(await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`)) :
             Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`))
     )
-    // promiseArray.push(new Promise(async (resolve, reject) => {
-    //     try{
-    //         const notifications = await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${whisperTimestamp}`)
-    //         resolve({whisperNotifications : notifications.data})
-    //     }catch(err){
-    //         reject(err)
-    //     }
-    // }))
-    // promiseArray.push(new Promise(async (resolve, reject) => {
-    //     try{
-    //         const notifications = await walletAppServer.get(`/v1/notifications/${address}?timestamp=${walletTimestamp}`)
-    //         resolve({walletNotifications : notifications.data})
-    //     }catch(err){
-    //         reject(err)
-    //     }
-    // }))
+    console.log('promise array made')
     return new Promise((resolve, reject)=>{
         Promise.all(promiseArray)
             .then((result=>{

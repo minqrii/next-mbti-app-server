@@ -3,8 +3,8 @@ const customValidation = require('./custom.validation');
 
 const getNotificationsByTimestamp = {
     query : joi.object().keys({
-        whisperTimestamp : joi.string().required(),
-        walletTimestamp : joi.string().required(),
+        whisperTimestamp : joi.string(),
+        walletTimestamp : joi.string(),
     }),
     params : joi.object().keys({
         address : joi.string().required().custom(customValidation.address)
