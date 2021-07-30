@@ -1,25 +1,19 @@
 const socketCatchAsync = require('../../utils/socketCatchAsync')
 const {userService} = require('../../services/index')
 
-const registerSpamUser = socketCatchAsync(async (io, socket, data) => {
+const registerSpamUser = socketCatchAsync(async (io, socket, data, callback) => {
     let registerSpamStatus = await userService.registerSpamUser(data)
-    socket.emit('registerSpamUser', registerSpamStatus)
-    //:todo 개발 후 delete
-    socket.emit('log', 'registerSpamUser')
+    callback(registerSpamStatus)
 });
 
-const deregisterSpamUser = socketCatchAsync(async (io, socket, data) => {
+const deregisterSpamUser = socketCatchAsync(async (io, socket, data, callback) => {
     let deregisterSpamStatus = await userService.deregisterSpamUser(data)
-    socket.emit('deregisterSpamUser', deregisterSpamStatus)
-    //:todo 개발 후 delete
-    socket.emit('log', 'deregisterSpamUser')
+    callback(deregisterSpamStatus)
 });
 
-const getSpamUsers = socketCatchAsync(async (io, socket, data) =>{
+const getSpamUsers = socketCatchAsync(async (io, socket, data, callback) =>{
     let spamUsers = await userService.getSpamUsers(data);
-    socket.emit('getSpamUsers', spamUsers);
-    //:todo 개발 후 delete
-    socket.emit('log', 'getSpamUsers')
+    callback(spamUsers)
 })
 
 const exportUserFriends = socketCatchAsync(async (io, socket, data, callback)=> {
