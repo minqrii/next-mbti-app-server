@@ -34,18 +34,14 @@ const deregisterPushType = socketCatchAsync(async (io, socket, data) =>{
     socket.emit('deregisterPushType', deregisterPushTypeStatus);
 })
 
-const getPushSound = socketCatchAsync(async (io, socket, data) =>{
+const getPushSound = socketCatchAsync(async (io, socket, data, callback) =>{
     const getPushSoundStatus = await pushNotificationService.getPushSound(data)
-    //todo :: 개발 후 delete
-    socket.emit("log",'getPushSound')
-    socket.emit('getPushSound', getPushSoundStatus);
+    callback(getPushSoundStatus)
 })
 
-const updatePushSound = socketCatchAsync(async (io, socket, data) =>{
+const updatePushSound = socketCatchAsync(async (io, socket, data, callback) =>{
     const updatePushSoundStatus = await pushNotificationService.updatePushSound(data)
-    //todo :: 개발 후 delete
-    socket.emit("log",'updatePushSound')
-    socket.emit('updatePushSound', updatePushSoundStatus);
+    callback(updatePushSoundStatus)
 })
 
 
