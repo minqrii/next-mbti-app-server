@@ -6,7 +6,7 @@ const moment = require('moment')
 
 const getNotificationsByTimestamp = async function (data) {
     try {
-        return await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp)
+        await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp)
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }
@@ -21,14 +21,13 @@ const getNotifications = async function(address, whisperTimestamp, walletTimesta
             Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`))
     )
     console.log('promise array made')
-    return new Promise((resolve, reject)=>{
-        Promise.all(promiseArray)
-            .then((result=>{
-                resolve (result)
-            })).catch((err)=>{
-                reject (err)
+    return await Promise.all(promiseArray)
+        .then((result=>{
+            return (result)
+        })).catch((err)=>{
+            throw (err)
         })
-    })
+
 }
 
 module.exports = {
