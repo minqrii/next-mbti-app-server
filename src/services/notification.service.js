@@ -6,7 +6,7 @@ const moment = require('moment')
 
 const getNotificationsByTimestamp = async function (data) {
     try {
-        return await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp)
+        console.log( await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp))
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }
@@ -25,6 +25,7 @@ const getNotifications = async function(address, whisperTimestamp, walletTimesta
         .then((result=>{
             return (result)
         })).catch((err)=>{
+            console.log('err', err)
             throw (err)
         })
 
