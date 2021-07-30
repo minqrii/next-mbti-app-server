@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const whisperAppServer = require('../utils/whisperAppServer');
 const walletAppServer = require('../utils/walletAppServer');
+const moment = require('moment')
 
 const getNotificationsByTimestamp = async function (data) {
     try {
@@ -12,23 +13,28 @@ const getNotificationsByTimestamp = async function (data) {
 };
 
 const getNotifications = async function(address, whisperTimestamp, walletTimestamp){
-    let promiseArray = [];
-    promiseArray.push(new Promise(async (resolve, reject) => {
-        try{
-            const notifications = await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${whisperTimestamp}`)
-            resolve({whisperNotifications : notifications.data})
-        }catch(err){
-            reject(err)
-        }
-    }))
-    promiseArray.push(new Promise(async (resolve, reject) => {
-        try{
-            const notifications = await walletAppServer.get(`/v1/notifications/${address}?timestamp=${walletTimestamp}`)
-            resolve({walletNotifications : notifications.data})
-        }catch(err){
-            reject(err)
-        }
-    }))
+    whisperTimestamp ??= moment().subtract(7, 'day').toDate()
+    walletTimestamp ??= moment().subtract(7, 'day').toDate()
+    let promiseArray = [whisperTimestamp, walletTimestamp].map(async (timestamp, index) =>
+        index === 0 ? Promise.resolve(await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`)) :
+            Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`))
+    )
+    // promiseArray.push(new Promise(async (resolve, reject) => {
+    //     try{
+    //         const notifications = await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${whisperTimestamp}`)
+    //         resolve({whisperNotifications : notifications.data})
+    //     }catch(err){
+    //         reject(err)
+    //     }
+    // }))
+    // promiseArray.push(new Promise(async (resolve, reject) => {
+    //     try{
+    //         const notifications = await walletAppServer.get(`/v1/notifications/${address}?timestamp=${walletTimestamp}`)
+    //         resolve({walletNotifications : notifications.data})
+    //     }catch(err){
+    //         reject(err)
+    //     }
+    // }))
     return new Promise((resolve, reject)=>{
         Promise.all(promiseArray)
             .then((result=>{
@@ -42,3 +48,4 @@ const getNotifications = async function(address, whisperTimestamp, walletTimesta
 module.exports = {
     getNotificationsByTimestamp
 }
+
