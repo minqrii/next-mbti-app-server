@@ -1,17 +1,17 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
-const {userValidation, transactionValidation} = require('../../../validations/api');
+const {userValidation} = require('../../../validations/api');
 const {userController} = require('../../../controllers/api');
 
 const router = express.Router();
 
 router
     .route('/spam/register')
-    .post(validate(userValidation.transactionPayload), userController.registerSpamUser);
+    .post(validate(userValidation.registerSpamUser), userController.registerSpamUser);
 
 router
     .route('/spam/deregister')
-    .post(validate(userValidation.transactionPayload),userController.deregisterSpamUser)
+    .post(validate(userValidation.deregisterSpamUser),userController.deregisterSpamUser)
 
 router
     .route('/friends')

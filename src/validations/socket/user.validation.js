@@ -1,5 +1,10 @@
 const joi = require('joi');
 const customValidation = require('./custom.validation');
+const transactionValidation = require('./transaction.validation');
+
+const registerSpamUser = transactionValidation.transactionPayload
+
+const deregisterSpamUser = transactionValidation.transactionPayload
 
 const getSpamUsers = joi.object().keys({
     address : joi.string().required().custom(customValidation.address)
@@ -15,6 +20,8 @@ const importUserFriends = joi.object().keys({
 });
 
 module.exports = {
+    registerSpamUser,
+    deregisterSpamUser,
     getSpamUsers,
     exportUserFriends,
     importUserFriends

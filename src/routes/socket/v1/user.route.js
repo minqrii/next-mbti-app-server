@@ -5,12 +5,12 @@ const {userValidation, transactionValidation} = require('../../../validations/so
 module.exports = (io, socket) => {
     //whisper
     socket.on('registerSpamUser', socketMiddleware(
-        socketValidate(transactionValidation.transactionPayload),
+        socketValidate(userValidation.registerSpamUser),
         userController.registerSpamUser
     )(io,socket))
 
     socket.on('deregisterSpamUser', socketMiddleware(
-        socketValidate(transactionValidation.transactionPayload),
+        socketValidate(userValidation.deregisterSpamUser),
         userController.deregisterSpamUser
     )(io,socket))
 
