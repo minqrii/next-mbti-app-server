@@ -1,26 +1,7 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const redisClient = require('../config/database/redis')
 const whisperAppServer = require('../utils/whisperAppServer')
 const walletAppServer = require('../utils/walletAppServer')
-
-// const setSendFailTransaction = async function (from, type, transactionObject) {
-//     try {
-//         redisClient.hmgetAsync("send_fail_" + from, type)
-//             .then((result) => {
-//                 let sendFailObject = {};
-//                 sendFailObject[transactionObject.tx_hash] = transactionObject
-//                 if (result[0] !== null) {
-//                     //이미 send fail이 존재하는 경우
-//                     sendFailObject = {...sendFailObject, ...JSON.parse(result[0])};
-//                 }
-//                 redisClient.hmsetAsync("send_fail_" + from, type, JSON.stringify(sendFailObject))
-//                 //todo :: add expire time to key
-//             })
-//     } catch (err) {
-//         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
-//     }
-// };
 
 const getSendFailTransactions = async function (data){
     try {
@@ -31,11 +12,6 @@ const getSendFailTransactions = async function (data){
                 getSendFailTransactionResult = await walletAppServer.get(path)
                 break;
             case 'ALL' :
-                //todo :: change after wallet server
-                // await Promise.all([walletAppServer.get(path), whisperAppServer.get(path)])
-                //     .then((result)=>{
-                //         getSendFailTransactionResult = result;
-                //     })
                 await Promise.all([whisperAppServer.get(path)])
                     .then((res)=>{
                         let result = {};

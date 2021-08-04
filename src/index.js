@@ -9,11 +9,8 @@ let server;
 redisClient
     .on('connect', () => {
         server = http.createServer(app);
-
         io.attach(server);
-
         app.io = io;
-
         server.listen(config.port, () => {
             logger.info('Listening to port %d', config.port);
         });

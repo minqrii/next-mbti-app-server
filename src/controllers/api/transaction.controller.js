@@ -3,20 +3,15 @@ const catchAsync = require('../../utils/catchAsync');
 const transactionService = require('../../services/transaction.service')
 
 const sendTransactionResult = catchAsync(async (req, res) => {
-    let data = req.body
-    let type = data.type;
-    // console.log(type);
+    const data = req.body
     let transactionResult = {
-        "status" : req.body.transactionResult.data[0],
-        "tx_hash" : req.body.tx_hash
+        "status" : data.transactionResult.data[0],
+        "tx_hash" : data.tx_hash
     }
     if(data.to){
-        req.app.io.to(data.to).emit("log", type + "Receive")
-        req.app.io.to(data.to).emit(type + "Receive", transactionResult)
+        req.app.io.to(data.to).emit(data.type + "Receive", transactionResult)
     }
-    console.log(type + " : result sent to : " + req.body.from);
-    req.app.io.to(req.body.from).emit(type + "Result", transactionResult)
-    req.app.io.to(req.body.from).emit("log", type + "Result")
+    req.app.io.to(data.from).emit(data.type + "Result", transactionResult)
     res.send("ok")
 });
 

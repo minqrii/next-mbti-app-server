@@ -8,12 +8,6 @@ const envVarSchema = joi.object()
     .keys({
         NODE_ENV: joi.string().valid('production', 'development', 'test').required(),
         PORT: joi.number().default(13010),
-        // APP_SERVER_HOST: joi.string().required().ip({
-        //     version: [
-        //         'ipv4',
-        //         'ipv6',
-        //     ]
-        // }),
         WHISPER_APP_SERVER_HOST: joi.string().required(),
         WHISPER_APP_SERVER_PORT: joi.number().required(),
         WALLET_APP_SERVER_HOST: joi.string().required(),
@@ -22,7 +16,6 @@ const envVarSchema = joi.object()
         ALARM_APP_SERVER_PORT: joi.number().required(),
         REDIS_HOST: joi.string().required(),
         REDIS_PORT: joi.number().required(),
-        // REDIS_PASSWORD: joi.string().required(),
     })
     .unknown();
 
