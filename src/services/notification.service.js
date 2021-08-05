@@ -21,7 +21,7 @@ const getNotifications = async function(address, whisperTimestamp, walletTimesta
     )
     return await Promise.all(promiseArray)
         .then(result => result)
-        .catch(err => throw (err))
+        .catch((err) => {throw (err)})
 }
 
 module.exports = {
