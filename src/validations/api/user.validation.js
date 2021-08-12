@@ -3,7 +3,7 @@ const customValidation = require('./custom.validation');
 const transactionValidation = require('./transaction.validation')
 
 const getSpamUsers = {
-    query : joi.object().keys({
+    params : joi.object().keys({
         address : joi.string().required().custom(customValidation.address)
     })
 }
