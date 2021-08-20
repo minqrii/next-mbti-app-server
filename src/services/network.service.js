@@ -20,7 +20,7 @@ const getNetworks = async function(data){
     console.log(promiseArray)
     await Promise.all(promiseArray)
         .then(result => console.log(result))
-    console.log(a)
+    // console.log(a)
     return await Promise.all(promiseArray)
         .then((result) => {console.log(result); return result})
         .catch((err) => {throw (err)})
