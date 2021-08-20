@@ -7,6 +7,9 @@ const getSendFailTransactions = async function (data){
     try {
         let getSendFailTransactionResult = {};
         let path = `/v1/transactions/fail?address=${data.address}&type=${data.type}`
+        if(data.networkId){
+            path = path + '$networkId=' + data.networkId
+        }
         switch (data.type){
             case 'SEND_TOKEN':
                 getSendFailTransactionResult = await walletAppServer.get(path)
@@ -32,7 +35,7 @@ const getSendFailTransactions = async function (data){
 const deleteSendFailTransactions = async function (data){
     try {
         let deleteSendFailTransactionResult;
-        let path = `/v1/transactions/fail?address=${data.address}&type=${data.type}&tx_hash=${data.tx_hash}`
+        const path = `/v1/transactions/fail?address=${data.address}&type=${data.type}&tx_hash=${data.tx_hash}&networkId=${data.networkId}`
         switch (data.type){
             case 'SEND_TOKEN':
                 deleteSendFailTransactionResult = await walletAppServer.delete(path)
@@ -50,7 +53,7 @@ const deleteSendFailTransactions = async function (data){
 const getNonceByAddress = async function (data){
     try {
         let getNonceResult;
-        let path = `/v1/transactions/nonce?address=${data.address}`
+        const path = `/v1/transactions/nonce?address=${data.address}&networkId=${data.networkId}`
         switch (data.server){
             case 'wallet':
                 getNonceResult = await walletAppServer.get(path)

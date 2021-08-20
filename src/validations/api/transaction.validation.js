@@ -28,7 +28,8 @@ const sendTransactionResult = {
 const getSendFailTransactions = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
-        type : joi.string().required()
+        type : joi.string().required(),
+        networkId : joi.string().required()
     })
 }
 
@@ -36,14 +37,16 @@ const deleteSendFailTransactions = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
         tx_hash : joi.string().required(),
-        type : joi.string().required()
+        type : joi.string().required(),
+        networkId : joi.string().required()
     })
 }
 
 const getNonceByAddress = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
-        server : joi.string().required().valid('whisper', 'wallet')
+        server : joi.string().required().valid('whisper', 'wallet'),
+        networkId : joi.string().required()
     })
 }
 
