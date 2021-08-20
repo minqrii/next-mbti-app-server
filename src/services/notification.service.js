@@ -6,18 +6,24 @@ const moment = require('moment')
 
 const getNotificationsByTimestamp = async function (data) {
     try {
-        return await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp)
+        return await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp, data.contractAddresses)
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }
 };
 
-const getNotifications = async function(address, whisperTimestamp, walletTimestamp){
+const getNotifications = async function(address, whisperTimestamp, walletTimestamp, contractAddresses){
+    let query = '';
+    console.log(contractAddresses.length)
+    for(let i=0; i < contractAddresses.length; i++){
+        console.log(i)
+        query += `&contractAddresses[${i}]=` + contractAddresses[i];
+    }
     whisperTimestamp ??= moment().subtract(7, 'day').unix() * 1000
     walletTimestamp ??= moment().subtract(7, 'day').unix() * 1000
     let promiseArray = [whisperTimestamp, walletTimestamp].map(async (timestamp, index) =>
         index === 0 ? Promise.resolve(await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`).then((result)=> result.data)) :
-            Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`).then((result)=>result.data))
+            Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}` + query).then((result)=>result.data))
     )
     return await Promise.all(promiseArray)
         .then(result => result)

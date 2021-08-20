@@ -31,7 +31,7 @@ const getTokensBalance = async function (data) {
 //todo: get 수정
 const getTokenTransactionsByContractAddress = async function (data) {
     let query = '';
-    for(let i=0; data.contractAddresses.length; i++){
+    for(let i=0; i < data.contractAddresses.length; i++){
         query += `&contractAddress${i}=` + data.contractAddresses[i];
     }
 
