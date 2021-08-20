@@ -13,7 +13,7 @@ const getTokenTransactionsByContractAddress = joi.object().keys({
     count : joi.number().required(),
     timestamp : joi.number(),
     address : joi.string().required().custom(customValidation.address),
-    contractAddresses : joi.array().required()
+    contractAddress : joi.string().required()
 });
 
 module.exports = {

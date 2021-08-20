@@ -15,13 +15,10 @@ const sendToken = async function (data) {
 const getTokensBalance = async function (data) {
     try {
         let query = '';
-        console.log(data.contractAddresses.length)
         for(let i=0; i < data.contractAddresses.length; i++){
-            console.log(i)
             query += `&contractAddresses[${i}]=` + data.contractAddresses[i];
         }
 
-        console.log('query', query)
         const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}` + query);
         return getTokensBalanceResponse.data;
     } catch (err) {
@@ -30,13 +27,8 @@ const getTokensBalance = async function (data) {
 };
 //todo: get 수정
 const getTokenTransactionsByContractAddress = async function (data) {
-    let query = '';
-    for(let i=0; i < data.contractAddresses.length; i++){
-        query += `&contractAddress${i}=` + data.contractAddresses[i];
-    }
-
     try {
-        const transactionsResult = await walletAppServer.get(`/v1/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}` + query);
+        const transactionsResult = await walletAppServer.get(`/v1/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}&contractAddress=${data.contractAddress}`);
         return transactionsResult.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');

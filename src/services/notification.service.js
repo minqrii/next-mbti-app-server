@@ -14,9 +14,7 @@ const getNotificationsByTimestamp = async function (data) {
 
 const getNotifications = async function(address, whisperTimestamp, walletTimestamp, contractAddresses){
     let query = '';
-    console.log(contractAddresses.length)
     for(let i=0; i < contractAddresses.length; i++){
-        console.log(i)
         query += `&contractAddresses[${i}]=` + contractAddresses[i];
     }
     whisperTimestamp ??= moment().subtract(7, 'day').unix() * 1000
