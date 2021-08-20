@@ -18,9 +18,6 @@ const getNetworks = async function(data){
             break;
     }
     return await Promise.all(promiseArray)
-        .then(result => result)
-        .catch((err) => {throw (err)})
-
 }
 
 const addNetwork = async function(data) {
