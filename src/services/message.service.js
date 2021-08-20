@@ -22,7 +22,7 @@ const readMessage = async function (data) {
 
 const getMessageCount = async function (data) {
     try {
-        const messageCount = await whisperAppServer.get(`/v1/messages/${data.address}/count`);
+        const messageCount = await whisperAppServer.get(`/v1/messages/${data.address}/count?networkId=${data.networkId}`);
         return messageCount.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
@@ -31,26 +31,17 @@ const getMessageCount = async function (data) {
 
 const getMessagesByAddress = async function (data) {
     try {
-        const messageData = await whisperAppServer.get(`/v1/messages/${data.toAddress}/address/${data.fromAddress}`);
+        const messageData = await whisperAppServer.get(`/v1/messages/${data.toAddress}/address/${data.fromAddress}?networkId=${data.networkId}`);
         return messageData.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }
 };
 
-const getMessagesByTimestamp = async function (data) {
-    try {
-        const messageData = await whisperAppServer.get(`/v1/messages/${data.address}/timestamp/${data.timestamp}`);
-        return messageData.data;
-    } catch (err) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
-    }
-};
 
 module.exports = {
     sendMessage,
     readMessage,
     getMessageCount,
-    getMessagesByAddress,
-    getMessagesByTimestamp
+    getMessagesByAddress
 };

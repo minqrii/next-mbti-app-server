@@ -22,7 +22,7 @@ const deregisterSpamUser = async function (data) {
 
 const getSpamUsers = async function (data) {
     try {
-        const spamUsers = await whisperAppServer.get(`/v1/users/${data.address}/spam`);
+        const spamUsers = await whisperAppServer.get(`/v1/users/${data.address}/spam?networkId=${data.networkId}`);
         return spamUsers.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');

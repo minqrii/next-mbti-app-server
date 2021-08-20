@@ -7,7 +7,8 @@ const registerSpamUser = transactionValidation.transactionPayload
 const deregisterSpamUser = transactionValidation.transactionPayload
 
 const getSpamUsers = joi.object().keys({
-    address : joi.string().required().custom(customValidation.address)
+    address : joi.string().required().custom(customValidation.address),
+    networkId : joi.number().required()
 });
 
 const exportUserFriends = joi.object().keys({

@@ -8,29 +8,28 @@ const readMessage = transactionValidation.transactionPayload;
 
 const getMessageCount = {
     params : joi.object().keys({
-        address : joi.string().required().custom(customValidation.address)
-    })
+        address : joi.string().required().custom(customValidation.address),
+    }),
+    query : joi.object().keys({
+        networkId : joi.number().required()
+    }),
 }
 
 const getMessagesByAddress = {
     params : joi.object().keys({
         fromAddress : joi.string().required().custom(customValidation.address),
-        toAddress : joi.string().required().custom(customValidation.address)
+        toAddress : joi.string().required().custom(customValidation.address),
+    }),
+    query : joi.object().keys({
+        networkId : joi.number().required()
     })
 }
 
-const getMessagesByTimestamp = {
-    params : joi.object().keys({
-        address : joi.string().required().custom(customValidation.address),
-        timestamp : joi.string().required()
-    })
-}
 
 module.exports = {
     getMessageCount,
     getMessagesByAddress,
     sendMessage,
-    readMessage,
-    getMessagesByTimestamp
+    readMessage
 };
 

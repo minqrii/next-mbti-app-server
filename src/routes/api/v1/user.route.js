@@ -20,7 +20,7 @@ router
 
 router
     .route('/:address/spam')
-    .post(validate(userValidation.getSpamUsers),userController.getSpamUsers)
+    .get(validate(userValidation.getSpamUsers),userController.getSpamUsers)
 
 
 module.exports = router;

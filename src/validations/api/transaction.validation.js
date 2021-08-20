@@ -2,11 +2,14 @@ const joi = require('joi');
 const customValidation = require('./custom.validation')
 
 const transactionPayload = {
-    body :joi.object().keys({
-        transaction : joi.string().required(),
-        tx_hash : joi.string().required(),
-        pub_key : joi.string().required(),
-        signature : joi.string().required()
+    body : joi.object().keys({
+        transaction :  joi.object().keys({
+            transaction : joi.string().required(),
+            tx_hash : joi.string().required(),
+            pub_key : joi.string().required(),
+            signature : joi.string().required()
+        }),
+        networkId : joi.number().required()
     })
 }
 
@@ -17,7 +20,8 @@ const sendTransactionResult = {
         transactionResult : joi.object().required(),
         from : joi.string().required().custom(customValidation.address),
         transactionObject : joi.object(),
-        to : joi.string().custom(customValidation.address)
+        to : joi.string().custom(customValidation.address),
+        networkId : joi.string().required()
     })
 }
 

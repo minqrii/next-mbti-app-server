@@ -15,14 +15,10 @@ router
 
 router
     .route('/:address/count')
-    .post(validate(messageValidation.getMessageCount),messageController.getMessageCount)
+    .get(validate(messageValidation.getMessageCount),messageController.getMessageCount)
 
 router
     .route('/:toAddress/address/:fromAddress')
-    .post(validate(messageValidation.getMessagesByAddress),messageController.getMessagesByAddress)
-
-router
-    .route('/:address/timestamp/:timestamp')
-    .post(validate(messageValidation.getMessagesByTimestamp),messageController.getMessagesByTimestamp)
+    .get(validate(messageValidation.getMessagesByAddress),messageController.getMessagesByAddress)
 
 module.exports = router;
