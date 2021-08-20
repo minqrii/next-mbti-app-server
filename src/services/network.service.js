@@ -17,7 +17,9 @@ const getNetworks = async function(data){
             promiseArray.concat(Promise.resolve(await walletAppServer.get(path).then((result)=> result.data)))
             break;
     }
-    const a = await Promise.all(promiseArray)
+    console.log(promiseArray)
+    await Promise.all(promiseArray)
+        .then(result => console.log(result))
     console.log(a)
     return await Promise.all(promiseArray)
         .then((result) => {console.log(result); return result})
