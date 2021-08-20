@@ -23,7 +23,8 @@ const getNotifications = async function(address, whisperTimestamp, walletTimesta
     //     index === 0 ? Promise.resolve(await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`).then((result)=> result.data)) :
     //         Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}` + query).then((result)=>result.data))
     // )
-    return await walletAppServer.get(`/v1/notifications/${address}?timestamp=${walletTimestamp}` + query)
+    const result =  await walletAppServer.get(`/v1/notifications/${address}?timestamp=${walletTimestamp}` + query)
+    return [[],result.data];
     // return await Promise.all(promiseArray)
     //     .then(result => result)
     //     .catch((err) => {throw (err)})
