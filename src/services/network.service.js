@@ -7,7 +7,7 @@ const getNetworks = async function(data){
     let promiseArray = [];
     switch(data.server){
         case 'whisper' :
-            promiseArray.concat(await whisperAppServer.get(path).then((result)=> result.data))
+            promiseArray.concat(await whisperAppServer.get(path).then((result)=> {console.log(result.data); return result.data}))
             break;
         case 'wallet' :
             promiseArray.concat(await walletAppServer.get(path).then((result)=> result.data))
@@ -18,6 +18,9 @@ const getNetworks = async function(data){
             break;
     }
     return await Promise.all(promiseArray)
+        .then((result) => {console.log(result); return result})
+        .catch((err) => {throw (err)})
+
 }
 
 const addNetwork = async function(data) {
