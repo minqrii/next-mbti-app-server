@@ -28,9 +28,11 @@ const addNetwork = async function(data) {
     const body = (({server, ...obj})=> obj) (data)
     switch (data.server) {
         case 'whisper' :
-            return await whisperAppServer.post(path, body)
+            const addWhisperNetworkResponse = await whisperAppServer.post(path, body)
+            return addWhisperNetworkResponse.data
         case 'wallet' :
-            return await walletAppServer.post(path, body)
+            const addWalletNetworkResponse = await walletAppServer.post(path, body)
+            return addWalletNetworkResponse.data
         default :
             throw new Error('server unavailable')
     }
@@ -40,9 +42,11 @@ const deleteNetwork = async function(data){
     const path = '/v1/networks' + '?networkId=' + data.networkId
     switch (data.server) {
         case 'whisper' :
-            return await whisperAppServer.delete(path)
+            const deleteWhisperNetworkResponse = await whisperAppServer.delete(path)
+            return deleteWhisperNetworkResponse.data
         case 'wallet' :
-            return await walletAppServer.delete(path)
+            const deleteWalletNetworkResponse = await walletAppServer.delete(path)
+            return deleteWalletNetworkResponse.data;
         default :
             throw new Error('server unavailable')
     }
