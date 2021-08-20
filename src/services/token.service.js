@@ -11,27 +11,32 @@ const sendToken = async function (data) {
     }
 };
 
+//todo: get 수정
 const getTokensBalance = async function (data) {
     try {
-        const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}`);
+        let query = '';
+        console.log(data.contractAddresses.length)
+        for(let i=0; i < data.contractAddresses.length; i++){
+            console.log(i)
+            query += `&contractAddresses[${i}]=` + data.contractAddresses[i];
+        }
+
+        console.log('query', query)
+        const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}` + query);
         return getTokensBalanceResponse.data;
     } catch (err) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, err);
     }
 };
-
-const getTokenBalanceByTokenName = async function (data) {
-    try {
-        const tokenBalanceResult = await walletAppServer.get(`/v1/tokens/${data.tokenName}/balance?address=${data.address}`);
-        return tokenBalanceResult.data;
-    } catch (err) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
+//todo: get 수정
+const getTokenTransactionsByContractAddress = async function (data) {
+    let query = '';
+    for(let i=0; data.contractAddresses.length; i++){
+        query += `&contractAddress${i}=` + data.contractAddresses[i];
     }
-};
 
-const getTokenTransactionsByTokenName = async function (data) {
     try {
-        const transactionsResult = await walletAppServer.get(`/v1/tokens/${data.tokenName}/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}`);
+        const transactionsResult = await walletAppServer.get(`/v1/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}` + query);
         return transactionsResult.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
@@ -41,6 +46,5 @@ const getTokenTransactionsByTokenName = async function (data) {
 module.exports = {
     sendToken,
     getTokensBalance,
-    getTokenBalanceByTokenName,
-    getTokenTransactionsByTokenName,
+    getTokenTransactionsByContractAddress,
 };

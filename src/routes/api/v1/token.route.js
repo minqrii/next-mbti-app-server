@@ -11,14 +11,10 @@ router
 
 router
     .route('/balance')
-    .post(validate(tokenValidation.getTokensBalance), tokenController.getTokensBalance);
+    .get(validate(tokenValidation.getTokensBalance), tokenController.getTokensBalance);
 
 router
-    .route('/:tokenName/balance')
-    .get(validate(tokenValidation.getTokenBalanceByTokenName), tokenController.getTokenBalanceByTokenName);
-
-router
-    .route('/:tokenName/transactions')
+    .route('/transactions')
     .post(validate(tokenValidation.getTokenTransactionsByTokenName), tokenController.getTokenTransactionsByTokenName);
 
 module.exports = router;
