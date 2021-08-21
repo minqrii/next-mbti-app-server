@@ -12,6 +12,7 @@ const getNotificationsByTimestamp = async function (data) {
     }
 };
 
+//todo::수정
 const getNotifications = async function(address, whisperTimestamp, walletTimestamp, contractAddresses){
     let query = '';
     for(let i=0; i < contractAddresses.length; i++){
