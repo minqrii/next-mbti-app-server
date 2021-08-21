@@ -13,6 +13,7 @@ module.exports = (io, socket) => {
         tokenController.getTokensBalance
     )(io,socket))
 
+    //todo :: getTokenTransactionsByTokenName -> getTokenTransactionsByContractAddress
     socket.on('getTokenTransactionsByTokenName', socketMiddleware(
         socketValidate(tokenValidation.getTokenTransactionsByContractAddress),
         tokenController.getTokenTransactionsByContractAddress

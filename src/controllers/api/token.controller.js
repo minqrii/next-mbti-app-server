@@ -14,21 +14,14 @@ const getTokensBalance = catchAsync(async(req,res)=>{
     res.send(balance)
 })
 
-const getTokenBalanceByContractAddress = catchAsync(async(req,res)=>{
+const getTokenTransactionsByContractAddress = catchAsync(async(req,res)=>{
     const data = {...req.body, ...req.query, ...req.params}
-    const tokenBalance = await tokenService.getTokenBalanceByContractAddress(data);
-    res.send(tokenBalance)
-})
-
-const getTokenTransactionsByTokenName = catchAsync(async(req,res)=>{
-    const data = {...req.body, ...req.query, ...req.params}
-    const transactions = await tokenService.getTokenTransactionsByTokenName(data);
+    const transactions = await tokenService.getTokenTransactionsByContractAddress(data);
     res.send(transactions)
 })
 
 module.exports = {
     sendToken,
     getTokensBalance,
-    getTokenBalanceByContractAddress,
-    getTokenTransactionsByTokenName
+    getTokenTransactionsByContractAddress
 };

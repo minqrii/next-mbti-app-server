@@ -15,6 +15,6 @@ router
 
 router
     .route('/transactions')
-    .post(validate(tokenValidation.getTokenTransactionsByTokenName), tokenController.getTokenTransactionsByTokenName);
+    .post(validate(tokenValidation.getTokenTransactionsByContractAddress), tokenController.getTokenTransactionsByContractAddress);
 
 module.exports = router;

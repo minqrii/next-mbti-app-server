@@ -4,7 +4,6 @@ const transactionValidation = require('./transaction.validation')
 
 const sendToken = transactionValidation.transactionPayload;
 
-//todo: get 수정
 const getTokensBalance = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
@@ -12,14 +11,12 @@ const getTokensBalance = {
     })
 }
 
-const getTokenTransactionsByTokenName = {
+const getTokenTransactionsByContractAddress = {
     query : joi.object().keys({
         count : joi.number().required(),
         timestamp : joi.number(),
-        address : joi.string().required().custom(customValidation.address)
-    }),
-    params : joi.object().keys({
-        tokenName : joi.string().required()
+        address : joi.string().required().custom(customValidation.address),
+        contractAddress : joi.string().required()
     })
 }
 
@@ -27,5 +24,5 @@ const getTokenTransactionsByTokenName = {
 module.exports = {
     sendToken,
     getTokensBalance,
-    getTokenTransactionsByTokenName
+    getTokenTransactionsByContractAddress
 };
