@@ -8,18 +8,14 @@ module.exports = (io, socket) => {
         tokenController.sendToken
     )(io,socket))
 
-    socket.on('getTokenBalanceByTokenName', socketMiddleware(
-        socketValidate(tokenValidation.getTokenBalanceByTokenName),
-        tokenController.getTokenBalanceByTokenName
-    )(io,socket))
-
     socket.on('getTokensBalance', socketMiddleware(
         socketValidate(tokenValidation.getTokensBalance),
         tokenController.getTokensBalance
     )(io,socket))
 
+    //todo :: getTokenTransactionsByTokenName -> getTokenTransactionsByContractAddress
     socket.on('getTokenTransactionsByTokenName', socketMiddleware(
-        socketValidate(tokenValidation.getTokenTransactionsByTokenName),
-        tokenController.getTokenTransactionsByTokenName
+        socketValidate(tokenValidation.getTokenTransactionsByContractAddress),
+        tokenController.getTokenTransactionsByContractAddress
     )(io,socket))
 };
