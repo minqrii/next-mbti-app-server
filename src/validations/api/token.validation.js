@@ -18,7 +18,8 @@ const getTokenTransactionsByContractAddress = {
         timestamp : joi.number(),
         address : joi.string().required().custom(customValidation.address),
         contractAddress : joi.string().required(),
-        index : joi.number().required()
+        index : joi.number().required(),
+        networkId : joi.number().required()
     }),
 }
 
