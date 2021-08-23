@@ -14,7 +14,7 @@ const sendToken = async function (data) {
 
 const getTokensBalance = async function (data) {
     try {
-        const query = makeQuery(data.contractAddresses)
+        const query = await makeQuery(data.contractAddresses)
 
         const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}` + query);
         return getTokensBalanceResponse.data;
