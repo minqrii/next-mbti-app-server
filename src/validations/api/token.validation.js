@@ -7,36 +7,24 @@ const sendToken = transactionValidation.transactionPayload;
 const getTokensBalance = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
+        contractAddresses : joi.array().required(),
         networkId : joi.number().required()
     })
 }
 
-const getTokenBalanceByTokenName = {
-    query : joi.object().keys({
-        address : joi.string().required().custom(customValidation.address),
-        networkId : joi.number().required()
-    }),
-    params : joi.object().keys({
-        tokenName : joi.string().required()
-    })
-}
-
-const getTokenTransactionsByTokenName = {
+const getTokenTransactionsByContractAddress = {
     query : joi.object().keys({
         count : joi.number().required(),
         timestamp : joi.number(),
         address : joi.string().required().custom(customValidation.address),
+        contractAddress : joi.string().required(),
         index : joi.number().required()
     }),
-    params : joi.object().keys({
-        tokenName : joi.string().required()
-    })
 }
 
 
 module.exports = {
     sendToken,
-    getTokenBalanceByTokenName,
     getTokensBalance,
-    getTokenTransactionsByTokenName
+    getTokenTransactionsByContractAddress
 };

@@ -11,19 +11,13 @@ const getTokensBalance = socketCatchAsync(async(io, socket, data, callback)=>{
     callback(balance)
 })
 
-const getTokenBalanceByTokenName = socketCatchAsync(async(io, socket, data, callback)=>{
-    const tokenBalance = await tokenService.getTokenBalanceByTokenName(data);
-    callback(tokenBalance)
-})
-
-const getTokenTransactionsByTokenName = socketCatchAsync(async(io, socket, data, callback)=>{
-    const transactions = await tokenService.getTokenTransactionsByTokenName(data);
+const getTokenTransactionsByContractAddress = socketCatchAsync(async(io, socket, data, callback)=>{
+    const transactions = await tokenService.getTokenTransactionsByContractAddress(data);
     callback(transactions)
 })
 
 module.exports = {
     sendToken,
     getTokensBalance,
-    getTokenBalanceByTokenName,
-    getTokenTransactionsByTokenName
+    getTokenTransactionsByContractAddress
 };
