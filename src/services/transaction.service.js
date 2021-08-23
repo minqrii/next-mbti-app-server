@@ -8,7 +8,7 @@ const getSendFailTransactions = async function (data){
         let getSendFailTransactionResult = {};
         let path = `/v1/transactions/fail?address=${data.address}&type=${data.type}`
         if(data.networkId){
-            path = path + '$networkId=' + data.networkId
+            path = path + '&networkId=' + data.networkId
         }
         switch (data.type){
             case 'SEND_TOKEN':

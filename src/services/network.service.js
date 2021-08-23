@@ -17,12 +17,9 @@ const getNetworks = async function(data){
             promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
             break;
     }
-
-
     return await Promise.all(promiseArray)
         .then((result) => result)
         .catch((err) => {throw (err)})
-
 }
 
 const addNetwork = async function(data) {
