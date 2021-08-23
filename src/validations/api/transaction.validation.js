@@ -21,7 +21,7 @@ const sendTransactionResult = {
         from : joi.string().required().custom(customValidation.address),
         transactionObject : joi.object(),
         to : joi.string().custom(customValidation.address),
-        networkId : joi.string().required()
+        networkId : joi.number().required()
     })
 }
 
@@ -29,7 +29,7 @@ const getSendFailTransactions = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
         type : joi.string().required(),
-        networkId : joi.string().required()
+        networkId : joi.number().required()
     })
 }
 
@@ -38,7 +38,7 @@ const deleteSendFailTransactions = {
         address : joi.string().required().custom(customValidation.address),
         tx_hash : joi.string().required(),
         type : joi.string().required(),
-        networkId : joi.string().required()
+        networkId : joi.number().required()
     })
 }
 
@@ -46,7 +46,7 @@ const getNonceByAddress = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
         server : joi.string().required().valid('whisper', 'wallet'),
-        networkId : joi.string().required()
+        networkId : joi.number().required()
     })
 }
 
