@@ -34,10 +34,16 @@ const getNonceByAddress = catchAsync(async (req, res) => {
     res.json(getNonceByAddressStatus)
 });
 
+const getContractAddresses = catchAsync(async (req, res) => {
+    const data = {...req.query, ...req.body, ...req.params}
+    const contractAddresses = await transactionService.getContractAddresses(data);
+    res.json(contractAddresses)
+});
 
 module.exports = {
     sendTransactionResult,
     getSendFailTransactions,
     deleteSendFailTransactions,
-    getNonceByAddress
+    getNonceByAddress,
+    getContractAddresses
 };

@@ -68,9 +68,30 @@ const getNonceByAddress = async function (data){
     }
 }
 
+const getContractAddresses = async function (data){
+    const path = `/v1/transactions/contract-address`
+    let promiseArray = [];
+    switch(data.server){
+        case 'whisper' :
+            promiseArray.push(await whisperAppServer.get(path).then((result)=> result.data))
+            break;
+        case 'wallet' :
+            promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
+            break;
+        default :
+            promiseArray.push(await whisperAppServer.get(path).then((result)=> result.data))
+            promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
+            break;
+    }
+    return await Promise.all(promiseArray)
+        .then((result) => result)
+        .catch((err) => {throw (err)})
+}
+
 module.exports = {
     getSendFailTransactions,
     deleteSendFailTransactions,
-    getNonceByAddress
-    // setSendFailTransaction
+    getNonceByAddress,
+    // setSendFailTransaction,
+    getContractAddresses
 };
