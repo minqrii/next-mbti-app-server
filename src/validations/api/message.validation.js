@@ -12,7 +12,7 @@ const getMessageCount = {
     }),
     query : joi.object().keys({
         networkId : joi.number().required(),
-        contracts : joi.string().required(),
+        contractAddress : joi.string().required()
     }),
 }
 
@@ -23,7 +23,7 @@ const getMessagesByAddress = {
     }),
     query : joi.object().keys({
         networkId : joi.number().required(),
-        contracts : joi.string().required(),
+        contractAddress : joi.string().required()
     })
 }
 
