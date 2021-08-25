@@ -19,10 +19,10 @@ const sendTransactionResult = {
         tx_hash : joi.string().required(),
         type : joi.string().required(),
         transactionResult : joi.object().required(),
+        networkId : joi.number().required(),
         from : joi.string().required().custom(customValidation.address),
         transactionObject : joi.object(),
-        to : joi.string().custom(customValidation.address),
-        networkId : joi.number().required()
+        to : joi.string().custom(customValidation.address)
     })
 }
 
