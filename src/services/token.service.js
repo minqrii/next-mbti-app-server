@@ -26,7 +26,7 @@ const getTokensBalance = async function (data) {
 
 const getTokenTransactionsByContractAddress = async function (data) {
     try {
-        const transactionsResult = await walletAppServer.get(`/v1/tokens/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}&contractAddress=${data.contractAddress}&networkId=${data.networkId}`);
+        const transactionsResult = await walletAppServer.get(`/v1/tokens/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}&contractAddress=${data.contractAddress}&networkId=${data.networkId}&contractAddressQuery=${data.contractAddressQuery}`);
         return transactionsResult.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');

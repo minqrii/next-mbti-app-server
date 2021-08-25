@@ -15,6 +15,7 @@ const getTokenTransactionsByContractAddress = joi.object().keys({
     timestamp : joi.number(),
     address : joi.string().required().custom(customValidation.address),
     contractAddress : joi.string().required(),
+    contractAddressQuery : joi.string().required(),
     networkId : joi.number().required()
 });
 
