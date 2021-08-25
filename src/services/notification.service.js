@@ -7,7 +7,7 @@ const {makeQuery} = require('../config/query');
 
 const getNotificationsByTimestamp = async function (data) {
     try {
-        return await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp, data.contractAddresses)
+        return await getNotifications(data.address, data.whisperTimestamp, data.walletTimestamp)
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
     }

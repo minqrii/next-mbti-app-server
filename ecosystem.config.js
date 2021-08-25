@@ -1,6 +1,6 @@
 module.exports = {
     apps : [{
-        name: "whisper",
+        name: "api",
         script: './src/index.js',
         watch: true,
         env: {
