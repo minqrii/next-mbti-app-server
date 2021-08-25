@@ -9,7 +9,8 @@ const transactionPayload = {
             pub_key : joi.string().required(),
             signature : joi.string().required()
         }),
-        networkId : joi.number().required()
+        networkId : joi.number().required(),
+        contractAddressQuery : joi.string()
     })
 }
 
