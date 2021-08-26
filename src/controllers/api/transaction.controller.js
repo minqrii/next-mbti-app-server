@@ -6,7 +6,8 @@ const sendTransactionResult = catchAsync(async (req, res) => {
     const data = req.body
     let transactionResult = {
         "status" : data.transactionResult.data[0],
-        "tx_hash" : data.tx_hash
+        "tx_hash" : data.tx_hash,
+        "networkId" : data.networkId
     }
     if(data.to){
         req.app.io.to(data.to).emit(data.type + "Receive", transactionResult)
