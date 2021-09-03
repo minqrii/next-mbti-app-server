@@ -11,13 +11,17 @@ const tokenRoute = require('./token.route')
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
-       if(!socket.address){
-          reject(new Error('No Socket Id'))
+       try{
+          if(!socket.address){
+             reject(new Error('No Socket Id'))
+          }
+          await io.of('/').adapter.remoteJoin(socket.id, socket.address).catch((err)=> reject(err));
+          await io.of('/').adapter.allRooms().then((result)=> console.log(result))
+          await redisClient.saddAsync('connectedUser', socket.address)
+          resolve();
+       }catch(err){
+          reject(err)
        }
-        await io.of('/').adapter.remoteJoin(socket.id, socket.address).catch((err)=> reject(err));
-        await io.of('/').adapter.allRooms().then((result)=> console.log(result))
-        await redisClient.saddAsync('connectedUser', socket.address)
-        resolve();
     })
 };
 
