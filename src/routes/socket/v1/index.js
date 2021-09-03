@@ -26,10 +26,10 @@ const initialize = (io, socket) => {
 };
 
 const disconnectHandler = socketCatchAsync(async (io, socket, data) =>{
+   if(!socket.address){
+      throw new Error('No Socket Id')
+   }
     await redisClient.sremAsync('connectedUser', socket.address)
-        .catch((err)=>{
-            throw new Error('disconnect redis error')
-        })
 })
 
 module.exports = function (io) {
