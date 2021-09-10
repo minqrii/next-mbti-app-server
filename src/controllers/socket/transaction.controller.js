@@ -5,11 +5,10 @@ const socketCatchAsync = require('../../utils/socketCatchAsync')
 
 
 
-const getSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
+const getSendFailTransactions = socketCatchAsync(async(io, socket, data, callback) => {
     let sendFailTransactions = await transactionService.getSendFailTransactions(data);
+    callback(sendFailTransactions);
     socket.emit('getSendFailTransactions', sendFailTransactions);
-    //:todo 개발 후 delete
-    socket.emit('log', 'getSendFailTransactions')
 });
 
 const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
