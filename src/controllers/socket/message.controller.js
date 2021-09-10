@@ -3,28 +3,28 @@ const {messageService, pushService} = require('../../services/index')
 const redisClient = require('../../config/database/redis')
 const config = require('../../config/config')
 
-const sendMessage = socketCatchAsync(async (io, socket, data, callback) => {
+const sendMessage = socketCatchAsync(async (io, socket, data) => {
     console.log("send message")
     let sendMessageStatus = await messageService.sendMessage(data);
-    callback(sendMessageStatus);
+    // callback(sendMessageStatus);
     socket.emit('sendMessage', sendMessageStatus);
 });
 
-const readMessage = socketCatchAsync(async (io, socket, data, callback) => {
+const readMessage = socketCatchAsync(async (io, socket, data) => {
     let readMessageStatus = await messageService.readMessage(data);
-    callback(readMessageStatus);
+    // callback(readMessageStatus);
     socket.emit('readMessage', readMessageStatus);
 });
 
-const getMessageCount = socketCatchAsync(async (io, socket, data, callback) => {
+const getMessageCount = socketCatchAsync(async (io, socket, data) => {
     let messageCounts = await messageService.getMessageCount(data);
-    callback(messageCounts);
     socket.emit('getMessageCount', messageCounts);
+    // callback(messageCounts);
 });
 
-const getMessagesByAddress = socketCatchAsync(async (io, socket, data, callback) => {
+const getMessagesByAddress = socketCatchAsync(async (io, socket, data) => {
     let messages = await messageService.getMessagesByAddress(data);
-    callback(messages);
+    // callback(messages);
     socket.emit('getMessagesByAddress', messages);
 });
 
