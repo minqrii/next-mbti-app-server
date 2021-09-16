@@ -8,3 +8,4 @@ module.exports.pushValidation = require('./pushNotification.validation');
 module.exports.pushNotificationValidation = require('./pushNotification.validation');
 module.exports.tokenValidation = require('./token.validation');
 module.exports.networkValidation = require('./network.validation')
+module.exports.escrowValidation = require('./escrow.validation');

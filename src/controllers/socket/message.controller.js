@@ -4,9 +4,7 @@ const redisClient = require('../../config/database/redis')
 const config = require('../../config/config')
 
 const sendMessage = socketCatchAsync(async (io, socket, data) => {
-    console.log("send message")
     let sendMessageStatus = await messageService.sendMessage(data);
-    // callback(sendMessageStatus);
     socket.emit('sendMessage', sendMessageStatus);
 });
 

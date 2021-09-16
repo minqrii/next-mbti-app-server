@@ -8,6 +8,7 @@ const socketMiddleware = require('../../../utils/socketMiddleware')
 const socketCatchAsync = require('../../../utils/socketCatchAsync')
 const transactionRoute = require('./transaction.route')
 const tokenRoute = require('./token.route')
+const escrowRoute = require('./escrow.route')
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
@@ -42,6 +43,7 @@ module.exports = function (io) {
                 pushNotificationRoute(io,socket);
                 transactionRoute(io,socket);
                 tokenRoute(io,socket);
+                escrowRoute(io,socket);
             })
             .catch((err) => {
                 socket.emit('error', err.message)
