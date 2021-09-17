@@ -9,7 +9,8 @@ const transactionPayload = joi.object().keys({
         signature : joi.string().required()
     }),
     networkId : joi.number().required(),
-    contractAddressQuery : joi.string()
+    contractAddressQuery : joi.string(),
+    serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
 });
 
 const getSendFailTransactions = joi.object().keys({
