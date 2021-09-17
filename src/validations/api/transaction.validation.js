@@ -9,7 +9,7 @@ const transactionPayload = {
             pub_key : joi.string().required(),
             signature : joi.string().required()
         }),
-        networkId : joi.number().required(),
+        networkId : joi.string().required(),
         contractAddressQuery : joi.string()
     })
 }
@@ -19,7 +19,7 @@ const sendTransactionResult = {
         tx_hash : joi.string().required(),
         type : joi.string().required(),
         transactionResult : joi.object().required(),
-        networkId : joi.number().required(),
+        networkId : joi.string().required(),
         from : joi.string().required().custom(customValidation.address),
         transactionObject : joi.object(),
         to : joi.string().custom(customValidation.address)
@@ -30,7 +30,7 @@ const getSendFailTransactions = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
         type : joi.string().required(),
-        networkId : joi.number().required()
+        networkId : joi.string().required()
     })
 }
 
@@ -39,7 +39,7 @@ const deleteSendFailTransactions = {
         address : joi.string().required().custom(customValidation.address),
         tx_hash : joi.string().required(),
         type : joi.string().required(),
-        networkId : joi.number().required()
+        networkId : joi.string().required()
     })
 }
 

@@ -11,7 +11,7 @@ const getMessageCount = {
         address : joi.string().required().custom(customValidation.address),
     }),
     query : joi.object().keys({
-        networkId : joi.number().required(),
+        networkId : joi.string().required(),
         contractAddress : joi.string().required()
     }),
 }
@@ -22,7 +22,7 @@ const getMessagesByAddress = {
         toAddress : joi.string().required().custom(customValidation.address),
     }),
     query : joi.object().keys({
-        networkId : joi.number().required(),
+        networkId : joi.string().required(),
         contractAddress : joi.string().required()
     })
 }

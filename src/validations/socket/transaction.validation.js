@@ -16,14 +16,14 @@ const transactionPayload = joi.object().keys({
 const getSendFailTransactions = joi.object().keys({
     address : joi.string().required(),
     type : joi.string().required(),
-    networkId : joi.number().required()
+    networkId : joi.string().required()
 })
 
 const deleteSendFailTransactions = joi.object().keys({
     address : joi.string().required(),
     tx_hash : joi.string().required(),
     type : joi.string().required(),
-    networkId : joi.number().required()
+    networkId : joi.string().required()
 })
 
 const getNonceByAddress = joi.object().keys({

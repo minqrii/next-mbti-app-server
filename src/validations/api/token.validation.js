@@ -8,7 +8,7 @@ const getTokensBalance = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
         contractAddresses : joi.array().required(),
-        networkId : joi.number().required()
+        networkId : joi.string().required()
     })
 }
 
@@ -20,7 +20,7 @@ const getTokenTransactionsByContractAddress = {
         contractAddress : joi.string().required(),
         contractAddressQuery : joi.string().required(),
         index : joi.number().required(),
-        networkId : joi.number().required()
+        networkId : joi.string().required()
     }),
 }
 
