@@ -8,7 +8,7 @@ const transactionPayload = joi.object().keys({
         pub_key : joi.string().required(),
         signature : joi.string().required()
     }),
-    networkId : joi.number().required(),
+    networkId : joi.string().required(),
     contractAddressQuery : joi.string(),
     serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
 });
