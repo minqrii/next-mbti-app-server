@@ -2,12 +2,13 @@ const config = require('../../../config/config');
 const redisClient = require('../../../config/database/redis');
 const userRoute = require('./user.route');
 const messageRoute = require('./message.route');
-const notificationRoute = require('./notification.route')
+const notificationRoute = require('./notification.route');
 const pushNotificationRoute = require('./pushNotification.route');
-const socketMiddleware = require('../../../utils/socketMiddleware')
-const socketCatchAsync = require('../../../utils/socketCatchAsync')
-const transactionRoute = require('./transaction.route')
-const tokenRoute = require('./token.route')
+const socketMiddleware = require('../../../utils/socketMiddleware');
+const socketCatchAsync = require('../../../utils/socketCatchAsync');
+const transactionRoute = require('./transaction.route');
+const tokenRoute = require('./token.route');
+const priceRoute = require('./price.route');
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
@@ -42,6 +43,7 @@ module.exports = function (io) {
                 pushNotificationRoute(io,socket);
                 transactionRoute(io,socket);
                 tokenRoute(io,socket);
+                priceRoute(io,socket);
             })
             .catch((err) => {
                 socket.emit('error', err.message)
