@@ -53,13 +53,14 @@ const deleteSendFailTransactions = async function (data){
 const getNonceByAddress = async function (data){
     try {
         let getNonceResult;
+        const serviceNameQuery = `&serviceName=${data.serviceName}`
         const path = `/v1/transactions/nonce?address=${data.address}&networkId=${data.networkId}`
         switch (data.server){
             case 'wallet':
-                getNonceResult = await walletAppServer.get(path)
+                getNonceResult = await walletAppServer.get(path + serviceNameQuery)
                 break;
             default :
-                getNonceResult = await whisperAppServer.get(path)
+                getNonceResult = await whisperAppServer.get(path + serviceNameQuery)
                 break;
         }
         return getNonceResult.data;
