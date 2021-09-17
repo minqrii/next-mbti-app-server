@@ -8,15 +8,15 @@ const getNetworks = async function(data){
     let promiseArray = [];
     switch(data.server){
         case 'whisper' :
-            promiseArray.push(await whisperAppServer.get(path + serviceName).then((result)=> result.data))
+            promiseArray.push(whisperAppServer.get(path + serviceName).then((result)=> result.data))
             break;
         case 'wallet' :
-            promiseArray.push(await walletAppServer.get(path + serviceName).then((result)=> result.data))
+            promiseArray.push(walletAppServer.get(path + serviceName).then((result)=> result.data))
             break;
         default :
             break;
     }
-    return await Promise.all(promiseArray)
+    return Promise.all(promiseArray)
         .then((result) => result)
         .catch((err) => {throw (err)})
 }
