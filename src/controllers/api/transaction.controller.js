@@ -5,7 +5,7 @@ const transactionService = require('../../services/transaction.service')
 const sendTransactionResult = catchAsync(async (req, res) => {
     const data = req.body
     let transactionResult = {
-        "status" : data.transactionResult.data[0],
+        "status" : data.transactionResult,
         "tx_hash" : data.tx_hash,
         "networkId" : data.networkId
     }
