@@ -1,7 +1,8 @@
-const {messageController} = require('../../../controllers/socket');
+const {escrowController} = require('../../../controllers/socket');
 const socketMiddleware = require('../../../utils/socketMiddleware')
 const socketValidate = require('../../../middlewares/socketValidate');
-const {messageValidation, transactionValidation} = require('../../../validations/socket');
+const {escrowValidation} = require('../../../validations/socket');
+
 module.exports = (io, socket) => {
     //whisper messenger
     socket.on('createExchange', socketMiddleware(

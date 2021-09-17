@@ -1,4 +1,3 @@
-
 const transactionValidation = require('./transaction.validation');
 
 const createExchange = transactionValidation.transactionPayload;
