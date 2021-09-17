@@ -61,15 +61,3 @@ router
     .get(validate(escrowValidation.rejectPromise),escrowController.rejectPromise)
 
 module.exports = router;
-
-createExchange
-acceptExchange
-rejectExchange
-createNoShow
-acceptNoShow
-rejectNoShow
-noShowVisit
-noShowAvoid
-createPromise
-acceptPromise
-rejectPromise
