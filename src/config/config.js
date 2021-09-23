@@ -14,6 +14,8 @@ const envVarSchema = joi.object()
         WALLET_APP_SERVER_PORT: joi.number().required(),
         ALARM_APP_SERVER_HOST: joi.string().required(),
         ALARM_APP_SERVER_PORT: joi.number().required(),
+        NETWORK_APP_SERVER_HOST: joi.string().required(),
+        NETWORK_APP_SERVER_PORT: joi.number().required(),
         REDIS_HOST: joi.string().required(),
         REDIS_PORT: joi.number().required(),
     })
@@ -31,6 +33,7 @@ module.exports = {
     walletAppServerAddr: envVars.WALLET_APP_SERVER_HOST + ':' + envVars.WALLET_APP_SERVER_PORT,
     whisperAppServerAddr: envVars.WHISPER_APP_SERVER_HOST + ':' + envVars.WHISPER_APP_SERVER_PORT,
     alarmAppServerAddr: envVars.ALARM_APP_SERVER_HOST + ':' + envVars.ALARM_APP_SERVER_PORT,
+    networkAppServerAddr: envVars.NETWORK_APP_SERVER_HOST + ':' + envVars.NETWORK_APP_SERVER_PORT,
     redis: {
         host: envVars.REDIS_HOST,
         port: envVars.REDIS_PORT,
