@@ -54,9 +54,10 @@ const getNonceByAddress = {
     })
 }
 
-const getContractAddresses = {
+const getContractAddressesByNetworkId = {
     query : joi.object().keys({
-        serviceName : joi.string().required()
+        serviceName : joi.string().required(),
+        networkId : joi.array().required()
     })
 }
 
@@ -66,5 +67,5 @@ module.exports = {
     sendTransactionResult,
     deleteSendFailTransactions,
     getNonceByAddress,
-    getContractAddresses
+    getContractAddressesByNetworkId
 }

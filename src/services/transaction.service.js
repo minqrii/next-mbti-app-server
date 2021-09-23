@@ -3,6 +3,7 @@ const ApiError = require('../utils/ApiError');
 const whisperAppServer = require('../utils/whisperAppServer')
 const walletAppServer = require('../utils/walletAppServer')
 const networkAppServer = require('../utils/networkAppServer')
+const {makeQueryFromArray} = require('../config/query');
 
 const getSendFailTransactions = async function (data){
     try {
@@ -70,9 +71,12 @@ const getNonceByAddress = async function (data){
     }
 }
 
-const getContractAddresses = async function (data){
+const getContractAddressesByNetworkId = async function (data){
+    const networkIdArray = data.networkId
 
-    const getContractAddressesResponse = await networkAppServer.get(`/v1/contract-address/${data.serviceName}`);
+    const query = makeQueryFromArray('networkId', networkIdArray)
+
+    const getContractAddressesResponse = await networkAppServer.get(`/v1/contract-address/networks/${data.serviceName}?${query}`);
 
     return getContractAddressesResponse.data;
 
@@ -99,5 +103,6 @@ module.exports = {
     deleteSendFailTransactions,
     getNonceByAddress,
     // setSendFailTransaction,
-    getContractAddresses
+    getContractAddressesByNetworkId,
+
 };
