@@ -10,7 +10,7 @@ const getNetworks = async function(data){
 
     const getNetworksResult = await networkAppServer.get(`/v1/networks/service?serviceName=${data.serviceName}`);
 
-    return getNetworksResult;
+    return getNetworksResult.data;
     // switch(data.server){
     //     case 'whisper' :
     //         promiseArray.push(whisperAppServer.get(path + serviceName).then((result)=> result.data))
