@@ -74,28 +74,11 @@ const getNonceByAddress = async function (data){
 const getContractAddressesByNetworkId = async function (data){
     const networkIdArray = data.networkId
 
-    const query = makeQueryFromArray('networkId', networkIdArray)
+    const query = await makeQueryFromArray('networkId', networkIdArray)
 
     const getContractAddressesResponse = await networkAppServer.get(`/v1/contract-address/networks/${data.serviceName}?${query}`);
 
     return getContractAddressesResponse.data;
-
-    // let promiseArray = [];
-    // switch(data.server){
-    //     case 'whisper' :
-    //         promiseArray.push(await whisperAppServer.get(path + serviceNameQuery).then((result)=> result.data))
-    //         break;
-    //     case 'wallet' :
-    //         promiseArray.push(await walletAppServer.get(path + serviceNameQuery).then((result)=> result.data))
-    //         break;
-    //     default :
-    //     //     promiseArray.push(await whisperAppServer.get(path).then((result)=> result.data))
-    //     //     promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
-    //         break;
-    // }
-    // return Promise.all(promiseArray)
-    //     .then((result) => result)
-    //     .catch((err) => {throw (err)})
 }
 
 module.exports = {

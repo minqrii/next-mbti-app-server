@@ -7,22 +7,16 @@ const socketCatchAsync = require('../../utils/socketCatchAsync')
 
 const getSendFailTransactions = socketCatchAsync(async(io, socket, data, callback) => {
     let sendFailTransactions = await transactionService.getSendFailTransactions(data);
-    socket.emit('getSendFailTransactions', sendFailTransactions);
-    // callback(sendFailTransactions);
+    callback(sendFailTransactions)
 });
 
-const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data) => {
+const deleteSendFailTransactions = socketCatchAsync(async(io, socket, data, callback) => {
     let deleteSendFailResult = await transactionService.deleteSendFailTransactions(data);
-    socket.emit('deleteSendFailTransactions', deleteSendFailResult);
-    //:todo 개발 후 delete
-    socket.emit('log', 'deleteSendFailTransactions')
+    callback(deleteSendFailResult)
 });
 
 const getNonceByAddress = socketCatchAsync(async(io, socket, data, callback) => {
     let nonce = await transactionService.getNonceByAddress(data);
-    socket.emit('getNonceByAddress', nonce);
-    //:todo 개발 후 delete
-    socket.emit('log', 'getNonceByAddress')
     callback(nonce)
 });
 
