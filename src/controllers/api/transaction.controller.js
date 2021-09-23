@@ -10,9 +10,9 @@ const sendTransactionResult = catchAsync(async (req, res) => {
         "networkId" : data.networkId
     }
     if(data.to){
-        req.app.io.to(data.to).emit(data.type + "Receive", transactionResult)
+        req.app.io.to(`${data.serviceName}_${data.to}`).emit(data.type + "Receive", transactionResult)
     }
-    req.app.io.to(data.from).emit(data.type + "Result", transactionResult)
+    req.app.io.to(`${data.serviceName}_${data.from}`).emit(data.type + "Result", transactionResult)
     res.send("ok")
 });
 
