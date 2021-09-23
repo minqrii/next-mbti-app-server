@@ -17,7 +17,7 @@ const getTokensBalance = async function (data) {
     try {
         //todo :: service로 빼기
         const query = await makeQuery(data.contractAddresses)
-        const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}&networkId=${data.networkId}` + query);
+        const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}&networkId=${data.networkId}&serviceName=${data.serviceName}` + query);
         return getTokensBalanceResponse.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, err);
@@ -26,7 +26,7 @@ const getTokensBalance = async function (data) {
 
 const getTokenTransactionsByContractAddress = async function (data) {
     try {
-        const transactionsResult = await walletAppServer.get(`/v1/tokens/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}&contractAddress=${data.contractAddress}&networkId=${data.networkId}&contractAddressQuery=${data.contractAddressQuery}`);
+        const transactionsResult = await walletAppServer.get(`/v1/tokens/transactions?address=${data.address}&count=${data.count}&timestamp=${data.timestamp}&contractAddress=${data.contractAddress}&networkId=${data.networkId}&contractAddressQuery=${data.contractAddressQuery}&serviceName=${data.serviceName}`);
         return transactionsResult.data;
     } catch (err) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network');
