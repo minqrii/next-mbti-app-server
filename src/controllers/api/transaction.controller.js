@@ -35,9 +35,9 @@ const getNonceByAddress = catchAsync(async (req, res) => {
     res.json(getNonceByAddressStatus)
 });
 
-const getContractAddresses = catchAsync(async (req, res) => {
+const getContractAddressesByNetworkId = catchAsync(async (req, res) => {
     const data = {...req.query, ...req.body, ...req.params}
-    const contractAddresses = await transactionService.getContractAddresses(data);
+    const contractAddresses = await transactionService.getContractAddressesByNetworkId(data);
     res.json(contractAddresses)
 });
 
@@ -46,5 +46,5 @@ module.exports = {
     getSendFailTransactions,
     deleteSendFailTransactions,
     getNonceByAddress,
-    getContractAddresses
+    getContractAddressesByNetworkId
 };

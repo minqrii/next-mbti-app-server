@@ -20,7 +20,7 @@ router
 
 router
     .route('/contract-address')
-    .get(validate(transactionValidation.getContractAddresses), transactionController.getContractAddresses)
+    .get(validate(transactionValidation.getContractAddressesByNetworkId), transactionController.getContractAddressesByNetworkId)
 //todo :: 보안 강화 후 처리
     // .post(validate(transactionValidation.registerContractAddress), transactionController.registerContractAddress)
     // .put(validate(transactionValidation.updateContractAddress), transactionController.updateContractAddress)
