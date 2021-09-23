@@ -7,8 +7,12 @@ const getNetworks = async function(data){
     // const path = '/v1/networks'
     // const serviceName = '?serviceName=' + data.serviceName
     // let promiseArray = [];
+    console.log("--------------------------------");
+    console.log("들어왔어요");
+    console.log("--------------------------------");
 
     const getNetworksResult = await networkAppServer.get(`/v1/networks/service?serviceName=${data.serviceName}`);
+    console.log(getNetworksResult);
 
     return getNetworksResult.data;
     // switch(data.server){
