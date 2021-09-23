@@ -12,7 +12,7 @@ const getNetworks = async function(data){
     console.log("--------------------------------");
 
     const getNetworksResult = await networkAppServer.get(`/v1/networks/service?serviceName=${data.serviceName}`);
-    console.log(getNetworksResult);
+    console.log(getNetworksResult.data);
 
     return getNetworksResult.data;
     // switch(data.server){
