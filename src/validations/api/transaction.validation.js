@@ -56,7 +56,6 @@ const getNonceByAddress = {
 
 const getContractAddresses = {
     query : joi.object().keys({
-        server : joi.string().required().valid('whisper', 'wallet', 'all'),
         serviceName : joi.string().required()
     })
 }
