@@ -4,7 +4,8 @@ const customValidation = require('./custom.validation');
 
 const getConnectionByAddress = {
     query : joi.object().keys({
-        address : joi.string().required().custom(customValidation.address)
+        address : joi.string().required().custom(customValidation.address),
+        serviceName : joi.string().required()
     }),
 }
 

@@ -10,12 +10,14 @@ const transactionPayload = {
             signature : joi.string().required()
         }),
         networkId : joi.string().required(),
+        serviceName : joi.string().required(),
         contractAddressQuery : joi.string()
     })
 }
 
 const sendTransactionResult = {
     body : joi.object().keys({
+        serviceName : joi.string().required(),
         tx_hash : joi.string().required(),
         type : joi.string().required(),
         transactionResult : joi.string().required(),
