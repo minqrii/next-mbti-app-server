@@ -1,4 +1,4 @@
-const makeQueryFromArray = async(param, array) => {
+const makeQueryFromArray = (param, array) => {
    let query = '';
 
    for(let i = 0; i < array.length; i++){

@@ -74,7 +74,7 @@ const getNonceByAddress = async function (data){
 const getContractAddressesByNetworkId = async function (data){
     const networkIdArray = data.networkId
 
-    const query = makeQueryFromArray('networkId', networkIdArray)
+    const query = await makeQueryFromArray('networkId', networkIdArray)
 
     const getContractAddressesResponse = await networkAppServer.get(`/v1/contract-address/networks/${data.serviceName}?${query}`);
 
