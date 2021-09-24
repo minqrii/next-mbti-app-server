@@ -32,10 +32,25 @@ const getNotifications = async function(address, serviceName, server, networkId,
         case "WALLET":
             return walletAppServer.get(`/v1/notification/${address}?serviceName=${serviceName}&${makeQueryFromArray("networkId", networkId)}&timestamp=${timestamp}`);
     }
-
 }
 
+const getMessageNotification = async function(data) {
+    const timestamp = (data.timestamp) ? data.timestamp : moment().subtract(7, 'day').unix() * 1000;
+    return whisperAppServer.get(`/v1/notification/message/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
+}
+const getTokenNotification = async function(data) {
+    const timestamp = (data.timestamp) ? data.timestamp : moment().subtract(7, 'day').unix() * 1000;
+    return walletAppServer.get(`/v1/notification/token/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
+}
+const getEscrowNotification = async function(data) {
+    const timestamp = (data.timestamp) ? data.timestamp : moment().subtract(7, 'day').unix() * 1000;
+    return walletAppServer.get(`/v1/notification/escrow/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
+}
+
+
 module.exports = {
-    getNotificationsByTimestamp
+    getMessageNotification,
+    getTokenNotification,
+    getEscrowNotification
 }
 

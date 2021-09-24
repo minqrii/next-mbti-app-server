@@ -1,12 +1,24 @@
 const catchAsync = require('../../utils/catchAsync');
 const {notificationService} = require('../../services');
 
-const getNotificationsByTimestamp = catchAsync(async (req, res) => {
-    const data = {...req.query, ...req.body, ...req.params}
-    const notifications = await notificationService.getNotificationsByTimestamp(data);
-    res.json(notifications)
-});
+const getMessageNotification = catchAsync(async (req, res) => {
+    const data = {...req.query, ...req.body, ...req.params};
+    const notifications = await notificationService.getMessageNotification(data);
+    res.json(notifications);
+})
+const getTokenNotification = catchAsync(async (req, res) => {
+    const data = {...req.query, ...req.body, ...req.params};
+    const notifications = await notificationService.getTokenNotification(data);
+    res.json(notifications);
+})
+const getEscrowNotification = catchAsync(async (req, res) => {
+    const data = {...req.query, ...req.body, ...req.params};
+    const notifications = await notificationService.getEscrowNotification(data);
+    res.json(notifications);
+})
 
 module.exports = {
-    getNotificationsByTimestamp,
+    getMessageNotification,
+    getTokenNotification,
+    getEscrowNotification
 };
