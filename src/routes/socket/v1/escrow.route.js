@@ -5,6 +5,11 @@ const {escrowValidation} = require('../../../validations/socket');
 
 module.exports = (io, socket) => {
     //whisper messenger
+    socket.on('getExchanges', socketMiddleware(
+        socketValidate(escrowValidation.getExchanges),
+        escrowController.getExchanges
+    )(io,socket));
+
     socket.on('createExchange', socketMiddleware(
         socketValidate(escrowValidation.createExchange),
         escrowController.createExchange
@@ -18,6 +23,11 @@ module.exports = (io, socket) => {
     socket.on('rejectExchange', socketMiddleware(
         socketValidate(escrowValidation.rejectExchange),
         escrowController.rejectExchange
+    )(io,socket));
+
+    socket.on('getNoShows', socketMiddleware(
+        socketValidate(escrowValidation.getNoShows),
+        escrowController.getNoShows
     )(io,socket));
 
     socket.on('createNoShow', socketMiddleware(
@@ -43,6 +53,11 @@ module.exports = (io, socket) => {
     socket.on('noShowAvoid', socketMiddleware(
         socketValidate(escrowValidation.noShowAvoid),
         escrowController.noShowAvoid
+    )(io,socket));
+
+    socket.on('getPromises', socketMiddleware(
+        socketValidate(escrowValidation.getPromises),
+        escrowController.getPromises
     )(io,socket));
 
     socket.on('createPromise', socketMiddleware(
