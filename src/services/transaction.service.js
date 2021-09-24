@@ -57,12 +57,15 @@ const getNonceByAddress = async function (data){
         let getNonceResult;
         const serviceNameQuery = `&serviceName=${data.serviceName}`
         const path = `/v1/transactions/nonce?address=${data.address}&networkId=${data.networkId}`
-        switch (data.server){
-            case 'wallet':
+        switch (data.tag){
+            case 'MESSENGER':
+                getNonceResult = await whisperAppServer.get(path + serviceNameQuery)
+                break;
+            case 'WALLET':
                 getNonceResult = await walletAppServer.get(path + serviceNameQuery)
                 break;
-            default :
-                getNonceResult = await whisperAppServer.get(path + serviceNameQuery)
+            case 'NFT':
+                //todo:: 추가 필요
                 break;
         }
         return getNonceResult.data;

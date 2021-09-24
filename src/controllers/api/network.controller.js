@@ -8,20 +8,7 @@ const getNetworks = catchAsync(async (req, res) => {
     res.json(getNetworksResult)
 });
 
-const addNetwork = catchAsync(async (req, res) => {
-    const data = {...req.query, ...req.body, ...req.params}
-    const addNetworkResult = await networkService.addNetwork(data);
-    res.json(addNetworkResult)
-});
-
-const deleteNetwork = catchAsync(async (req, res) => {
-    const data = {...req.query, ...req.body, ...req.params}
-    const deleteNetworkResult = await networkService.deleteNetwork(data);
-    res.json(deleteNetworkResult)
-});
 
 module.exports = {
-    getNetworks,
-    addNetwork,
-    deleteNetwork
+    getNetworks
 };
