@@ -5,14 +5,14 @@ const transactionService = require('../../services/transaction.service')
 const sendTransactionResult = catchAsync(async (req, res) => {
     const data = req.body
     let transactionResult = {
-        "status" : data.transactionResult.data[0],
+        "status" : data.transactionResult,
         "tx_hash" : data.tx_hash,
         "networkId" : data.networkId
     }
     if(data.to){
-        req.app.io.to(data.to).emit(data.type + "Receive", transactionResult)
+        req.app.io.to(`${data.serviceName}_${data.to}`).emit(data.type + "Receive", transactionResult)
     }
-    req.app.io.to(data.from).emit(data.type + "Result", transactionResult)
+    req.app.io.to(`${data.serviceName}_${data.from}`).emit(data.type + "Result", transactionResult)
     res.send("ok")
 });
 
@@ -35,9 +35,9 @@ const getNonceByAddress = catchAsync(async (req, res) => {
     res.json(getNonceByAddressStatus)
 });
 
-const getContractAddresses = catchAsync(async (req, res) => {
+const getContractAddressesByNetworkId = catchAsync(async (req, res) => {
     const data = {...req.query, ...req.body, ...req.params}
-    const contractAddresses = await transactionService.getContractAddresses(data);
+    const contractAddresses = await transactionService.getContractAddressesByNetworkId(data);
     res.json(contractAddresses)
 });
 
@@ -46,5 +46,5 @@ module.exports = {
     getSendFailTransactions,
     deleteSendFailTransactions,
     getNonceByAddress,
-    getContractAddresses
+    getContractAddressesByNetworkId
 };

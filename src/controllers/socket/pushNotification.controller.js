@@ -6,32 +6,24 @@ const syncPushNotificationCount = socketCatchAsync(async (io, socket, data, call
     callback(syncPushNotificationCountStatus)
 });
 
-const registerPushNotificationToken = socketCatchAsync(async (io, socket, data) => {
+const registerPushNotificationToken = socketCatchAsync(async (io, socket, data, callback) => {
     let registerPushNotificationTokenStatus = await pushNotificationService.registerPushNotificationToken(data)
-    //todo :: 개발 후 delete
-    socket.emit("log",'registerPushNotificationToken')
-    socket.emit('registerPushNotificationToken', registerPushNotificationTokenStatus)
+    callback(registerPushNotificationTokenStatus)
 });
 
-const deregisterPushNotificationToken = socketCatchAsync(async (io, socket, data) =>{
+const deregisterPushNotificationToken = socketCatchAsync(async (io, socket, data, callback) =>{
     let deregisterPushNotificationTokenStatus = await pushNotificationService.deregisterPushNotificationToken(data);
-    //todo :: 개발 후 delete
-    socket.emit("log",'deregisterPushNotificationToken')
-    socket.emit('deregisterPushNotificationToken', deregisterPushNotificationTokenStatus);
+    callback(deregisterPushNotificationTokenStatus)
 })
 
-const registerPushType = socketCatchAsync(async (io, socket, data) =>{
+const registerPushType = socketCatchAsync(async (io, socket, data, callback) =>{
     const registerPushTypeStatus = await pushNotificationService.registerPushType(data)
-    //todo :: 개발 후 delete
-    socket.emit("log",'registerPushType')
-    socket.emit('registerPushType', registerPushTypeStatus);
+    callback(registerPushTypeStatus)
 })
 
-const deregisterPushType = socketCatchAsync(async (io, socket, data) =>{
+const deregisterPushType = socketCatchAsync(async (io, socket, data, callback) =>{
     const deregisterPushTypeStatus = await pushNotificationService.deregisterPushType(data)
-    //todo :: 개발 후 delete
-    socket.emit("log",'deregisterPushType')
-    socket.emit('deregisterPushType', deregisterPushTypeStatus);
+    callback(deregisterPushTypeStatus)
 })
 
 const getPushSound = socketCatchAsync(async (io, socket, data, callback) =>{

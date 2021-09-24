@@ -1,13 +1,13 @@
-const makeQuery = async(contractAddresses) => {
+const makeQueryFromArray = (param, array) => {
    let query = '';
 
-   for(let i = 0; i < contractAddresses.length; i++){
-      query += `&contractAddresses[${i}]=` + contractAddresses[i];
+   for(let i = 0; i < array.length; i++){
+      query += `&${param}[]=` + array[i];
    }
 
-   return query;
+   return query.slice(1);
 }
 
 module.exports = {
-   makeQuery
+   makeQueryFromArray
 }

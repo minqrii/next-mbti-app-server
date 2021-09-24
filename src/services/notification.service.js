@@ -14,9 +14,8 @@ const getNotificationsByTimestamp = async function (data) {
 
 //todo::수정 (하나는 eqt, 하나는 weth)
 const getNotifications = async function(address, whisperTimestamp, walletTimestamp){
-
-    whisperTimestamp ??= moment().subtract(7, 'day').unix() * 1000
-    walletTimestamp ??= moment().subtract(7, 'day').unix() * 1000
+    whisperTimestamp = (whisperTimestamp) ? whisperTimestamp : moment().subtract(7, 'day').unix() * 1000
+    walletTimestamp = (walletTimestamp) ? walletTimestamp : moment().subtract(7, 'day').unix() * 1000
     let promiseArray = [whisperTimestamp, walletTimestamp].map(async (timestamp, index) =>
         index === 0 ? Promise.resolve(await whisperAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`).then((result)=> result.data)) :
             Promise.resolve(await walletAppServer.get(`/v1/notifications/${address}?timestamp=${timestamp}`).then((result)=>result.data))

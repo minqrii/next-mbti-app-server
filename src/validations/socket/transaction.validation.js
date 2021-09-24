@@ -8,27 +8,29 @@ const transactionPayload = joi.object().keys({
         pub_key : joi.string().required(),
         signature : joi.string().required()
     }),
-    networkId : joi.number().required(),
-    contractAddressQuery : joi.string()
+    networkId : joi.string().required(),
+    contractAddressQuery : joi.string(),
+    serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
 });
 
 const getSendFailTransactions = joi.object().keys({
     address : joi.string().required(),
     type : joi.string().required(),
-    networkId : joi.number().required()
+    networkId : joi.string().required()
 })
 
 const deleteSendFailTransactions = joi.object().keys({
     address : joi.string().required(),
     tx_hash : joi.string().required(),
     type : joi.string().required(),
-    networkId : joi.number().required()
+    networkId : joi.string().required()
 })
 
 const getNonceByAddress = joi.object().keys({
     address : joi.string().required().custom(customValidation.address),
     server : joi.string().required().valid('whisper', 'wallet'),
-    networkId : joi.number().required()
+    networkId : joi.string().required(),
+    serviceName : joi.string().required()
 })
 
 module.exports = {

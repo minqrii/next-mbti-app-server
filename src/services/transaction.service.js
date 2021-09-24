@@ -2,6 +2,8 @@ const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const whisperAppServer = require('../utils/whisperAppServer')
 const walletAppServer = require('../utils/walletAppServer')
+const networkAppServer = require('../utils/networkAppServer')
+const {makeQueryFromArray} = require('../config/query');
 
 const getSendFailTransactions = async function (data){
     try {
@@ -53,13 +55,14 @@ const deleteSendFailTransactions = async function (data){
 const getNonceByAddress = async function (data){
     try {
         let getNonceResult;
+        const serviceNameQuery = `&serviceName=${data.serviceName}`
         const path = `/v1/transactions/nonce?address=${data.address}&networkId=${data.networkId}`
         switch (data.server){
             case 'wallet':
-                getNonceResult = await walletAppServer.get(path)
+                getNonceResult = await walletAppServer.get(path + serviceNameQuery)
                 break;
             default :
-                getNonceResult = await whisperAppServer.get(path)
+                getNonceResult = await whisperAppServer.get(path + serviceNameQuery)
                 break;
         }
         return getNonceResult.data;
@@ -68,24 +71,14 @@ const getNonceByAddress = async function (data){
     }
 }
 
-const getContractAddresses = async function (data){
-    const path = `/v1/transactions/contract-address`
-    let promiseArray = [];
-    switch(data.server){
-        case 'whisper' :
-            promiseArray.push(await whisperAppServer.get(path).then((result)=> result.data))
-            break;
-        case 'wallet' :
-            promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
-            break;
-        default :
-            promiseArray.push(await whisperAppServer.get(path).then((result)=> result.data))
-            promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
-            break;
-    }
-    return await Promise.all(promiseArray)
-        .then((result) => result)
-        .catch((err) => {throw (err)})
+const getContractAddressesByNetworkId = async function (data){
+    const networkIdArray = data.networkId
+
+    const query = await makeQueryFromArray('networkId', networkIdArray)
+
+    const getContractAddressesResponse = await networkAppServer.get(`/v1/contract-address/networks/${data.serviceName}?${query}`);
+
+    return getContractAddressesResponse.data;
 }
 
 module.exports = {
@@ -93,5 +86,6 @@ module.exports = {
     deleteSendFailTransactions,
     getNonceByAddress,
     // setSendFailTransaction,
-    getContractAddresses
+    getContractAddressesByNetworkId,
+
 };

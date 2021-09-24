@@ -2,30 +2,13 @@ const joi = require('joi');
 
 const getNetworks = {
     params : joi.object().keys({
-        server : joi.string().required().allow('whisper', 'wallet', 'all')
-    })
-}
-
-const addNetwork = {
-    params : joi.object().keys({
-        server : joi.string().required().allow('whisper', 'wallet')
-    }),
-    body : joi.object().keys({
-        networkId : joi.number().required()
-    })
-}
-
-const deleteNetwork = {
-    params : joi.object().keys({
-        server : joi.string().required().allow('whisper', 'wallet')
+        server : joi.string().required().allow('whisper', 'wallet', 'nft'),
     }),
     query : joi.object().keys({
-        networkId : joi.number().required()
+        serviceName : joi.string().required().allow('SLUSH', 'WHISPER', 'NFT')
     })
 }
 
 module.exports = {
     getNetworks,
-    addNetwork,
-    deleteNetwork
 };

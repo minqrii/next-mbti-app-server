@@ -1,12 +1,13 @@
 const express = require('express');
 const messageRoute = require('./message.route');
-const connectionRoute = require('./connection.route');
+const connectionRoute = require('./connection.route')
 const userRoute = require('./user.route');
 const pushNotificationRoute = require('./pushNotification.route');
-const notificationRoute = require('./notification.route');
+const notificationRoute = require('./notification.route')
 const transactionRoute = require('./transaction.route');
-const tokenRoute = require('./token.route');
-const networkRoute = require('./network.route');
+const tokenRoute = require('./token.route')
+const networkRoute = require('./network.route')
+const escrowRoute = require('./escrow.route')
 const priceRoute = require('./price.route');
 const candlestickRoute = require('./candlestick.route');
 
@@ -44,6 +45,10 @@ const defaultRoutes = [
     {
         path : '/networks',
         route : networkRoute
+    },
+    {
+        path : '/escrow',
+        route : escrowRoute
     },
     {
         path : '/price',

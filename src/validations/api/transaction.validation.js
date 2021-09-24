@@ -9,17 +9,19 @@ const transactionPayload = {
             pub_key : joi.string().required(),
             signature : joi.string().required()
         }),
-        networkId : joi.number().required(),
+        networkId : joi.string().required(),
+        serviceName : joi.string().required(),
         contractAddressQuery : joi.string()
     })
 }
 
 const sendTransactionResult = {
     body : joi.object().keys({
+        serviceName : joi.string().required(),
         tx_hash : joi.string().required(),
         type : joi.string().required(),
-        transactionResult : joi.object().required(),
-        networkId : joi.number().required(),
+        transactionResult : joi.string().required(),
+        networkId : joi.string().required(),
         from : joi.string().required().custom(customValidation.address),
         transactionObject : joi.object(),
         to : joi.string().custom(customValidation.address)
@@ -30,7 +32,7 @@ const getSendFailTransactions = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
         type : joi.string().required(),
-        networkId : joi.number().required()
+        networkId : joi.string().required()
     })
 }
 
@@ -39,7 +41,7 @@ const deleteSendFailTransactions = {
         address : joi.string().required().custom(customValidation.address),
         tx_hash : joi.string().required(),
         type : joi.string().required(),
-        networkId : joi.number().required()
+        networkId : joi.string().required()
     })
 }
 
@@ -47,13 +49,15 @@ const getNonceByAddress = {
     query : joi.object().keys({
         address : joi.string().required().custom(customValidation.address),
         server : joi.string().required().valid('whisper', 'wallet'),
-        networkId : joi.number().required()
+        networkId : joi.string().required(),
+        serviceName : joi.string().required()
     })
 }
 
-const getContractAddresses = {
+const getContractAddressesByNetworkId = {
     query : joi.object().keys({
-        server : joi.string().required().valid('whisper', 'wallet', 'all'),
+        serviceName : joi.string().required(),
+        networkId : joi.array().required()
     })
 }
 
@@ -63,5 +67,5 @@ module.exports = {
     sendTransactionResult,
     deleteSendFailTransactions,
     getNonceByAddress,
-    getContractAddresses
+    getContractAddressesByNetworkId
 }

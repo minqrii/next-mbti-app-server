@@ -1,25 +1,11 @@
 const whisperAppServer = require('../utils/whisperAppServer');
 const walletAppServer = require('../utils/walletAppServer');
+const networkAppServer = require('../utils/networkAppServer');
 
 
 const getNetworks = async function(data){
-    const path = '/v1/networks/'
-    let promiseArray = [];
-    switch(data.server){
-        case 'whisper' :
-            promiseArray.push(await whisperAppServer.get(path).then((result)=> result.data))
-            break;
-        case 'wallet' :
-            promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
-            break;
-        default :
-            promiseArray.push(await whisperAppServer.get(path).then((result)=> result.data))
-            promiseArray.push(await walletAppServer.get(path).then((result)=> result.data))
-            break;
-    }
-    return await Promise.all(promiseArray)
-        .then((result) => result)
-        .catch((err) => {throw (err)})
+    const getNetworksResult = await networkAppServer.get(`/v1/networks/service?serviceName=${data.serviceName}`);
+    return getNetworksResult.data;
 }
 
 const addNetwork = async function(data) {

@@ -8,6 +8,7 @@ io.adapter(IORedis({host: config.redis.host, port: config.redis.port}));
 io.use(async (socket, next) => {
     try {
         socket.address = socket.handshake.query.address
+        socket.serviceName = socket.handshake.query.serviceName
         next();
     } catch (err) {
         next(new Error('Please authenticate'))
