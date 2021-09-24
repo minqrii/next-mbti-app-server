@@ -36,15 +36,15 @@ const getNotifications = async function(address, serviceName, server, networkId,
 
 const getMessageNotification = async function(data) {
     const timestamp = (data.timestamp) ? data.timestamp : moment().subtract(7, 'day').unix() * 1000;
-    return whisperAppServer.get(`/v1/notification/message/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
+    return whisperAppServer.get(`/v1/notifications/message/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
 }
 const getTokenNotification = async function(data) {
     const timestamp = (data.timestamp) ? data.timestamp : moment().subtract(7, 'day').unix() * 1000;
-    return walletAppServer.get(`/v1/notification/token/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
+    return walletAppServer.get(`/v1/notifications/token/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
 }
 const getEscrowNotification = async function(data) {
     const timestamp = (data.timestamp) ? data.timestamp : moment().subtract(7, 'day').unix() * 1000;
-    return walletAppServer.get(`/v1/notification/escrow/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
+    return walletAppServer.get(`/v1/notifications/escrow/${data.address}?serviceName=${data.serviceName}&${makeQueryFromArray("networkId", data.networkId)}&timestamp=${timestamp}`);
 }
 
 
