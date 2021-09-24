@@ -16,7 +16,7 @@ const sendToken = async function (data) {
 const getTokensBalance = async function (data) {
     try {
         //todo :: service로 빼기
-        const query = await makeQueryFromArray('contractAddresses', data.contractAddressQuery)
+        const query = await makeQueryFromArray('contractAddressQuery', data.contractAddressQuery)
         const getTokensBalanceResponse = await walletAppServer.get(`/v1/tokens/balance?address=${data.address}&networkId=${data.networkId}&serviceName=${data.serviceName}&` + query);
         return getTokensBalanceResponse.data;
     } catch (err) {
