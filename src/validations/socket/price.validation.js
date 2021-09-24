@@ -5,8 +5,7 @@ const getMarketPriceFromBinance = joi.object().keys({
 });
 
 const getMarketPriceFromUpbit = joi.object().keys({
-   symbols : joi.array().required(),
-   currency: joi.string().required()
+   symbols : joi.array().required()
 });
 
 module.exports = {

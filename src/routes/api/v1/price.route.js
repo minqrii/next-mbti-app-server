@@ -11,6 +11,6 @@ router
 
 router
   .route('/upbit')
-  .post(validate(priceValidation.getMarketPriceFromUpbit),priceController.getMarketPriceFromUpbit)
+  .post(validate(priceValidation.getMarketPriceFromUpbit),priceController.getMarketPriceFromUpbit);
 
 module.exports = router;

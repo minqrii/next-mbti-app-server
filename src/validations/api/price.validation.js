@@ -8,8 +8,7 @@ const getMarketPriceFromBinance = {
 
 const getMarketPriceFromUpbit = {
    body: joi.object().keys({
-      symbols : joi.array().required(),
-      currency: joi.string().required()
+      symbols : joi.array().required()
    })
 }
 
