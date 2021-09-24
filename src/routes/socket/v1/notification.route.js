@@ -8,16 +8,12 @@ module.exports = (io, socket) => {
         socketValidate(notificationValidation.getMessageNotification),
         notificationController.getMessageNotification
     )(io,socket))
-};
 
-module.exports = (io, socket) => {
     socket.on('getTokenNotification', socketMiddleware(
         socketValidate(notificationValidation.getTokenNotification),
         notificationController.getTokenNotification
     )(io,socket))
-};
 
-module.exports = (io, socket) => {
     socket.on('getEscrowNotification', socketMiddleware(
         socketValidate(notificationValidation.getEscrowNotification),
         notificationController.getEscrowNotification
