@@ -9,6 +9,7 @@ const socketCatchAsync = require('../../../utils/socketCatchAsync');
 const transactionRoute = require('./transaction.route');
 const tokenRoute = require('./token.route');
 const priceRoute = require('./price.route');
+const candlestickRoute = require('./candlestick.route');
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
@@ -44,6 +45,7 @@ module.exports = function (io) {
                 transactionRoute(io,socket);
                 tokenRoute(io,socket);
                 priceRoute(io,socket);
+                candlestickRoute(io,socket);
             })
             .catch((err) => {
                 socket.emit('error', err.message)
