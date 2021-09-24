@@ -9,7 +9,7 @@ const deregisterSpamUser = transactionValidation.transactionPayload
 const getSpamUsers = joi.object().keys({
     address : joi.string().required().custom(customValidation.address),
     networkId : joi.string().required(),
-    contractAddress : joi.string().required(),
+    contractAddressQuery : joi.string().required(),
     serviceName : joi.string().required()
 });
 
