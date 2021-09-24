@@ -8,6 +8,7 @@ const router = express.Router();
 //[trx] exchange 등록
 router
     .route('/exchange')
+    .get(validate(escrowValidation.getExchanges),escrowController.getExchanges)
     .post(validate(escrowValidation.createExchange),escrowController.createExchange);
 
 //[trx] exchange accept
@@ -23,6 +24,7 @@ router
 //[trx] no-show 등록
 router
     .route('/no-show')
+    .get(validate(escrowValidation.getNoShows),escrowController.getNoShows)
     .post(validate(escrowValidation.createNoShow),escrowController.createNoShow)
 
 //[trx] no-show 수락
@@ -48,6 +50,7 @@ router
 //[trx] promise 등록
 router
     .route('/promise')
+    .get(validate(escrowValidation.getPromises),escrowController.getPromises)
     .get(validate(escrowValidation.createPromise),escrowController.createPromise)
 
 //[trx] promise 수락

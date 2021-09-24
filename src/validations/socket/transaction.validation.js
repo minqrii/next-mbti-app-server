@@ -28,7 +28,7 @@ const deleteSendFailTransactions = joi.object().keys({
 
 const getNonceByAddress = joi.object().keys({
     address : joi.string().required().custom(customValidation.address),
-    server : joi.string().required().valid('whisper', 'wallet'),
+    tag : joi.string().required().valid('MESSENGER', 'WALLET', 'NFT'),
     networkId : joi.string().required(),
     serviceName : joi.string().required()
 })

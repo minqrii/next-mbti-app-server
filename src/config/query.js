@@ -8,6 +8,16 @@ const makeQueryFromArray = (param, array) => {
    return query.slice(1);
 }
 
+const makeQuery = (data) => {
+   let queryString = ``;
+   Object.keys(data).forEach((el) => {
+      queryString += `${el}=${data[el]}&`
+   })
+   return queryString.slice(0, -1);
+}
+
+
 module.exports = {
-   makeQueryFromArray
+   makeQueryFromArray,
+   makeQuery
 }

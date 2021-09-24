@@ -7,3 +7,5 @@ module.exports.notificationController = require('./notification.controller');
 module.exports.connectionController = require('./connection.controller');
 module.exports.networkController = require('./network.controller')
 module.exports.escrowController = require('./escrow.controller');
+module.exports.priceController = require('./price.controller');
+module.exports.candlestickController = require('./candlestick.controller');
