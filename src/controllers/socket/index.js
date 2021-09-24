@@ -5,3 +5,5 @@ module.exports.tokenController = require('./token.controller');
 module.exports.transactionController = require('./transaction.controller');
 module.exports.notificationController = require('./notification.controller');
 module.exports.escrowController = require('./escrow.controller');
+module.exports.priceController = require('./price.controller');
+module.exports.candlestickController = require('./candlestick.controller');

@@ -7,3 +7,5 @@ module.exports.transactionService =require('./transaction.service');
 module.exports.connectionService =require('./connection.service');
 module.exports.networkService =require('./network.service');
 module.exports.escrowService = require('./escrow.service');
+module.exports.priceService =require('./price.service');
+module.exports.candlestickService =require('./candlestick.service');
