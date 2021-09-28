@@ -50,12 +50,12 @@ module.exports = (io, socket) => {
         escrowController.rejectNoShow
     )(io,socket));
 
-    socket.on('noShowVisit', socketMiddleware(
+    socket.on('visitNoShow', socketMiddleware(
         socketValidate(escrowValidation.noShowVisit),
         escrowController.noShowVisit
     )(io,socket));
 
-    socket.on('noShowAvoid', socketMiddleware(
+    socket.on('avoidNoShow', socketMiddleware(
         socketValidate(escrowValidation.noShowAvoid),
         escrowController.noShowAvoid
     )(io,socket));
