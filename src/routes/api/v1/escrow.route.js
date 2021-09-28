@@ -63,4 +63,15 @@ router
     .route('/promise/reject')
     .post(validate(escrowValidation.rejectPromise),escrowController.rejectPromise)
 
+//[trx] promise 취소
+router
+    .route('/promise/break')
+    .post(validate(escrowValidation.breakPromise),escrowController.breakPromise)
+
+//[trx] promise 확인
+router
+    .route('/promise/confirm')
+    .post(validate(escrowValidation.confirmPromise),escrowController.confirmPromise)
+
+
 module.exports = router;

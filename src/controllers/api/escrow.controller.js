@@ -85,6 +85,18 @@ const rejectPromise = catchAsync(async (req,res)=> {
     res.send(rejectPromiseStatus)
 })
 
+const breakPromise = catchAsync(async (req,res)=> {
+    const data = {...req.query, ...req.body, ...req.params}
+    const breakPromiseStatus = await escrowService.breakPromise(data);
+    res.send(breakPromiseStatus)
+})
+
+const confirmPromise = catchAsync(async (req,res)=> {
+    const data = {...req.query, ...req.body, ...req.params}
+    const confirmPromiseStatus = await escrowService.confirmPromise(data);
+    res.send(confirmPromiseStatus)
+})
+
 
 module.exports = {
     getExchanges,
@@ -100,5 +112,7 @@ module.exports = {
     getPromises,
     createPromise,
     acceptPromise,
-    rejectPromise
+    rejectPromise,
+    breakPromise,
+    confirmPromise
 };

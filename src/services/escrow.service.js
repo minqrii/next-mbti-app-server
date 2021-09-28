@@ -121,6 +121,24 @@ const rejectPromise = async function(data) {
 }
 
 
+const breakPromise = async function(data) {
+    try{
+        const breakPromiseStatus = await walletAppServer.post(`/v1/escrow/promise/break`, data)
+        return breakPromiseStatus.data;
+    }catch(err){
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
+    }
+}
+
+const confirmPromise = async function(data) {
+    try{
+        const confirmPromiseStatus = await walletAppServer.post(`/v1/escrow/promise/confirm`, data)
+        return confirmPromiseStatus.data;
+    }catch(err){
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
+    }
+}
+
 module.exports = {
     getExchanges,
     createExchange,
@@ -135,5 +153,7 @@ module.exports = {
     getPromises,
     createPromise,
     acceptPromise,
-    rejectPromise
+    rejectPromise,
+    breakPromise,
+    confirmPromise
 }

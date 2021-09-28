@@ -75,4 +75,15 @@ module.exports = (io, socket) => {
         escrowController.rejectPromise
     )(io,socket));
 
+    socket.on('breakPromise', socketMiddleware(
+        socketValidate(escrowValidation.breakPromise),
+        escrowController.breakPromise
+    )(io,socket));
+
+    socket.on('confirmPromise', socketMiddleware(
+        socketValidate(escrowValidation.confirmPromise),
+        escrowController.confirmPromise
+    )(io,socket));
+
+
 };

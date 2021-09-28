@@ -71,6 +71,16 @@ const rejectPromise= socketCatchAsync(async (io, socket, data, callback) => {
     callback(rejectPromiseStatus);
 })
 
+const breakPromise= socketCatchAsync(async (io, socket, data, callback) => {
+    const breakPromiseStatus = await escrowService.breakPromise(data);
+    callback(breakPromiseStatus);
+})
+
+const confirmPromise= socketCatchAsync(async (io, socket, data, callback) => {
+    const confirmPromiseStatus = await escrowService.confirmPromise(data);
+    callback(confirmPromiseStatus);
+})
+
 module.exports = {
     getExchanges,
     createExchange,
@@ -85,5 +95,7 @@ module.exports = {
     getPromises,
     createPromise,
     acceptPromise,
-    rejectPromise
+    rejectPromise,
+    breakPromise,
+    confirmPromise
 }

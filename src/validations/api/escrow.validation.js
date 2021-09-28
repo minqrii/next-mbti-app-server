@@ -65,6 +65,11 @@ const acceptPromise = transactionValidation.transactionPayload;
 
 const rejectPromise = transactionValidation.transactionPayload;
 
+const breakPromise = transactionValidation.transactionPayload;
+
+const confirmPromise = transactionValidation.transactionPayload;
+
+
 module.exports = {
     getExchanges,
     createExchange,
@@ -79,5 +84,7 @@ module.exports = {
     getPromises,
     createPromise,
     acceptPromise,
-    rejectPromise
+    rejectPromise,
+    breakPromise,
+    confirmPromise
 };
