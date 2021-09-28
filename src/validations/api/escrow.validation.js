@@ -12,7 +12,7 @@ const getEscrows = {
         requesterAddress: joi.string(),
         opponentAddress: joi.string(),
         type: joi.array().items(joi.number()).required(),
-        status: joi.array().items(joi.number())
+        status: joi.array().items(joi.number()).required()
     })
 }
 
