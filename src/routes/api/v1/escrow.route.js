@@ -51,16 +51,16 @@ router
 router
     .route('/promise')
     .get(validate(escrowValidation.getPromises),escrowController.getPromises)
-    .get(validate(escrowValidation.createPromise),escrowController.createPromise)
+    .post(validate(escrowValidation.createPromise),escrowController.createPromise)
 
 //[trx] promise 수락
 router
     .route('/promise/accept')
-    .get(validate(escrowValidation.acceptPromise),escrowController.acceptPromise)
+    .post(validate(escrowValidation.acceptPromise),escrowController.acceptPromise)
 
 //[trx] promise 거절
 router
     .route('/promise/reject')
-    .get(validate(escrowValidation.rejectPromise),escrowController.rejectPromise)
+    .post(validate(escrowValidation.rejectPromise),escrowController.rejectPromise)
 
 module.exports = router;
