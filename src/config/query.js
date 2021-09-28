@@ -11,7 +11,7 @@ const makeQueryFromArray = (param, array) => {
 const makeQuery = (data) => {
     let queryString = ``;
     Object.keys(data).forEach((el) => {
-        if (typeof el === "object") {
+        if (typeof data[el] === "object") {
             queryString += `&${makeQueryFromArray(el, data[el])}`;
         } else {
             queryString += `&${el}=${data[el]}`;
