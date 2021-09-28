@@ -11,7 +11,7 @@ const getEscrows = joi.object().keys({
     requesterAddress: joi.string(),
     opponentAddress: joi.string(),
     type: joi.array().required(),
-    status: joi.array()
+    status: joi.array().required()
 });
 
 const getExchanges = joi.object().keys({
