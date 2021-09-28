@@ -1,6 +1,21 @@
 const joi = require('joi');
 const transactionValidation = require('./transaction.validation');
 
+const getEscrows = {
+    query: joi.object().keys({
+        serviceName: joi.string().required(),
+        networkId: joi.string().required(),
+        contractAddressQuery: joi.string().required(),
+        count : joi.number().required(),
+        id: joi.number().required(),
+        address: joi.string(),
+        requesterAddress: joi.string(),
+        opponentAddress: joi.string(),
+        type: joi.array().items(joi.number()).required(),
+        status: joi.array().items(joi.number())
+    })
+}
+
 const getExchanges = {
     query: joi.object().keys({
         serviceName: joi.string().required(),
@@ -71,6 +86,7 @@ const confirmPromise = transactionValidation.transactionPayload;
 
 
 module.exports = {
+    getEscrows,
     getExchanges,
     createExchange,
     acceptExchange,

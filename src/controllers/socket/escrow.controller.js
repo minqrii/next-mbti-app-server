@@ -1,6 +1,11 @@
 const socketCatchAsync = require('../../utils/socketCatchAsync')
 const {escrowService} = require('../../services/index')
 
+const getEscrows= socketCatchAsync(async (io, socket, data, callback) => {
+    const getEscrowsResult = await escrowService.getEscrows(data);
+    callback(getEscrowsResult);
+})
+
 const getExchanges= socketCatchAsync(async (io, socket, data, callback) => {
     const getExchangeRequestsResult = await escrowService.getExchanges(data);
     callback(getExchangeRequestsResult);
@@ -82,6 +87,7 @@ const confirmPromise= socketCatchAsync(async (io, socket, data, callback) => {
 })
 
 module.exports = {
+    getEscrows,
     getExchanges,
     createExchange,
     acceptExchange,

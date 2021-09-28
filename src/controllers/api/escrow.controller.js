@@ -1,6 +1,12 @@
 const catchAsync = require('../../utils/catchAsync');
 const {escrowService} = require('../../services');
 
+const getEscrows = catchAsync(async (req,res)=> {
+    const data = {...req.query, ...req.body, ...req.params}
+    const getEscrowsResult = await escrowService.getEscrows(data);
+    res.send(getEscrowsResult)
+})
+
 const getExchanges = catchAsync(async (req,res)=> {
     const data = {...req.query, ...req.body, ...req.params}
     const getExchangesResult = await escrowService.getExchanges(data);
@@ -99,6 +105,7 @@ const confirmPromise = catchAsync(async (req,res)=> {
 
 
 module.exports = {
+    getEscrows,
     getExchanges,
     createExchange,
     acceptExchange,

@@ -4,7 +4,12 @@ const socketValidate = require('../../../middlewares/socketValidate');
 const {escrowValidation} = require('../../../validations/socket');
 
 module.exports = (io, socket) => {
-    //whisper messenger
+
+    socket.on('getEscrows', socketMiddleware(
+        socketValidate(escrowValidation.getEscrows),
+        escrowController.getEscrows
+    )(io,socket));
+
     socket.on('getExchanges', socketMiddleware(
         socketValidate(escrowValidation.getExchanges),
         escrowController.getExchanges

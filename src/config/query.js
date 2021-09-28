@@ -1,23 +1,27 @@
 const makeQueryFromArray = (param, array) => {
-   let query = '';
+    let query = '';
 
-   for(let i = 0; i < array.length; i++){
-      query += `&${param}[]=` + array[i];
-   }
+    for (let i = 0; i < array.length; i++) {
+        query += `&${param}[]=` + array[i];
+    }
 
-   return query.slice(1);
+    return query.slice(1);
 }
 
 const makeQuery = (data) => {
-   let queryString = ``;
-   Object.keys(data).forEach((el) => {
-      queryString += `${el}=${data[el]}&`
-   })
-   return queryString.slice(0, -1);
+    let queryString = ``;
+    Object.keys(data).forEach((el) => {
+        if (typeof el === "object") {
+            queryString += makeQueryFromArray(el, data[el]);
+        } else {
+            queryString += `&${el}=${data[el]}`;
+        }
+    })
+    return queryString.slice(1);
 }
 
 
 module.exports = {
-   makeQueryFromArray,
-   makeQuery
+    makeQueryFromArray,
+    makeQuery
 }

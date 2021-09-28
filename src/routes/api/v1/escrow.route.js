@@ -5,6 +5,11 @@ const {escrowController} = require('../../../controllers/api');
 
 const router = express.Router();
 
+// escrow 조회
+router
+    .route('/')
+    .get(validate(escrowValidation.getEscrows), escrowController.getEscrows)
+
 //[trx] exchange 등록
 router
     .route('/exchange')

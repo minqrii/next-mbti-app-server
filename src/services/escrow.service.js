@@ -3,6 +3,12 @@ const ApiError = require('../utils/ApiError');
 const walletAppServer = require('../utils/walletAppServer');
 const {makeQuery} = require("../config/query");
 
+const getEscrows = async function (data) {
+    const path = `/v1/escrow?${makeQuery(data)}`;
+    const getExchangesResponse = await walletAppServer.get(path);
+    return getExchangesResponse.data;
+}
+
 const getExchanges = async function (data) {
     const path = `/v1/escrow/exchange?${makeQuery(data)}`;
     const getExchangesResponse = await walletAppServer.get(path);
@@ -140,6 +146,7 @@ const confirmPromise = async function(data) {
 }
 
 module.exports = {
+    getEscrows,
     getExchanges,
     createExchange,
     acceptExchange,
