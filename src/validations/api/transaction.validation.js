@@ -11,7 +11,8 @@ const transactionPayload = {
         }),
         networkId : joi.string().required(),
         serviceName : joi.string().required(),
-        contractAddressQuery : joi.string()
+        contractAddressQuery : joi.string(),
+        recipient : joi.string().custom(customValidation.address),
     })
 }
 
