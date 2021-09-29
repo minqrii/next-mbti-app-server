@@ -6,11 +6,6 @@ const getEscrows= socketCatchAsync(async (io, socket, data, callback) => {
     callback(getEscrowsResult);
 })
 
-const getExchanges= socketCatchAsync(async (io, socket, data, callback) => {
-    const getExchangeRequestsResult = await escrowService.getExchanges(data);
-    callback(getExchangeRequestsResult);
-})
-
 const createExchange= socketCatchAsync(async (io, socket, data, callback) => {
     const createExchangeStatus = await escrowService.createExchange(data);
     callback(createExchangeStatus);
@@ -24,11 +19,6 @@ const acceptExchange= socketCatchAsync(async (io, socket, data, callback) => {
 const rejectExchange= socketCatchAsync(async (io, socket, data, callback) => {
     const rejectExchangeStatus = await escrowService.rejectExchange(data);
     callback(rejectExchangeStatus);
-})
-
-const getNoShows= socketCatchAsync(async (io, socket, data, callback) => {
-    const getNoShowRequestsResult = await escrowService.getNoShows(data);
-    callback(getNoShowRequestsResult);
 })
 
 const createNoShow= socketCatchAsync(async (io, socket, data, callback) => {
@@ -54,11 +44,6 @@ const noShowVisit= socketCatchAsync(async (io, socket, data, callback) => {
 const noShowAvoid= socketCatchAsync(async (io, socket, data, callback) => {
     const noShowAvoidStatus = await escrowService.noShowAvoid(data);
     callback(noShowAvoidStatus);
-})
-
-const getPromises= socketCatchAsync(async (io, socket, data, callback) => {
-    const getPromiseRequestsResult = await escrowService.getPromises(data);
-    callback(getPromiseRequestsResult);
 })
 
 const createPromise= socketCatchAsync(async (io, socket, data, callback) => {
@@ -88,17 +73,14 @@ const confirmPromise= socketCatchAsync(async (io, socket, data, callback) => {
 
 module.exports = {
     getEscrows,
-    getExchanges,
     createExchange,
     acceptExchange,
     rejectExchange,
-    getNoShows,
     createNoShow,
     acceptNoShow,
     rejectNoShow,
     noShowVisit,
     noShowAvoid,
-    getPromises,
     createPromise,
     acceptPromise,
     rejectPromise,

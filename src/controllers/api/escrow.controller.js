@@ -7,12 +7,6 @@ const getEscrows = catchAsync(async (req,res)=> {
     res.send(getEscrowsResult)
 })
 
-const getExchanges = catchAsync(async (req,res)=> {
-    const data = {...req.query, ...req.body, ...req.params}
-    const getExchangesResult = await escrowService.getExchanges(data);
-    res.send(getExchangesResult)
-})
-
 const createExchange = catchAsync(async (req,res)=> {
     const data = {...req.query, ...req.body, ...req.params}
     const createExchangeStatus = await escrowService.createExchange(data);
@@ -29,12 +23,6 @@ const rejectExchange = catchAsync(async (req,res)=> {
     const data = {...req.query, ...req.body, ...req.params}
     const rejectExchangeStatus = await escrowService.rejectExchange(data);
     res.send(rejectExchangeStatus)
-})
-
-const getNoShows = catchAsync(async (req,res)=> {
-    const data = {...req.query, ...req.body, ...req.params}
-    const getNoShowsResult = await escrowService.getNoShows(data);
-    res.send(getNoShowsResult)
 })
 
 const createNoShow = catchAsync(async (req,res)=> {
@@ -65,12 +53,6 @@ const noShowAvoid = catchAsync(async (req,res)=> {
     const data = {...req.query, ...req.body, ...req.params}
     const noShowAvoidStatus = await escrowService.noShowAvoid(data);
     res.send(noShowAvoidStatus)
-})
-
-const getPromises = catchAsync(async (req,res)=> {
-    const data = {...req.query, ...req.body, ...req.params}
-    const getPromisesResult = await escrowService.getPromises(data);
-    res.send(getPromisesResult)
 })
 
 const createPromise = catchAsync(async (req,res)=> {
@@ -106,17 +88,14 @@ const confirmPromise = catchAsync(async (req,res)=> {
 
 module.exports = {
     getEscrows,
-    getExchanges,
     createExchange,
     acceptExchange,
     rejectExchange,
-    getNoShows,
     createNoShow,
     acceptNoShow,
     rejectNoShow,
     noShowVisit,
     noShowAvoid,
-    getPromises,
     createPromise,
     acceptPromise,
     rejectPromise,

@@ -9,12 +9,6 @@ const getEscrows = async function (data) {
     return getExchangesResponse.data;
 }
 
-const getExchanges = async function (data) {
-    const path = `/v1/escrow/exchange?${makeQuery(data)}`;
-    const getExchangesResponse = await walletAppServer.get(path);
-    return getExchangesResponse.data;
-}
-
 const createExchange = async function(data) {
     try{
         const createExchangeStatus = await walletAppServer.post(`/v1/escrow/exchange`, data)
@@ -40,12 +34,6 @@ const rejectExchange = async function(data) {
     }catch(err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
     }
-}
-
-const getNoShows = async function (data) {
-    const path = `/v1/escrow/no-show?${makeQuery(data)}`;
-    const getNoShowsResponse = await walletAppServer.get(path);
-    return getNoShowsResponse.data;
 }
 
 const createNoShow = async function(data) {
@@ -91,12 +79,6 @@ const noShowAvoid = async function(data) {
     }catch(err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
     }
-}
-
-const getPromises = async function (data) {
-    const path = `/v1/escrow/promise?${makeQuery(data)}`;
-    const getPromisesResponse = await walletAppServer.get(path);
-    return getPromisesResponse.data;
 }
 
 const createPromise = async function(data) {
@@ -147,17 +129,14 @@ const confirmPromise = async function(data) {
 
 module.exports = {
     getEscrows,
-    getExchanges,
     createExchange,
     acceptExchange,
     rejectExchange,
-    getNoShows,
     createNoShow,
     acceptNoShow,
     rejectNoShow,
     noShowVisit,
     noShowAvoid,
-    getPromises,
     createPromise,
     acceptPromise,
     rejectPromise,
