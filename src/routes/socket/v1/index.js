@@ -19,7 +19,6 @@ const initialize = (io, socket) => {
              reject(new Error('No Socket Id'))
           }
           await io.of('/').adapter.remoteJoin(socket.id, `${socket.serviceName}_${socket.address}`).catch((err)=> reject(err));
-          await io.of('/').adapter.allRooms().then((result)=> console.log(result))
           await redisClient.saddAsync(`${socket.serviceName}_connectedUsers`, socket.address)
           resolve();
        }catch(err){
