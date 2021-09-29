@@ -12,9 +12,27 @@ const getMessageNotification = {
     })
 };
 
-const getTokenNotification = getMessageNotification;
+const getTokenNotification = {
+    query : joi.object().keys({
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH'),
+        networkId: joi.array().required(),
+        timestamp : joi.string().required(),
+    }),
+    params : joi.object().keys({
+        address : joi.string().required().custom(customValidation.address)
+    })
+};
 
-const getEscrowNotification = getMessageNotification;
+const getEscrowNotification = {
+    query : joi.object().keys({
+        serviceName : joi.string().required().valid('SLUSH'),
+        networkId: joi.array().required(),
+        timestamp : joi.string().required(),
+    }),
+    params : joi.object().keys({
+        address : joi.string().required().custom(customValidation.address)
+    })
+};
 
 module.exports = {
     getMessageNotification,
