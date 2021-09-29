@@ -10,7 +10,7 @@ const getSpamUsers = joi.object().keys({
     address : joi.string().required().custom(customValidation.address),
     networkId : joi.string().required(),
     contractAddressQuery : joi.string().required(),
-    serviceName : joi.string().required()
+    serviceName : joi.string().required().valid('WHISPER')
 });
 
 const exportUserFriends = joi.object().keys({

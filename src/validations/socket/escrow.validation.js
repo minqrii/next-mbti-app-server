@@ -2,7 +2,7 @@ const joi = require('joi');
 const transactionValidation = require('./transaction.validation');
 
 const getEscrows = joi.object().keys({
-    serviceName: joi.string().required(),
+    serviceName: joi.string().required().valid('SLUSH'),
     networkId: joi.string().required(),
     contractAddressQuery: joi.string().required(),
     count : joi.number().required(),

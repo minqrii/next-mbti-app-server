@@ -31,7 +31,7 @@ const getNonceByAddress = joi.object().keys({
     address : joi.string().required().custom(customValidation.address),
     tag : joi.string().required().valid('MESSENGER', 'WALLET', 'NFT'),
     networkId : joi.string().required(),
-    serviceName : joi.string().required()
+    serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
 })
 
 module.exports = {

@@ -3,7 +3,7 @@ const transactionValidation = require('./transaction.validation');
 
 const getEscrows = {
     query: joi.object().keys({
-        serviceName: joi.string().required(),
+        serviceName: joi.string().required().valid( 'SLUSH'),
         networkId: joi.string().required(),
         contractAddressQuery: joi.string().required(),
         count : joi.number().required(),
@@ -18,7 +18,7 @@ const getEscrows = {
 
 const getExchanges = {
     query: joi.object().keys({
-        serviceName: joi.string().required(),
+        serviceName: joi.string().required().valid('SLUSH'),
         networkId: joi.string().required(),
         contractAddress: joi.string().required(),
         count : joi.number().required(),
@@ -38,7 +38,7 @@ const rejectExchange = transactionValidation.transactionPayload;
 
 const getNoShows = {
     query: joi.object().keys({
-        serviceName: joi.string().required(),
+        serviceName: joi.string().required().valid( 'SLUSH'),
         networkId: joi.string().required(),
         contractAddress: joi.string().required(),
         count : joi.number().required(),
@@ -62,7 +62,7 @@ const noShowAvoid = transactionValidation.transactionPayload;
 
 const getPromises = {
     query: joi.object().keys({
-        serviceName: joi.string().required(),
+        serviceName: joi.string().required().valid('SLUSH'),
         networkId: joi.string().required(),
         contractAddress: joi.string().required(),
         count : joi.number().required(),

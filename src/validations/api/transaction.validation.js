@@ -10,7 +10,7 @@ const transactionPayload = {
             signature : joi.string().required()
         }),
         networkId : joi.string().required(),
-        serviceName : joi.string().required(),
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT'),
         contractAddressQuery : joi.string(),
         recipient : joi.string().custom(customValidation.address),
     })
@@ -18,7 +18,7 @@ const transactionPayload = {
 
 const sendTransactionResult = {
     body : joi.object().keys({
-        serviceName : joi.string().required(),
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT'),
         tx_hash : joi.string().required(),
         type : joi.string().required(),
         transactionResult : joi.string().required(),
@@ -51,13 +51,13 @@ const getNonceByAddress = {
         address : joi.string().required().custom(customValidation.address),
         tag : joi.string().required().valid('MESSENGER', 'WALLET', 'NFT'),
         networkId : joi.string().required(),
-        serviceName : joi.string().required()
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
     })
 }
 
 const getContractAddressesByNetworkId = {
     query : joi.object().keys({
-        serviceName : joi.string().required(),
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT'),
         networkId : joi.array().required()
     })
 }

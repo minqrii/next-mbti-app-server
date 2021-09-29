@@ -6,7 +6,7 @@ const syncPushNotificationCount = {
         key : joi.string().required()
     }),
     body : joi.object().keys({
-        serviceName : joi.string().required(),
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT'),
         count : joi.number().required()
     })
 }
@@ -17,7 +17,7 @@ const registerPushNotificationToken  = {
         key : joi.string().required()
     }),
     body : joi.object().keys({
-        serviceName : joi.string().required(),
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT'),
         version : joi.string()
     })
 }
@@ -28,7 +28,7 @@ const deregisterPushNotificationToken  = {
         key : joi.string().required()
     }),
     query : joi.object().keys({
-        serviceName : joi.string().required(),
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT'),
     })
 }
 
@@ -39,7 +39,7 @@ const registerPushType  = {
     }),
     body : joi.object().keys({
         type : joi.string().required(),
-        serviceName : joi.string().required()
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
     })
 }
 
@@ -50,7 +50,7 @@ const deregisterPushType  = {
     }),
     query : joi.object().keys({
         type : joi.string().required(),
-        serviceName : joi.string().required()
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
     })
 }
 
@@ -60,7 +60,7 @@ const getPushSound = {
         key : joi.string().required()
     }),
     query : joi.object().keys({
-        serviceName : joi.string().required()
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
     })
 }
 
@@ -71,7 +71,7 @@ const updatePushSound = {
     }),
     body : joi.object().keys({
         soundName : joi.string().required(),
-        serviceName : joi.string().required()
+        serviceName : joi.string().required().valid('WHISPER', 'SLUSH', 'NFT')
     })
 }
 

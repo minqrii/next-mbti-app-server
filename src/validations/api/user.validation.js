@@ -9,7 +9,7 @@ const getSpamUsers = {
     query : joi.object().keys({
         networkId : joi.string().required(),
         contractAddressQuery : joi.string().required(),
-        serviceName : joi.string().required(),
+        serviceName : joi.string().required().valid('WHISPER'),
     })
 }
 
