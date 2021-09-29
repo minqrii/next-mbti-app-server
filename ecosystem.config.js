@@ -1,6 +1,6 @@
 module.exports = {
     apps : [{
-        name: "api",
+        name: "EQBR-Api-Gateway",
         script: './src/index.js',
         watch: true,
         env: {
