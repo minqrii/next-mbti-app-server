@@ -14,11 +14,13 @@ const getSpamUsers = joi.object().keys({
 });
 
 const exportUserFriends = joi.object().keys({
+    serviceName: joi.string().required().valid('WHISPER', 'SLUSH'),
     userId : joi.string().required(),
     data : joi.string().required()
 });
 
 const importUserFriends = joi.object().keys({
+    serviceName: joi.string().required().valid('WHISPER', 'SLUSH'),
     userId : joi.string().required()
 });
 

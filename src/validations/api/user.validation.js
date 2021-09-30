@@ -15,6 +15,7 @@ const getSpamUsers = {
 
 const exportUserFriends = {
     body : joi.object().keys({
+        serviceName: joi.string().required().valid('WHISPER', 'SLUSH'),
         userId : joi.string().required(),
         data : joi.string().required()
     })
@@ -22,6 +23,7 @@ const exportUserFriends = {
 
 const importUserFriends = {
     query : joi.object().keys({
+        serviceName: joi.string().required().valid('WHISPER', 'SLUSH'),
         userId : joi.string().required()
     })
 }

@@ -41,7 +41,7 @@ const exportUserFriends = async function (data){
 
 const importUserFriends = async function (data){
     try{
-        const importUserFriendsResponse = await whisperAppServer.get(`/v1/users/friends?userId=${data.userId}`)
+        const importUserFriendsResponse = await whisperAppServer.get(`/v1/users/friends?serviceName=${data.serviceName}&userId=${data.userId}`)
         return importUserFriendsResponse.data
     }
     catch(err){
