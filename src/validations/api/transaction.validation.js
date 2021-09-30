@@ -25,7 +25,7 @@ const sendTransactionResult = {
         networkId : joi.string().required(),
         from : joi.string().required().custom(customValidation.address),
         transactionObject : joi.object(),
-        to : joi.string().custom(customValidation.address)
+        recipient : joi.string().custom(customValidation.address)
     })
 }
 

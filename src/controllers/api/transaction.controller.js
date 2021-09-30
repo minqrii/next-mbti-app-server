@@ -9,8 +9,8 @@ const sendTransactionResult = catchAsync(async (req, res) => {
         "tx_hash" : data.tx_hash,
         "networkId" : data.networkId
     }
-    if(data.to){
-        req.app.io.to(`${data.serviceName}_${data.to}`).emit(data.type + "Receive", transactionResult)
+    if(data.recipient){
+        req.app.io.to(`${data.serviceName}_${data.recipient}`).emit(data.type + "Receive", transactionResult)
     }
     req.app.io.to(`${data.serviceName}_${data.from}`).emit(data.type + "Result", transactionResult)
     res.send("ok")
