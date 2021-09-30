@@ -63,19 +63,19 @@ const rejectNoShow = async function(data) {
     }
 }
 
-const noShowVisit = async function(data) {
+const visitNoShow = async function(data) {
     try{
-        const noShowVisitStatus = await walletAppServer.post(`/v1/escrow/no-show/visit`, data)
-        return noShowVisitStatus.data;
+        const visitNoShowStatus = await walletAppServer.post(`/v1/escrow/no-show/visit`, data)
+        return visitNoShowStatus.data;
     }catch(err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
     }
 }
 
-const noShowAvoid = async function(data) {
+const avoidNoShow = async function(data) {
     try{
-        const noShowAvoidStatus = await walletAppServer.post(`/v1/escrow/no-show/avoid`, data)
-        return noShowAvoidStatus.data;
+        const avoidNoShowStatus = await walletAppServer.post(`/v1/escrow/no-show/avoid`, data)
+        return avoidNoShowStatus.data;
     }catch(err){
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Please check network')
     }
@@ -135,8 +135,8 @@ module.exports = {
     createNoShow,
     acceptNoShow,
     rejectNoShow,
-    noShowVisit,
-    noShowAvoid,
+    visitNoShow,
+    avoidNoShow,
     createPromise,
     acceptPromise,
     rejectPromise,

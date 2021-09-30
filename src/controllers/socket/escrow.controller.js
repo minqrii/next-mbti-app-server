@@ -36,14 +36,14 @@ const rejectNoShow= socketCatchAsync(async (io, socket, data, callback) => {
     callback(rejectNoShowStatus);
 })
 
-const noShowVisit= socketCatchAsync(async (io, socket, data, callback) => {
-    const noShowVisitStatus = await escrowService.noShowVisit(data);
-    callback(noShowVisitStatus);
+const visitNoShow= socketCatchAsync(async (io, socket, data, callback) => {
+    const visitNoShowStatus = await escrowService.visitNoShow(data);
+    callback(visitNoShowStatus);
 })
 
-const noShowAvoid= socketCatchAsync(async (io, socket, data, callback) => {
-    const noShowAvoidStatus = await escrowService.noShowAvoid(data);
-    callback(noShowAvoidStatus);
+const avoidNoShow= socketCatchAsync(async (io, socket, data, callback) => {
+    const avoidNoShowStatus = await escrowService.avoidNoShow(data);
+    callback(avoidNoShowStatus);
 })
 
 const createPromise= socketCatchAsync(async (io, socket, data, callback) => {
@@ -79,8 +79,8 @@ module.exports = {
     createNoShow,
     acceptNoShow,
     rejectNoShow,
-    noShowVisit,
-    noShowAvoid,
+    visitNoShow,
+    avoidNoShow,
     createPromise,
     acceptPromise,
     rejectPromise,

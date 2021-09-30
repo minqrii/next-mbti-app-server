@@ -56,9 +56,9 @@ const acceptNoShow = transactionValidation.transactionPayload;
 
 const rejectNoShow = transactionValidation.transactionPayload;
 
-const noShowVisit = transactionValidation.transactionPayload;
+const visitNoShow = transactionValidation.transactionPayload;
 
-const noShowAvoid = transactionValidation.transactionPayload;
+const avoidNoShow = transactionValidation.transactionPayload;
 
 const getPromises = {
     query: joi.object().keys({
@@ -95,8 +95,8 @@ module.exports = {
     createNoShow,
     acceptNoShow,
     rejectNoShow,
-    noShowVisit,
-    noShowAvoid,
+    visitNoShow,
+    avoidNoShow,
     getPromises,
     createPromise,
     acceptPromise,

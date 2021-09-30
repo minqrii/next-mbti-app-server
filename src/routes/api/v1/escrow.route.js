@@ -43,12 +43,12 @@ router
 //[trx] no-show 방문
 router
     .route('/no-show/visit')
-    .post(validate(escrowValidation.noShowVisit),escrowController.noShowVisit)
+    .post(validate(escrowValidation.visitNoShow),escrowController.visitNoShow)
 
 //[trx] no-show 를 함
 router
     .route('/no-show/avoid')
-    .post(validate(escrowValidation.noShowAvoid),escrowController.noShowAvoid)
+    .post(validate(escrowValidation.avoidNoShow),escrowController.avoidNoShow)
 
 //[trx] promise 등록
 router

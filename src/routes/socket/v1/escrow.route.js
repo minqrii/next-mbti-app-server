@@ -41,13 +41,13 @@ module.exports = (io, socket) => {
     )(io,socket));
 
     socket.on('visitNoShow', socketMiddleware(
-        socketValidate(escrowValidation.noShowVisit),
-        escrowController.noShowVisit
+        socketValidate(escrowValidation.visitNoShow),
+        escrowController.visitNoShow
     )(io,socket));
 
     socket.on('avoidNoShow', socketMiddleware(
-        socketValidate(escrowValidation.noShowAvoid),
-        escrowController.noShowAvoid
+        socketValidate(escrowValidation.avoidNoShow),
+        escrowController.avoidNoShow
     )(io,socket));
 
     socket.on('createPromise', socketMiddleware(

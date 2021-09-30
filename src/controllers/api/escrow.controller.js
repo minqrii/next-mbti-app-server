@@ -43,16 +43,16 @@ const rejectNoShow = catchAsync(async (req,res)=> {
     res.send(rejectNoShowStatus)
 })
 
-const noShowVisit = catchAsync(async (req,res)=> {
+const visitNoShow = catchAsync(async (req,res)=> {
     const data = {...req.query, ...req.body, ...req.params}
-    const noShowVisitStatus = await escrowService.noShowVisit(data);
-    res.send(noShowVisitStatus)
+    const visitNoShowStatus = await escrowService.visitNoShow(data);
+    res.send(visitNoShowStatus)
 })
 
-const noShowAvoid = catchAsync(async (req,res)=> {
+const avoidNoShow = catchAsync(async (req,res)=> {
     const data = {...req.query, ...req.body, ...req.params}
-    const noShowAvoidStatus = await escrowService.noShowAvoid(data);
-    res.send(noShowAvoidStatus)
+    const avoidNoShowStatus = await escrowService.avoidNoShow(data);
+    res.send(avoidNoShowStatus)
 })
 
 const createPromise = catchAsync(async (req,res)=> {
@@ -94,8 +94,8 @@ module.exports = {
     createNoShow,
     acceptNoShow,
     rejectNoShow,
-    noShowVisit,
-    noShowAvoid,
+    visitNoShow,
+    avoidNoShow,
     createPromise,
     acceptPromise,
     rejectPromise,
