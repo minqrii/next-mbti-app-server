@@ -8,3 +8,4 @@ module.exports.tokenValidation = require('./token.validation');
 module.exports.escrowValidation = require('./escrow.validation');
 module.exports.priceValidation = require('./price.validation');
 module.exports.candlestickValidation = require('./candlestick.validation');
+module.exports.networkValidation = require('./network.validation');

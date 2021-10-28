@@ -11,6 +11,7 @@ const tokenRoute = require('./token.route')
 const escrowRoute = require('./escrow.route')
 const priceRoute = require('./price.route');
 const candlestickRoute = require('./candlestick.route');
+const networkRoute = require('./network.route');
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
@@ -47,6 +48,7 @@ module.exports = function (io) {
                 escrowRoute(io,socket);
                 priceRoute(io,socket);
                 candlestickRoute(io,socket);
+                networkRoute(io,socket);
             })
             .catch((err) => {
                 socket.emit('error', err.message)
