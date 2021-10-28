@@ -17,5 +17,9 @@ module.exports = (io, socket) => {
         socketValidate(transactionValidation.getNonceByAddress),
         transactionController.getNonceByAddress
     )(io,socket))
+    socket.on('getContractAddressesByNetworkId', socketMiddleware(
+      socketValidate(transactionValidation.getContractAddressesByNetworkId),
+      transactionController.getContractAddressesByNetworkId
+    )(io,socket))
 };
 

@@ -20,9 +20,15 @@ const getNonceByAddress = socketCatchAsync(async(io, socket, data, callback) => 
     callback(nonce)
 });
 
+const getContractAddressesByNetworkId = socketCatchAsync(async(io, socket, data, callback) => {
+    let contractAddresses = await transactionService.getContractAddressesByNetworkId(data);
+    callback(contractAddresses)
+});
+
 
 module.exports = {
     deleteSendFailTransactions,
     getSendFailTransactions,
     getNonceByAddress,
+    getContractAddressesByNetworkId
 };
