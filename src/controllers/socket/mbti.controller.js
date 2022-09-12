@@ -1,21 +1,17 @@
 const socketCatchAsync = require('../../utils/socketCatchAsync')
 const {mbtiService} = require('../../services')
 
-const testController = socketCatchAsync(async (io, socket, data, callback) => {
-   let testServiceResult = await mbtiService.testService(data);
-   socket.emit("testService", testServiceResult)
-   callback(testServiceResult);
+const sendAnswer = socketCatchAsync(async (io, socket, data, callback) => {
+   let sendAnswerResult = await mbtiService.sendAnswer(data);
+   io.of("/").emit("getAnswerResult", sendAnswerResult)
 });
 
-const miziController = socketCatchAsync(async (io, socket, data, callback) => {
-   let testServiceResult = await mbtiService.testService(data);
-
-   //broadcast emit
-   io.of("/").emit("mizi", testServiceResult)
-   callback(testServiceResult);
+const changePageIdx = socketCatchAsync(async (io, socket, data, callback) => {
+   let testServiceResult = await mbtiService.changePageIdx(data);
+   io.of("/").emit("getPageIdx", testServiceResult)
 });
 
 module.exports = {
-   testController,
-   miziController
+   sendAnswer,
+   changePageIdx
 }
