@@ -7,7 +7,7 @@ const config = require('./config/config');
 const morgan = require('./config/morgan');
 
 const { sequelize } = require("./models/index");
-// const apiRoutes = require('./routes/api/v1');
+const apiRoutes = require('./routes/api');
 
 const ApiError = require('./utils/ApiError');
 
@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(xss());
 
-// app.use('/api/v1', apiRoutes);
+app.use('/', apiRoutes);
 
 app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, 'Not Found'))
