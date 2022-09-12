@@ -9,7 +9,9 @@ const testController = socketCatchAsync(async (io, socket, data, callback) => {
 
 const miziController = socketCatchAsync(async (io, socket, data, callback) => {
    let testServiceResult = await mbtiService.testService(data);
-   socket.emit("testService", testServiceResult)
+
+   //broadcast emit
+   io.of("/").emit("mizi", testServiceResult)
    callback(testServiceResult);
 });
 
