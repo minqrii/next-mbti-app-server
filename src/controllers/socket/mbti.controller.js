@@ -2,8 +2,8 @@ const socketCatchAsync = require('../../utils/socketCatchAsync')
 const {mbtiService} = require('../../services')
 
 const sendAnswer = socketCatchAsync(async (io, socket, data, callback) => {
-   let sendAnswerResult = await mbtiService.sendAnswer(data);
-   io.of("/").emit("getAnswerResult", sendAnswerResult)
+   const sendAnswerResult = await mbtiService.sendAnswer(data);
+       io.of("/").emit("getAnswerResult", sendAnswerResult)
 });
 
 const changePageIdx = socketCatchAsync(async (io, socket, data, callback) => {
