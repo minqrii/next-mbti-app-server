@@ -30,7 +30,8 @@ const changePageIdx = async function (data) {
    } catch (error) {
       return {
          success : false,
-         data : {pageIdx}
+         data : {pageIdx},
+         error: error.message,
       }
    }
 
