@@ -5,11 +5,28 @@ const {EorI, NorS, PorJ, TorF} =require('../constant/constant')
 
 
 const sendAnswer = async function (data) {
-   //sendAnswer
-   //db update
-   // -> return은 socket emit 해줄 꼴에 맞춰서 정리ㅇㅇ
+   const {id, category, ENFP} = data
+   await calculateMbti(category, ENFP)
    return data;
 };
+
+const calculateMbti = async (category, isPos) => {
+   const mbtiDoc = await Mbti.findOne({
+      where: {
+         category : category
+      },
+      raw: true
+   })
+   if (mbtiDoc) {
+      return await Mbti.update({result : (mbtiDoc.result + ((isPos) ? 1 : -1))}, {
+         where: {category:category}
+      })
+   }
+   else {
+      const data = {category : category, result : ((isPos) ? 1 : -1)}
+      return await Mbti.insert(data)
+   }
+}
 
 const changePageIdx = async function (data) {
    try {
@@ -56,7 +73,7 @@ const getMbtiResult = async function () {
             result.NorS = ((e.result >= 0) ? "N" : "S")
             break
          case TorF :
-            result.TorF = ((e.result >= 0) ? "T" : "F")
+            result.TorF = ((e.result >= 0) ? "F" : "T")
             break
          case PorJ :
             result.PorJ = ((e.result >= 0) ? "P" : "J")

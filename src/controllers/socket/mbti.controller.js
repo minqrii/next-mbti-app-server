@@ -11,7 +11,7 @@ const changePageIdx = socketCatchAsync(async (io, socket, data, callback) => {
    io.of("/").emit("getPageIdx", pageIdxChanged)
 });
 
-module.exports = { 
+module.exports = {
    sendAnswer,
    changePageIdx
 }
