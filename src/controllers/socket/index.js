@@ -1,10 +1,1 @@
-module.exports.userController =require('./user.controller');
-module.exports.messageController = require('./message.controller');
-module.exports.pushNotificationController = require('./pushNotification.controller');
-module.exports.tokenController = require('./token.controller');
-module.exports.transactionController = require('./transaction.controller');
-module.exports.notificationController = require('./notification.controller');
-module.exports.escrowController = require('./escrow.controller');
-module.exports.priceController = require('./price.controller');
-module.exports.candlestickController = require('./candlestick.controller');
-module.exports.networkController = require('./network.controller');
+module.exports.mbtiController = require('./mbti.controller');

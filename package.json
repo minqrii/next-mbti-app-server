@@ -1,10 +1,10 @@
 {
-  "name": "EQBR-Api-Gateway",
+  "name": "next-mbti",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "test": "cross-env NODE_ENV=test node src/index.js"
   },
   "author": "",

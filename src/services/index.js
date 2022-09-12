@@ -1,11 +1,1 @@
-module.exports.userService =require('./user.service');
-module.exports.messageService =require('./message.service');
-module.exports.pushNotificationService =require('./pushNotification.service');
-module.exports.tokenService =require('./token.service');
-module.exports.notificationService =require('./notification.service');
-module.exports.transactionService =require('./transaction.service');
-module.exports.connectionService =require('./connection.service');
-module.exports.networkService =require('./network.service');
-module.exports.escrowService = require('./escrow.service');
-module.exports.priceService =require('./price.service');
-module.exports.candlestickService =require('./candlestick.service');
+module.exports.mbtiService =require('./mbti.service');

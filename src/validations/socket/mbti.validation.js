@@ -1,11 +1,10 @@
 const joi = require('joi');
 
-const getCandlestickFromBinance = joi.array().items({
-   symbol  : joi.string().required(),
+const testValidation = joi.array().items({
    limit   : joi.string().required(),
    interval: joi.string().required()
 });
 
 module.exports = {
-   getCandlestickFromBinance
+   testValidation
 };

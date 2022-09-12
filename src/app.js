@@ -6,7 +6,7 @@ const httpStatus = require('http-status');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
 
-const apiRoutes = require('./routes/api/v1');
+// const apiRoutes = require('./routes/api/v1');
 
 const ApiError = require('./utils/ApiError');
 
@@ -28,9 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(xss());
 
-//todo:: 개발 완료 후 삭제
-
-app.use('/api/v1', apiRoutes);
+// app.use('/api/v1', apiRoutes);
 
 app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, 'Not Found'))

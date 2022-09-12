@@ -1,6 +1,6 @@
 module.exports = {
     apps : [{
-        name: "EQBR-Api-Gateway",
+        name: "next-mbti",
         script: './src/index.js',
         watch: true,
         env: {
