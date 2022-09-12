@@ -6,7 +6,6 @@ const mbtiRoute = require('./mbti.route');
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
        try{
-           console.log(socket)
           // if(!socket.address || !socket.serviceName){
           //    reject(new Error('No Socket Id'))
           // }
@@ -19,17 +18,13 @@ const initialize = (io, socket) => {
 };
 
 const disconnectHandler = socketCatchAsync(async (io, socket, data) =>{
-   if(!socket.address || !socket.serviceName){
       throw new Error('No Socket Id')
-   }
 })
 
 module.exports = function (io) {
     io.on('connection', (socket) => {
-        console.log("hi")
         initialize(io, socket)
             .then(() => {
-                console.log(socket)
                 mbtiRoute(io,socket);
             })
             .catch((err) => {
