@@ -6,6 +6,7 @@ const httpStatus = require('http-status');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
 
+const { sequelize } = require("./models/index");
 // const apiRoutes = require('./routes/api/v1');
 
 const ApiError = require('./utils/ApiError');
@@ -37,4 +38,17 @@ app.use((req, res, next) => {
 app.use(errorConverter);
 app.use(errorHandler);
 
+const ConnectDB = async () => {
+    try {
+      await sequelize
+        .authenticate()
+        .then(() => console.log("데이터베이스 연결 성공!"));
+      await sequelize.sync({alter:true}).then(() => console.log("동기화 완료!"));
+    } catch (error) {
+      console.error("DB 연결 및 동기화 실패", error);
+    }
+  };
+  // DB와 연결 및 동기화
+  ConnectDB();
+  
 module.exports = app;
