@@ -2,7 +2,7 @@ const sequelize = require('../config/db');
 const {DataTypes} = require('sequelize');
 
 const Mbti = sequelize.define("Mbti", {
-                id: {
+                pk: {
                     type:DataTypes.INTEGER,
                     allowNull:false,
                     primaryKey:true,

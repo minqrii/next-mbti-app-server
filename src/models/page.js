@@ -2,13 +2,17 @@ const sequelize = require('../config/db');
 const {DataTypes} = require('sequelize');
 
 const Page = sequelize.define("Page", {
-                id: {
+                pk: {
                     type:DataTypes.INTEGER,
                     allowNull:false,
                     primaryKey:true,
                     autoIncrement:true,
                 },
-                activeUsers : {
+                index:{
+                    type:DataTypes.INTEGER,
+                    allowNull:false,
+                },
+                active_user : {
                     type:DataTypes.INTEGER,
                     allowNull:false,
                 },

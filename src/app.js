@@ -50,5 +50,5 @@ const ConnectDB = async () => {
   };
   // DB와 연결 및 동기화
   ConnectDB();
-  
+
 module.exports = app;

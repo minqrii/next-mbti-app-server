@@ -3,11 +3,15 @@ const sequelize = require('../config/db');
 const {DataTypes} = require('sequelize');
 
 const Question = sequelize.define("Question", {
-    id: {
+    pk: {
         type:DataTypes.INTEGER,
         allowNull:false,
         primaryKey:true,
         autoIncrement:true,
+    },
+    id:{
+        type:DataTypes.INTEGER,
+        allowNull:false
     },
     category : {
         type:DataTypes.TINYINT,
