@@ -28,6 +28,7 @@ const changePageIdx = async function (data) {
          data : {pageIdx}
       }
    }
+
 };
 
 module.exports = {
