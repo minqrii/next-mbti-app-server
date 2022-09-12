@@ -3,7 +3,7 @@ const {mbtiService} = require("../../services");
 
 const getMbtiResult = catchAsync(async (req, res) => {
     const result = await mbtiService.getMbtiResult()
-    res.send(result)
+    res.send({data: result})
 })
 
 module.exports = {

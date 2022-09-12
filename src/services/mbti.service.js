@@ -19,18 +19,29 @@ const getMbtiResult = async function () {
    const mbtiData = await Mbti.findAll({
       raw: true
    })
-   return mbtiData.reduce((result, e)=>{
+   const result = {
+      EorI : "",
+      NorS : "",
+      TorF : "",
+      PorJ : ""
+   }
+   mbtiData.map((e)=>{
       switch (e.category) {
          case EorI :
-            return (e.result >= 0) ? "E" : "I"
+            result.EorI = ((e.result >= 0) ? "E" : "I")
+            break
          case NorS :
-            return (e.result >= 0) ? "N" : "S"
+            result.NorS = ((e.result >= 0) ? "N" : "S")
+            break
          case TorF :
-            return (e.result >= 0) ? "T" : "F"
+            result.TorF = ((e.result >= 0) ? "T" : "F")
+            break
          case PorJ :
-            return (e.result >= 0) ? "P" : "J"
+            result.PorJ = ((e.result >= 0) ? "P" : "J")
+            break
       }
-   }, "")
+   })
+   return (result.EorI + result.NorS + result.TorF + result.PorJ)
 }
 
 module.exports = {
