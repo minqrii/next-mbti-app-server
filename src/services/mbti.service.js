@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const {Mbti} = require('../models')
+const {Mbti, Page} = require('../models')
 const {EorI, NorS, PorJ, TorF} =require('../constant/constant')
 
 
@@ -12,7 +12,28 @@ const sendAnswer = async function (data) {
 };
 
 const changePageIdx = async function (data) {
-   return data;
+   try {
+      const pageIdx = data.pageIdx;
+      if (pageIdx) {
+         const savedIdx = await Page.findOne({where:{pk:1}});
+
+         savedIdx.set({
+            index:pageIdx
+         })
+         await savedIdx.save();
+
+         return {
+            success : true,
+            data : {pageIdx}
+         }
+      }
+   } catch (error) {
+      return {
+         success : false,
+         data : {pageIdx}
+      }
+   }
+
 };
 
 const getMbtiResult = async function () {

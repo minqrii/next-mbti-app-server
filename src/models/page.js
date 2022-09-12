@@ -15,6 +15,7 @@ const Page = sequelize.define("Page", {
                 active_user : {
                     type:DataTypes.INTEGER,
                     allowNull:false,
+                    default:0
                 },
             }, {
                 freezeTableName:true,
