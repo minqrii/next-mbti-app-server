@@ -7,11 +7,11 @@ const sendAnswer = socketCatchAsync(async (io, socket, data, callback) => {
 });
 
 const changePageIdx = socketCatchAsync(async (io, socket, data, callback) => {
-   let testServiceResult = await mbtiService.changePageIdx(data);
-   io.of("/").emit("getPageIdx", testServiceResult)
+   const pageIdxChanged = await mbtiService.changePageIdx(data);
+   io.of("/").emit("getPageIdx", pageIdxChanged)
 });
 
-module.exports = {
+module.exports = { 
    sendAnswer,
    changePageIdx
 }
