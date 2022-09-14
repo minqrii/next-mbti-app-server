@@ -3,7 +3,8 @@ const {mbtiService} = require('../../services')
 
 const sendAnswer = socketCatchAsync(async (io, socket, data, callback) => {
    const sendAnswerResult = await mbtiService.sendAnswer(data);
-       io.of("/").emit("getAnswerResult", sendAnswerResult)
+   console.log(data);
+   io.of("/").emit("getAnswerResult", sendAnswerResult)
 });
 
 const changePageIdx = socketCatchAsync(async (io, socket, data, callback) => {

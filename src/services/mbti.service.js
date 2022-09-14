@@ -1,14 +1,41 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const {Mbti, Page} = require('../models')
+const {Mbti, Page, Question} = require('../models')
 const {EorI, NorS, PorJ, TorF} =require('../constant/constant')
 
 
 const sendAnswer = async function (data) {
-   const {id, category, ENFP} = data
-   await calculateMbti(category, ENFP)
-   return data;
+   const {id, category, ENFP, isFirst} = data
+   const qRate=await questionRate(id,category,isFirst)
+   const calcMBTI=await calculateMbti(category, ENFP)
+   return {
+      success : true,
+      questionRate : {qRate},
+      calculateMbti:{calcMBTI}
+   }
 };
+//request에서 id category ENFP 외에도 isFirst 
+const questionRate = async(id,category,isFirst)=>{
+   const questionDoc = await Question.findOne({
+      where:{
+         id :id 
+      },
+      raw:true // 왜쓰는거죠
+   })
+ 
+
+   if(questionDoc){
+      return await Question.update({first:((isFirst)?questionDoc.first+1:questionDoc.first),second:((isFirst)?questionDoc.second:questionDoc.second+1),total_submit:questionDoc.total_submit+1},{
+         where :{id:id}
+      })
+   }
+   else{
+      const data ={id:id,category:category,total_submit:1,first:((isFirst)?1:0),second:((isFirst)?0:1)}
+      // return await Question.insert(data)
+      console.log(data)
+   }
+
+}
 
 const calculateMbti = async (category, isPos) => {
    const mbtiDoc = await Mbti.findOne({
