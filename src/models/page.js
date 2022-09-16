@@ -9,13 +9,12 @@ const Page = sequelize.define("Page", {
                     autoIncrement:true,
                 },
                 index:{
-                    type:DataTypes.INTEGER,
+                    type:DataTypes.STRING,
                     allowNull:false,
                 },
                 active_user : {
                     type:DataTypes.INTEGER,
-                    allowNull:false,
-                    default:0
+                    allowNull:true,
                 },
             }, {
                 freezeTableName:true,
