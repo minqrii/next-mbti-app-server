@@ -59,12 +59,22 @@ const changePageIdx = async function (data) {
    try {
       const pageIdx = data.pageIdx;
       if (pageIdx) {
-         const savedIdx = await Page.findOne({where:{pk:1}});
+         const pageData = await Page.findAll();
 
-         savedIdx.set({
-            index:pageIdx
-         })
-         await savedIdx.save();
+         if (pageData.length > 0) {
+            savedIdx = pageData[0];
+
+            await savedIdx.update({
+               index:pageIdx
+            })
+
+            return {
+               success : true,
+               data : {pageIdx}
+            }
+         }
+
+         await Page.create({index:pageIdx});
 
          return {
             success : true,
@@ -72,6 +82,7 @@ const changePageIdx = async function (data) {
          }
       }
    } catch (error) {
+      console.log(error);
       return {
          success : false,
          data : {pageIdx},
