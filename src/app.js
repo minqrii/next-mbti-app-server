@@ -15,7 +15,7 @@ const {errorConverter, errorHandler} = require('./utils/error');
 
 const app = express();
 
-app.get('/health', function (req,res){
+app.get('/', function (req,res){
     res.send('success');
 })
 
