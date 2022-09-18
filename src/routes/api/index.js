@@ -6,7 +6,7 @@ const router = express.Router();
 
 const defaultRoutes = [
     {
-        path : '/result',
+        path : '/',
         route: mbtiRoute,
     },
 ];
