@@ -9,7 +9,7 @@ const Page = sequelize.define("Page", {
                     autoIncrement:true,
                 },
                 index:{
-                    type:DataTypes.STRING,
+                    type:DataTypes.INTEGER,
                     allowNull:false,
                 },
                 active_user : {
