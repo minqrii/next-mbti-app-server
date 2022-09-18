@@ -5,14 +5,23 @@ const {EorI, NorS, PorJ, TorF} =require('../constant/constant')
 
 
 const sendAnswer = async function (data) {
-   const {id, category, ENFP, isFirst} = data
-   const qRate=await questionRate(id,category,isFirst)
-   const calcMBTI=await calculateMbti(category, ENFP)
-   return {
-      success : true,
-      questionRate : {qRate},
-      calculateMbti:{calcMBTI}
+   try {
+      const {id, category, ENFP, isFirst} = data;
+      const qRate= await questionRate(id,category,isFirst);
+      const calcMBTI=await calculateMbti(category, ENFP);
+      return {
+         success : true,
+         questionRate : {qRate},
+         calculateMbti:{calcMBTI}
+      }
+   } catch (error) {
+      console.log(error);
+      return {
+         success:false,
+         data,
+      }
    }
+
 };
 //request에서 id category ENFP 외에도 isFirst 
 const questionRate = async(id,category,isFirst)=>{
@@ -99,7 +108,7 @@ const getPageIdx = async function () {
       
       return {
          success:true,
-         data:{savedIdx}
+         data:{pageIdx:savedIdx}
       }
    } catch (error) {
       console.log(error);
