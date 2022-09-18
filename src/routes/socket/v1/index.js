@@ -2,6 +2,7 @@ const config = require('../../../config/config');
 const socketMiddleware = require('../../../utils/socketMiddleware')
 const socketCatchAsync = require('../../../utils/socketCatchAsync')
 const mbtiRoute = require('./mbti.route');
+const mbtiService = require('../../../services/mbti.service');
 
 const initialize = (io, socket) => {
     return new Promise(async (resolve, reject) => {
@@ -26,6 +27,10 @@ module.exports = function (io) {
         initialize(io, socket)
             .then(() => {
                 mbtiRoute(io,socket);
+            })
+            .then(async () => {
+                const savedIdx = await mbtiService.getPageIdx();
+                io.of("/").emit("getPageIdx", savedIdx);
             })
             .catch((err) => {
                 console.error(err)
