@@ -31,8 +31,8 @@ const questionRate = async(id,category,isFirst)=>{
    }
    else{
       const data ={id:id,category:category,total_submit:1,first:((isFirst)?1:0),second:((isFirst)?0:1)}
-      // return await Question.insert(data)
       console.log(data)
+      return await Question.insert(data)
    }
 
 }
@@ -92,6 +92,24 @@ const changePageIdx = async function (data) {
 
 };
 
+const getPageIdx = async function () {
+   try {
+      const pageRow = (await Page.findAll())[0];
+      const savedIdx = pageRow.index;
+      
+      return {
+         success:true,
+         data:{savedIdx}
+      }
+   } catch (error) {
+      console.log(error);
+      return {
+         success:false,
+         data:null
+      }
+   }
+}
+
 const getMbtiResult = async function () {
    const mbtiData = await Mbti.findAll({
       raw: true
@@ -124,5 +142,6 @@ const getMbtiResult = async function () {
 module.exports = {
    sendAnswer,
    changePageIdx,
+   getPageIdx,
    getMbtiResult
 };
