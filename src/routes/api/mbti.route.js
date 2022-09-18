@@ -3,7 +3,7 @@ const {mbtiController} = require('../../controllers/api/index')
 const router = express.Router();
 
 router
-    .route("/")
+    .route("/final")
     .get(mbtiController.getMbtiResult)
 
 module.exports = router;
