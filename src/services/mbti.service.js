@@ -7,13 +7,26 @@ const {EorI, NorS, PorJ, TorF} =require('../constant/constant')
 const sendAnswer = async function (data) {
    try {
       const {id, category, ENFP, isFirst} = data;
-      const qRate= await questionRate(id,category,isFirst);
-      const calcMBTI=await calculateMbti(category, ENFP);
-      return {
-         success : true,
-         questionRate : qRate,
-         calculateMbti:calcMBTI
-      }
+
+      await saveAnswerForRate(id, category, isFirst); // questionRate에서 변경
+      // 답변을 저장 -- 해당 문항의 1번 응답 비율을 계산하는 데 사용
+      await saveAnswerForMbti(category, ENFP);  // calculateMbti에서 변경
+      // 해당 답변의 카테고리 및 응답 성향 -- 최종 MBTI 알파벳 결과 조회에 사용
+
+      const firstAnswerRate = await calcFirstAnswerRate(id); // 추가
+
+      const pageIdxStatus = await getPageIdx();
+
+      if (pageIdxStatus.success) 
+         return { success : true, 
+                  data:{
+                     id:id,
+                     pageIdx: pageIdxStatus.data.pageIdx,
+                     first:firstAnswerRate
+                     }
+                  }
+
+      throw new Error();
    } catch (error) {
       console.log(error);
       return {
@@ -24,7 +37,7 @@ const sendAnswer = async function (data) {
 
 };
 //request에서 id category ENFP 외에도 isFirst 
-const questionRate = async(id,category,isFirst)=>{
+const saveAnswerForRate = async(id,category,isFirst)=>{
    const questionDoc = await Question.findOne({
       where:{
          id :id 
@@ -46,7 +59,7 @@ const questionRate = async(id,category,isFirst)=>{
 
 }
 
-const calculateMbti = async (category, isPos) => {
+const saveAnswerForMbti = async (category, isPos) => {
    const mbtiDoc = await Mbti.findOne({
       where: {
          category : category
@@ -148,6 +161,20 @@ const getMbtiResult = async function () {
    return (result.EorI + result.NorS + result.TorF + result.PorJ)
 }
 
+const calcFirstAnswerRate = async function (id) {
+   try {
+      const result = await Question.findOne(
+         {where:{
+            id:id
+         }, 
+         raw:true});
+      return (Number(result.first) / Number(result.total_submit) * 100).toFixed(2)
+   } catch (error) {
+      console.log(error);
+      throw new Error(error.message);
+   }
+
+}
 module.exports = {
    sendAnswer,
    changePageIdx,
