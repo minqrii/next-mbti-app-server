@@ -11,8 +11,8 @@ const sendAnswer = async function (data) {
       const calcMBTI=await calculateMbti(category, ENFP);
       return {
          success : true,
-         questionRate : {qRate},
-         calculateMbti:{calcMBTI}
+         questionRate : qRate,
+         calculateMbti:calcMBTI
       }
    } catch (error) {
       console.log(error);
@@ -41,7 +41,7 @@ const questionRate = async(id,category,isFirst)=>{
    else{
       const data ={id:id,category:category,total_submit:1,first:((isFirst)?1:0),second:((isFirst)?0:1)}
       console.log(data)
-      return await Question.insert(data)
+      return await Question.create(data)
    }
 
 }
@@ -60,7 +60,7 @@ const calculateMbti = async (category, isPos) => {
    }
    else {
       const data = {category : category, result : ((isPos) ? 1 : -1)}
-      return await Mbti.insert(data)
+      return await Mbti.create(data)
    }
 }
 
