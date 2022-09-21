@@ -219,9 +219,10 @@ const calcFirstAnswerRate = async function (id) {
     if (!result) {
       throw new Error(`Question with ID ${id} not found`);
     }
-    return ((Number(result.first) / Number(result.total_submit)) * 100).toFixed(
-      2
-    );
+    return (
+      (parseInt(result.first) / parseInt(result.total_submit)) *
+      100
+    ).toFixed(2);
   } catch (error) {
     console.log(error);
     throw new Error(error.message);
