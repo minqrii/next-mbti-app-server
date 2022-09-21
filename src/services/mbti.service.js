@@ -152,6 +152,34 @@ const getPageIdx = async function () {
   }
 };
 
+const getCurrentAnswerStatus = async function () {
+  try {
+    const currentPageIdx = (await getPageIdx()).data.pageIdx;
+
+    const currentClientPage =
+      currentPageIdx % 2 === 1 ? currentPageIdx + 1 : currentPageIdx;
+
+    const currentQuestionId = currentClientPage / 2;
+
+    const firstAnswerRate = await calcFirstAnswerRate(currentQuestionId);
+
+    return {
+      success: true,
+      data: {
+        id: currentQuestionId,
+        pageIdx: currentPageIdx,
+        first: firstAnswerRate,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      data: null,
+    };
+  }
+};
+
 const getMbtiResult = async function () {
   const mbtiData = await Mbti.findAll({
     raw: true,
@@ -189,6 +217,9 @@ const calcFirstAnswerRate = async function (id) {
       },
       raw: true,
     });
+    if (!result) {
+      throw new Error(`Question with ID ${id} not found`);
+    }
     return ((Number(result.first) / Number(result.total_submit)) * 100).toFixed(
       2
     );
@@ -202,4 +233,5 @@ module.exports = {
   changePageIdx,
   getPageIdx,
   getMbtiResult,
+  getCurrentAnswerStatus,
 };
