@@ -154,7 +154,7 @@ const getPageIdx = async function () {
 
 const getCurrentAnswerStatus = async function () {
   try {
-    const currentPageIdx = (await getPageIdx()).data.pageIdx;
+    const currentPageIdx = parseInt((await getPageIdx()).data.pageIdx);
 
     const currentClientPage =
       currentPageIdx % 2 === 1 ? currentPageIdx + 1 : currentPageIdx;
@@ -162,7 +162,6 @@ const getCurrentAnswerStatus = async function () {
     const currentQuestionId = currentClientPage / 2;
 
     const firstAnswerRate = await calcFirstAnswerRate(currentQuestionId);
-
     return {
       success: true,
       data: {
