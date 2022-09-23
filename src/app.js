@@ -35,6 +35,13 @@ app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, 'Not Found'))
 });
 
+const cors = require('cors')
+let corsOption = {
+    origin: '*',
+    credentials: true
+}
+app.use(cors(corsOption))
+
 app.use(errorConverter);
 app.use(errorHandler);
 
