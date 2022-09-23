@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const {Mbti, Page, Question} = require('../models')
+const {Mbti, Page, Question, sequelize} = require('../models')
 const {EorI, NorS, PorJ, TorF} =require('../constant/constant')
 
 
@@ -17,8 +17,8 @@ const sendAnswer = async function (data) {
 
       const pageIdxStatus = await getPageIdx();
 
-      if (pageIdxStatus.success) 
-         return { success : true, 
+      if (pageIdxStatus.success)
+         return { success : true,
                   data:{
                      id:id,
                      pageIdx: pageIdxStatus.data.pageIdx,
@@ -36,15 +36,15 @@ const sendAnswer = async function (data) {
    }
 
 };
-//request에서 id category ENFP 외에도 isFirst 
+//request에서 id category ENFP 외에도 isFirst
 const saveAnswerForRate = async(id,category,isFirst)=>{
    const questionDoc = await Question.findOne({
       where:{
-         id :id 
+         id :id
       },
       raw:true // 왜쓰는거죠
    })
- 
+
 
    if(questionDoc){
       return await Question.update({first:((isFirst)?questionDoc.first+1:questionDoc.first),second:((isFirst)?questionDoc.second:questionDoc.second+1),total_submit:questionDoc.total_submit+1},{
@@ -118,7 +118,7 @@ const getPageIdx = async function () {
    try {
       const pageRow = (await Page.findAll())[0];
       const savedIdx = pageRow.index;
-      
+
       return {
          success:true,
          data:{pageIdx:savedIdx}
@@ -166,7 +166,7 @@ const calcFirstAnswerRate = async function (id) {
       const result = await Question.findOne(
          {where:{
             id:id
-         }, 
+         },
          raw:true});
       return (Number(result.first) / Number(result.total_submit) * 100).toFixed(2)
    } catch (error) {
@@ -175,9 +175,26 @@ const calcFirstAnswerRate = async function (id) {
    }
 
 }
+
+const truncateAll = async () => {
+   try {
+      await sequelize.transaction(async ()=>{
+         await Mbti.destroy({ truncate : true, cascade: false })
+         await Page.destroy({ truncate : true, cascade: false })
+         await Question.destroy({ truncate : true, cascade: false })
+      })
+      return true
+   }
+   catch (e) {
+      return false
+   }
+
+}
+
 module.exports = {
    sendAnswer,
    changePageIdx,
    getPageIdx,
-   getMbtiResult
+   getMbtiResult,
+   truncateAll
 };

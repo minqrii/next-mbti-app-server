@@ -8,6 +8,12 @@ const getMbtiResult = catchAsync(async (req, res) => {
   res.send({ data: result });
 });
 
+const truncateAll = catchAsync(async (req,res) => {
+  const truncateAllResult = await mbtiService.truncateAll();
+  res.send({success: truncateAllResult})
+})
+
 module.exports = {
   getMbtiResult,
+  truncateAll
 };
