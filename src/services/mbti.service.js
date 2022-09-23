@@ -158,7 +158,7 @@ const getMbtiResult = async function () {
             break
       }
    })
-   return (result.EorI + result.NorS + result.TorF + result.PorJ)
+   return {data:(result.EorI + result.NorS + result.TorF + result.PorJ)}
 }
 
 const calcFirstAnswerRate = async function (id) {

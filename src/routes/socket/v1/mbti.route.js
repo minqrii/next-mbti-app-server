@@ -11,4 +11,8 @@ module.exports = (io, socket) => {
    socket.on('changePageIdx', socketMiddleware(
        mbtiController.changePageIdx
    )(io, socket));
+
+   socket.on('getFinalResult', socketMiddleware(
+        mbtiController.getFinalResult
+   )(io, socket));
 };
