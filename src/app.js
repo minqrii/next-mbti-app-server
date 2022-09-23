@@ -40,7 +40,7 @@ let corsOption = {
     origin: '*',
     credentials: true
 }
-app.use(cors(corsOption))
+app.use(cors());
 
 app.use(errorConverter);
 app.use(errorHandler);
