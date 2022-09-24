@@ -5,10 +5,10 @@ const config = require('./config/config');
 
 // io.adapter(IORedis({host: config.redis.host, port: config.redis.port}));
 
+const { mbtiService } = require('./services/')
+
 io.use(async (socket, next) => {
     try {
-        // socket.address = socket.handshake.query.address
-        // socket.serviceName = socket.handshake.query.serviceName
         console.log("socket connected")
         next();
     } catch (err) {

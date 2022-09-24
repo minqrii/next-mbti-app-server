@@ -30,7 +30,9 @@ module.exports = function (io) {
             })
             .then(async () => {
                 const savedIdx = await mbtiService.getPageIdx();
+                const currentAnswerStatus = await mbtiService.getCurrentAnswerStatus();
                 io.of("/").emit("getPageIdx", savedIdx);
+                io.of("/").emit("getAnswerResult", currentAnswerStatus);
             })
             .catch((err) => {
                 console.error(err)

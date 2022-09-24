@@ -188,13 +188,40 @@ const truncateAll = async () => {
    catch (e) {
       return false
    }
-
 }
+
+const getCurrentAnswerStatus = async function () {
+   try {
+      const currentPageIdx = parseInt((await getPageIdx()).data.pageIdx);
+
+      const currentClientPage =
+          currentPageIdx % 2 === 1 ? currentPageIdx + 1 : currentPageIdx;
+
+      const currentQuestionId = currentClientPage / 2;
+
+      const firstAnswerRate = await calcFirstAnswerRate(currentQuestionId);
+      return {
+         success: true,
+         data: {
+            id: currentQuestionId,
+            pageIdx: currentPageIdx,
+            first: firstAnswerRate,
+         },
+      };
+   } catch (error) {
+      console.log(error);
+      return {
+         success: false,
+         data: null,
+      };
+   }
+};
 
 module.exports = {
    sendAnswer,
    changePageIdx,
    getPageIdx,
    getMbtiResult,
-   truncateAll
+   truncateAll,
+   getCurrentAnswerStatus
 };
