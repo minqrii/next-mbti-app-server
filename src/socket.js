@@ -5,8 +5,6 @@ const config = require('./config/config');
 
 // io.adapter(IORedis({host: config.redis.host, port: config.redis.port}));
 
-const { mbtiService } = require('./services/')
-
 io.use(async (socket, next) => {
     try {
         console.log("socket connected")
